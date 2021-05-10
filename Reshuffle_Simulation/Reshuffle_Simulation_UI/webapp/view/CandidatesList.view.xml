@@ -1,0 +1,254 @@
+<mvc:View
+	controllerName="com.sap.sfsf.simulation.controller.CandidatesList" 
+	xmlns:table="sap.ui.table"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:u="sap.ui.unified"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core" 
+	xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar" 
+	xmlns:l="sap.ui.layout"
+	height="100%">
+	<m:Page
+		showHeader="false"
+		enableScrolling="false"
+		class="sapUiContentPadding"
+		id="CandidatesList"
+		title="CandidatesList">
+		<m:content>
+			<l:VerticalLayout width="100%" id="vlmessage">
+			</l:VerticalLayout>
+			<l:VerticalLayout width="100%">
+				<fb:FilterBar id="filterbar" search="onSearch" showRestoreButton="true" showClearButton="true" showClearOnFB="true" clear="onClear">
+					<fb:filterGroupItems>
+						<fb:FilterGroupItem groupName="Group1" name="A" label="{i18n>checkStatus}" labelTooltip="{i18n>checkStatus}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+							<fb:control>
+								<m:Select id="slCheckStatus" 
+										forceSelection="true" 
+										items="{ path: '/checkStatus' }">
+									<core:ListItem key="{status}" text="{name}" />
+								</m:Select>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem groupName="Group1" name="B" label="{i18n>currentDivision}" labelTooltip="{i18n>currentDivision}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+							<fb:control>
+								<m:Select id="slDivision" 
+										forceSelection="true" 
+										showSecondaryValues= "true"
+										change="onSlCurrentDivisionChange" 
+										items="{ path: '/currentDivision' }"
+										busy = "{view>/divisionBusy}" >
+									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}" />
+								</m:Select>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem groupName="Group1" name="C" label="{i18n>currentDepartment}" labelTooltip="{i18n>currentDepartment}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+							<fb:control>
+								<m:Select id="slDepartment" 
+										forceSelection="true" 
+										showSecondaryValues= "true"
+										change="onSlCurrentDepartmentChange"
+										items="{path: '/currentDepartment'}"
+										busy = "{view>/departmentBusy}" >
+									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
+								</m:Select>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem groupName="Group1" name="D" label="{i18n>currentPosition}" labelTooltip="{i18n>currentPosition}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+							<fb:control>
+								<m:Select id="slPosition" 
+										forceSelection="true" 
+										showSecondaryValues= "true"
+										items="{ path: '/currentPosition' }"
+										busy = "{view>/positionBusy}" >
+									<core:ListItem key="{code}" text="{name}" additionalText="{code}"/>
+								</m:Select>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem groupName="Group1" name="E" label="{i18n>nextDivision}" labelTooltip="{i18n>nextDivision}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="false">
+							<fb:control>
+								<m:Select id="slNextDivision" 
+										forceSelection="true" 
+										showSecondaryValues= "true"
+										change="onSlNextDivisionChange"
+										items="{ path: '/nextDivision' }">
+									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}" />
+								</m:Select>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem groupName="Group1" name="F" label="{i18n>nextDepartment}" labelTooltip="{i18n>nextDepartment}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="false">
+							<fb:control>
+								<m:Select id="slNextDepartment" 
+										forceSelection="true" 
+										showSecondaryValues= "true"
+										change="onSlNextDepartmentChange"
+										items="{path: '/nextDepartment'}">
+									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}" />
+								</m:Select>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem groupName="Group1" name="G" label="{i18n>nextPosition}" labelTooltip="{i18n>nextPosition}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="false">
+							<fb:control>
+								<m:Select id="slNextPosition" 
+										forceSelection="true" 
+										showSecondaryValues= "true"
+										items="{ path: '/nextPosition' }">
+									<core:ListItem key="{code}" text="{name}" additionalText="{code}" />
+								</m:Select>
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem groupName="Group1" name="H" label="{i18n>candidateID}" labelTooltip="{i18n>candidateID}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+							<fb:control>
+								<m:Input id="candidateId" placeholder="CandidatesId ..." value="{/candidateId}" />
+							</fb:control>
+						</fb:FilterGroupItem>
+						<fb:FilterGroupItem groupName="Group1" name="I" label="{i18n>candidateName}" labelTooltip="{i18n>candidateName}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+							<fb:control>
+								<m:Input id="candidateName" placeholder="CandidatesName ..." value="{/candidateName}" />
+							</fb:control>
+						</fb:FilterGroupItem>
+					</fb:filterGroupItems>				
+			    </fb:FilterBar>		
+				<table:Table
+					id="idCandidatesTable"
+					rows="{/list}"
+					rowHeight = "20"
+					filter="filterPrice"
+					selectionMode="None"
+					enableCustomFilter="true"
+					cellClick="onPopoverPress"
+					visibleRowCount="20"
+					visibleRowCountMode="Interactive"
+					ariaLabelledBy="title">
+					<table:extension>
+						<m:OverflowToolbar>
+							<m:Title id="title" text="{i18n>Candidates}"/>
+							<m:ToolbarSpacer/>
+							<m:Button id="check" type="Emphasized" text="{i18n>b_check}" press="onSimulationCheck" />
+							<m:Button id="export" type="Emphasized" text="{i18n>b_export}" press="onDataExport" />
+						</m:OverflowToolbar>
+					</table:extension>
+					<table:columns>
+						<table:Column
+							sortProperty="checkStatus"
+							width="11rem">
+							<m:Label text="{i18n>checkStatus}" />
+							<table:template>
+								<m:ObjectStatus text="{ path: 'checkStatus', formatter: '.formatter.getStatusName' }"
+									state="{ path: 'checkStatus', formatter: '.formatter.checkState' }"/>
+							</table:template>
+						</table:Column>
+						<table:Column
+							sortProperty="candidateID"
+							width="11rem">
+							<m:Label text="{i18n>candidateID}" />
+							<table:template>
+								<m:ObjectIdentifier title="{candidateID}"/>
+							</table:template>
+						</table:Column>
+						<table:Column
+							sortProperty="candidateName"
+							width="11rem">
+							<m:Label text="{i18n>candidateName}" />
+							<table:template>
+								<m:Text text="{candidateName}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							sortProperty="currentDivision"
+							width="11rem">
+							<m:Label text="{i18n>currentDivision}" />
+							<table:template>
+								<m:Text text="{currentDivisionName}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							sortProperty="currentDepartment"
+							width="11rem">
+							<m:Label text="{i18n>currentDepartment}" />
+							<table:template>
+								<m:Text text="{currentDepartmentName}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							sortProperty="currentPosition"
+							width="11rem">
+							<m:Label text="{i18n>currentPosition}" />
+							<table:template>
+								<m:Text text="{currentPositionName}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							sortProperty="currentJobGrade"
+							width="11rem">
+							<m:Label text="{i18n>currentJobGrade}" />
+							<table:template>
+								<m:Text text="{currentJobGrade}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							sortProperty="nextDivision"
+							width="11rem">
+							<m:Label text="{i18n>nextDivision}" />
+							<table:template>
+								<m:Text text="{nextDivisionName}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							sortProperty="nextDepartment"
+							width="11rem">
+							<m:Label text="{i18n>nextDepartment}" />
+							<table:template>
+								<m:Text text="{nextDepartmentName}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							sortProperty="nextPosition"
+							width="11rem">
+							<m:Label text="{i18n>nextPosition}" />
+							<table:template>
+								<m:Text text="{nextPositionName}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							sortProperty="nextJobGrade"
+							width="11rem">
+							<m:Label text="{i18n>nextJobGrade}" />
+							<table:template>
+								<m:Text text="{nextJobGrade}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							width="11rem">
+							<m:Label text="{i18n>currentEmpRetire}" />
+							<table:template>
+								<m:Text text="{currentEmpRetire}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							width="11rem">
+							<m:Label text="{i18n>transferTimes}" />
+							<table:template>
+								<m:Text text="{transferTimes}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							width="11rem">
+							<m:Label text="{i18n>lastTransReason}" />
+							<table:template>
+								<m:Text text="{lastTransReason}" wrapping="false" />
+							</table:template>
+						</table:Column>
+						<table:Column
+							width="11rem">
+							<m:Label text="{i18n>certification}" />
+							<table:template>
+								<m:Text text="{certification}" wrapping="false" />
+							</table:template>
+						</table:Column>
+					</table:columns>
+				</table:Table>
+			</l:VerticalLayout>
+		</m:content>
+	</m:Page>
+</mvc:View>

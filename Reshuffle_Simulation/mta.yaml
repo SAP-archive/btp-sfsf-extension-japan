@@ -1,0 +1,101 @@
+ID: Reshuffle_Simulation
+_schema-version: '2.1'
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+  - name: reshuffle-simulation-approuter
+    type: approuter.nodejs
+    path: reshuffle-simulation-approuter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: Reshuffle_Simulation_html5_repo_runtime
+      - name: uaa_Reshuffle
+      - name: Reshuffle_Simulation_Backend_api
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          name: srv_api
+          url: '~{url}'
+          timeout: 600000
+      - name: Reshuffle_Configuration_Backend
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          name: config_api
+          url: '~{url}'
+          
+  - name: Reshuffle_Simulation_ui_deployer
+    type: com.sap.html5.application-content
+    path: Reshuffle_Simulation_ui_deployer
+    requires:
+      - name: Reshuffle_Simulation_html5_repo_host
+    build-parameters:
+      requires:
+        - name: Reshuffle_Simulation_UI
+          artifacts:
+            - './*'
+          target-path: resources/Reshuffle_Simulation_UI
+    
+  - name: Reshuffle_Simulation_Backend
+    type: java
+    path: Reshuffle_Simulation_Backend
+    parameters:
+      memory: 2048M
+    provides:
+      - name: Reshuffle_Simulation_Backend_api
+        properties:
+          url: '${default-url}'
+    build-parameters:
+      build-result: 'target/*.jar'
+    requires:
+      - name: uaa_Reshuffle
+      - name: dest_Reshuffle_Simulation
+      - name: hdi_db
+      - name: my-job-scheduler
+
+  - name: Reshuffle_Simulation_UI
+    type: html5
+    path: Reshuffle_Simulation_UI
+    build-parameters:
+       builder: custom
+       commands:
+        - npm install
+        - npm run build
+       supported-platforms: []
+       build-result: dist
+
+resources:
+  - name: Reshuffle_Configuration_Backend
+    type: configuration
+    parameters:
+      provider-nid: mta 
+      provider-id: Reshuffle_Configuration:Reshuffle_Configuration_Backend_api
+      version: ">=0.0.1" 
+      target: 
+        org: ${org}     # Specifies the org of the provider MTA
+        space: ${space} # Wildcard * searches in all spaces 
+      
+  - name: Reshuffle_Simulation_html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: Reshuffle_Simulation_html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: uaa_Reshuffle
+    type: org.cloudfoundry.existing-service
+  - name: dest_Reshuffle_Simulation
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service
+  - name: hdi_db
+    type: org.cloudfoundry.existing-service
+  - name: my-job-scheduler
+    type: org.cloudfoundry.existing-service

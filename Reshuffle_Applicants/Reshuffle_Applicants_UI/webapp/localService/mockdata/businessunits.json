@@ -1,0 +1,38 @@
+[
+    {
+        "externalCode": "SVCS",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "サービス統括本部"
+    },
+    {
+        "externalCode": "GCS",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "グローバルコンサルティングサービス統括本部"
+    },
+    {
+        "externalCode": "RETAIL",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "小売"
+    },
+    {
+        "externalCode": "CORP",
+        "startDate": "/Date(1451606400000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "コーポレート戦略統括本部"
+    },
+    {
+        "externalCode": "PRODS",
+        "startDate": "/Date(1451606400000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "プロダクトマネジメント統括本部"
+    },
+    {
+        "externalCode": "SALES",
+        "startDate": "/Date(1451606400000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "営業統括本部"
+    }
+]

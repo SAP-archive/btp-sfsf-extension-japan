@@ -1,0 +1,110 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.uxap" 
+	xmlns:m="sap.m" 
+	xmlns:l="sap.ui.layout"
+	xmlns:rich="sap.ui.richtexteditor" 
+	xmlns:core="sap.ui.core"
+	controllerName="com.sap.sfsf.configuration.controller.App" height="100%">
+    <m:App>
+	    <ObjectPageLayout id="ObjectPageLayout" upperCaseAnchorBar="false">
+			<headerTitle>
+				<ObjectPageDynamicHeaderTitle>
+					<expandedHeading>
+						<m:FlexBox fitContainer="true" alignItems="Center">
+							<m:Avatar src="sap-icon://key-user-settings" class="sapUiTinyMarginEnd"/>
+							<m:Title text="{i18n>title}" wrapping="true" />
+						</m:FlexBox>
+					</expandedHeading>
+					<expandedContent>
+						<m:Text text="{i18n>titleDescription}" />
+					</expandedContent>
+
+					<snappedHeading>
+						<m:FlexBox fitContainer="true" alignItems="Center">
+							<m:Avatar src="sap-icon://key-user-settings" class="sapUiTinyMarginEnd"/>
+							<m:Title text="{i18n>title}" wrapping="true" />
+						</m:FlexBox>
+					</snappedHeading>
+
+					<actions>
+						<m:Button id="editBtn" text="{i18n>editBtn}" press="onEditBtn" enabled="false" type="Emphasized" />
+						<m:Button id="saveBtn" text="{i18n>saveBtn}" type="Emphasized" visible="false" press="onSaveBtn" />
+						<m:Button id="cancelBtn" text="{i18n>cancelBtn}" visible="false" press="onCancelBtn" />
+					</actions>
+				</ObjectPageDynamicHeaderTitle>
+			</headerTitle>
+	    	<sections>
+	    		<ObjectPageSection titleUppercase="false" title="{i18n>pdSectionTitle}" importance="Medium">
+	    			<subSections>
+	    				<ObjectPageSubSection title="{i18n>pdNextPubDate}" titleUppercase="false">
+	    					<blocks>
+	    						<m:DatePicker 
+	    							xmlns="sap.m"
+	    							id="pubNextDate" 
+	    							editable="false" 
+	    							value="{
+	    								path: '/startDateTime',
+	    								type: 'sap.ui.model.type.String',
+	    								constraints: {
+	    									search: '^\\d{4}/\\d{2}/\\d{2}$'
+	    								}
+	    							}"
+	    							valueFormat="yyyy/MM/dd" 
+	    							displayFormat="yyyy/MM/dd" 
+	    							required="true" />
+	    					</blocks>
+	    				</ObjectPageSubSection>
+	    				<ObjectPageSubSection title="{i18n>pdTenure}" titleUppercase="false">
+	    					<blocks>
+	    						<m:Input
+	    							id="pubTenureInput"
+	    							class="sapUiSmallMarginBottom"
+	    							liveChange="true"
+	    							editable="false"
+	    							required="true"
+	    							placeholder="{i18n>pdTenurePlaceholder}"
+	    							valueStateText="{i18n>pdTenureValueState}"
+	    							type="Number"
+	    							value="{
+	    								path: '/span',
+	    								type : 'sap.ui.model.type.Integer',
+	    								constraints : {
+	    									minimum: 1
+	    								}
+	    							}" />
+	    					</blocks>
+	    				</ObjectPageSubSection>
+	    			</subSections>
+	    		</ObjectPageSection>
+	    		<ObjectPageSection titleUppercase="false" title="{i18n>evalSectionTitle}">
+	    			<subSections>
+	    				<ObjectPageSubSection title="{i18n>evalTopics}" titleUppercase="false">
+	    					<blocks>
+	    						<l:VerticalLayout class="sapUiContentPadding">
+	    							<l:HorizontalLayout class="sapUiContentPadding" >
+	    								<m:Label text="{i18n>evalLabel1}" labelFor="rateFormInput1" />
+	    								<m:Select id="rateFormInput1" showSecondaryValues="true" items="{rateform>/}" editable="false" width="auto">
+	    									<core:ListItem key="{rateform>formTemplateId}" text="{rateform>formTemplateName}" additionalText="{rateform>formTemplateId}" />
+	    								</m:Select>
+	    							</l:HorizontalLayout>
+	    							<l:HorizontalLayout class="sapUiContentPadding" >
+	    								<m:Label text="{i18n>evalLabel2}" labelFor="rateFormInput2" />
+	    								<m:Select id="rateFormInput2" showSecondaryValues="true" items="{rateform>/}" editable="false" width="auto">
+	    									<core:ListItem key="{rateform>formTemplateId}" text="{rateform>formTemplateName}" additionalText="{rateform>formTemplateId}"/>
+	    								</m:Select>
+	    							</l:HorizontalLayout>
+	    							<l:HorizontalLayout class="sapUiContentPadding" >
+	    								<m:Label text="{i18n>evalLabel2}" labelFor="rateFormInput2" />
+	    								<m:Select id="rateFormInput3" showSecondaryValues="true" items="{rateform>/}" editable="false" width="auto">
+	    									<core:ListItem key="{rateform>formTemplateId}" text="{rateform>formTemplateName}" additionalText="{rateform>formTemplateId}"/>
+	    								</m:Select>
+	    							</l:HorizontalLayout>
+	    						</l:VerticalLayout>
+	    					</blocks>
+	    				</ObjectPageSubSection>
+	    			</subSections>
+	    		</ObjectPageSection>
+	    	</sections>
+	    </ObjectPageLayout>
+    </m:App>
+</mvc:View>

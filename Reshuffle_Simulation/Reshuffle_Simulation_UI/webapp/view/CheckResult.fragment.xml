@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover
+		title="詳細"
+		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		placement="Right">
+		<content>
+			<FormattedText class="sapUiResponsiveMargin" htmlText="{checkResult}"/>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button
+					id="close"
+					text="CLOSE"
+					press="onClosePress" />
+			</OverflowToolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,33 @@
+/*.smallCheckbox {*/
+    /*content: '';*/
+/*    position: relative;*/
+/*    border: .0625rem solid #89919a;*/
+/*    background-color: #fff;*/
+/*    font-family: "SAP-icons";*/
+/*    text-align: center;*/
+/*    color: #0854a0;*/
+/*    box-sizing: border-box;*/
+/*    margin: auto;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    bottom: 0;*/
+/*    right: 0;*/
+/*    width: 1rem;*/
+/*    height: 1rem;*/
+/*    font-size: .625rem;*/
+/*    border-radius: .125rem;*/
+/*}*/
+/*.sapMCbBg {*/
+/*     left: 0.6875rem; */
+/*     top: 0.6875rem; */
+/*    height: 1rem;*/
+/*    width: 1rem;*/
+/*    line-height: 1.125rem;*/
+/*    border-width: 0.0625rem;*/
+/*    box-sizing: border-box;*/
+/*}*/
+/*.sapMCbBg.sapMCbMarkChecked:before {*/
+/*    content: "\e05b";*/
+/*    font-family: "SAP-icons";*/
+/*    display: inline-block;*/
+/*}*/

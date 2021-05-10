@@ -1,0 +1,9 @@
+column table config (
+	 startDateTime DateTime,
+	 span int,
+	 rateFormKey1 nvarchar(10),
+	 rateFormKey2 nvarchar(10),
+ 	 rateFormKey3 nvarchar(10),
+	 modifiedAt Datetime,
+	 modifiedBy nvarchar(40)
+)

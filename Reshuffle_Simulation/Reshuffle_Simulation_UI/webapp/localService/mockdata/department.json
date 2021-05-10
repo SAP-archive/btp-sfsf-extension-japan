@@ -1,0 +1,1338 @@
+[
+    {
+        "externalCode": "5000102",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "資産管理 (US)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50150017",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "機械サービス (US)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50100019",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "公益事業/エネルギー管理 (CN)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50100018",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "建物管理 (CN)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50100017",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "機械サービス (CN)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50120017",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "機械サービス (UK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50120016",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "資産管理 (UK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50120019",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "公益事業/エネルギー管理 (UK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50003726",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人材獲得 (US)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50110008",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "パフォーマンス/開発 (AU)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50120008",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "パフォーマンス/開発 (UK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50120013",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "品質保証 (UK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "dfdfdfdfd",
+        "startDate": "/Date(946684800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "財務: 中国",
+        "division": {
+            "divisionList": []
+        }
+    },
+    {
+        "externalCode": "50110000",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "リーダーシップチーム (オーストラリア)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "EXEC"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50110004",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "外部従業員 (AU)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50100014",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "生産計画部 (CN)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50100016",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "資産管理 (CN)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50100020",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "財務 (CN)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50100008",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "パフォーマンス/開発 (CN)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50007752",
+        "startDate": "/Date(-2208211200000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "生産計画",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50130004",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "外部従業員 (FR)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50140002",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "学習プログラム管理 (DE)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50160008",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "パフォーマンス/開発 (BR)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50130008",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "パフォーマンス/開発 (FR)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50007757",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "業務推進部 (CN)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50007754",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "品質保証",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50140004",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "外部従業員 (DE)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50007756",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "業務 (CN)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50007755",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "施設保守",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50150000",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "リーダーシップチーム (ブラジル)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "EXEC"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000005",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "エンジニアリング (RU)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000006",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人材管理 (BR)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50100004",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "外部従業員 (CN)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50110019",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "公益事業/エネルギー管理 (AU)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50110017",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "機械サービス (AU)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50110016",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "資産管理 (AU)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50000595",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人事管理",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50110021",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "販売 (AU)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "DIR_SALES"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50140017",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "機械サービス (DE)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50130019",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "公益事業/エネルギー管理 (FR)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50140016",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "資産管理 (DE)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50130016",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "資産管理 (FR)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50140019",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "公益事業/エネルギー管理 (DE)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50130017",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "機械サービス (FR)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50160019",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "公益事業/エネルギー管理 (BR)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50160017",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "機械サービス (BR)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50160016",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "資産管理 (BR)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50012007",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人材開発本部",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000010",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "外部従業員 (RU)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50000603",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "報酬および福利",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000019",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "販売 (SG)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "DIR_SALES"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000020",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人事 (SG)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000021",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "報酬および福利 (SG)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000022",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "IT (SG)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "IT"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000024",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "施設保守 (SG)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000025",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "財務 (SG)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000028",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人材管理 (SG)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000029",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "社員開発 (SG)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000034",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "リーダーシップチーム (HK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "EXEC"
+                },
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000035",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "リーダーシップチーム (台湾)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                },
+                {
+                    "externalCode": "EXEC"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000040",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "建物管理 (HK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000041",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "販売 (HK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "DIR_SALES"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000042",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人事 (HK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000043",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "財務 (HK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000044",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人材管理 (HK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000045",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "社員開発 (HK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000046",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "IT (HK)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "IT"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000051",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "資産管理 (TW)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000053",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "使用不可",
+        "division": {
+            "divisionList": []
+        }
+    },
+    {
+        "externalCode": "5000054",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "建物管理 (TW)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000055",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "販売 (TW)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "DIR_SALES"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000056",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人事 (TW)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000057",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "財務 (TW)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000058",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人材管理 (TW)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000059",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "社員開発 (TW)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000060",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "IT (TW)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "IT"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000061",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "エンジニアリング (TW)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50177727",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "学習事業所長 (SAF)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000072",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "小売 - 流通センタ",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "RSE"
+                },
+                {
+                    "externalCode": "RNW"
+                },
+                {
+                    "externalCode": "RWEST"
+                },
+                {
+                    "externalCode": "RCENTRAL"
+                },
+                {
+                    "externalCode": "RNE"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000073",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "小売 - 財務",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "RC"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000074",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "小売 - 人事",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "RC"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000075",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "小売 - IT",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "RC"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000076",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "小売 - 商品",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "RSE"
+                },
+                {
+                    "externalCode": "RNW"
+                },
+                {
+                    "externalCode": "RWEST"
+                },
+                {
+                    "externalCode": "RCENTRAL"
+                },
+                {
+                    "externalCode": "RNE"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000077",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "小売 - 販売",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "RSE"
+                },
+                {
+                    "externalCode": "RNW"
+                },
+                {
+                    "externalCode": "RWEST"
+                },
+                {
+                    "externalCode": "RCENTRAL"
+                },
+                {
+                    "externalCode": "RNE"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "5000078",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "小売 - 店舗業務",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "RCENTRAL"
+                },
+                {
+                    "externalCode": "RNE"
+                },
+                {
+                    "externalCode": "RSE"
+                },
+                {
+                    "externalCode": "RC"
+                },
+                {
+                    "externalCode": "RNW"
+                },
+                {
+                    "externalCode": "RWEST"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "45000011",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "生産 (カナダ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "45000012",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "施設保守 (カナダ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "45000013",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "品質保証 (カナダ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "45000014",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "計画 & スケジュール (カナダ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "45000015",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "エンジニアリング (カナダ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "45000018",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "建物管理 (カナダ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "45007727",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "学習事業所長 (カナダ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "50000590",
+        "startDate": "/Date(631929600000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "業務 (US)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "60000001",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人事 (メキシコ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "60000006",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "人材獲得 (メキシコ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "CORP_SVCS"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "60000011",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "生産 (メキシコ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "60000012",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "施設保守 (メキシコ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "60000013",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "品質保証 (メキシコ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    },
+    {
+        "externalCode": "60000014",
+        "startDate": "/Date(-2208988800000)/",
+        "endDate": "/Date(253402214400000)/",
+        "name": "計画 & スケジュール (メキシコ)",
+        "division": {
+            "divisionList": [
+                {
+                    "externalCode": "MANU"
+                }
+            ]
+        }
+    }
+]

@@ -1,20 +1,50 @@
-# Title
+# SAP SuccessFactors Extension on BTP for Japan
 
 ## Description
 
+This **SAP SuccessFactors Extension on BTP for Japan** project contains a collection of Full-stack SuccessFactors extension app to demonstrate the implementation of Cloud Foundry application consists of **SAPUI5** and **Cloud SDK (Java)** in the context of extending Japanese-specific process "Tamatsuki-Jinji" in SAP SuccessFactors.
+
+## List of projects
+
+| Application             | Scenario Description                                         |
+| ----------------------- | ------------------------------------------------------------ |
+| Reshuffle_Applicants    | UI5 and Java app to create a "Tamatsuki-Jinji" plan          |
+| Reshuffle_Simulation    | UI5 and Java app to confirm a consistency of created plan    |
+| Reshuffle_Configuration | UI5 and Java app to configure properties of **Reshuffle_Applicants** and **Reshuffle_Simulation**. |
+| Reshuffle_DB            | HANA DB module for **Reshuffle_Applicants**, **Reshuffle_Simulation**, **Reshuffle_Configuration** |
+
 ## Requirements
+
+For all the applications, you would require the following:
+
+1. SAP Business Technology Platform (trial account or production account)
+2. SAP SuccessFactors 
+3. Active subscription or entitlement:
+   1. Cloud Foundry Runtime: > 8 GB
+   2. SAP HANA Cloud (plan hana)
+   3. SAP HANA Schemas & HDI Containers (plan hdi-shared)
+   4. SAP SuccessFactors Extensibility (plan api-access) 
+   5. [Optional] SAP Business Application Studio
 
 ## Download and Installation
 
-## Known Issues
-
-## How to obtain support
-
-[Create an issue](https://github.com/SAP-samples/<repository-name>/issues) in this repository if you find a bug or have questions about the content.
- 
-For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
-
-## Contributing
+1. Create XSUAA service instance **uaa_Reshuffle**
+2. Create Job Scheduling Service instance **my-job-scheduler**
+3. Configure Destination that connects between Reshuffle_Applicants Java app and SAP SuccessFactors
+   1. Name: SFSF
+   2. Type: HTTP
+   3. URL: Your SuccessFactors's endpoint
+   4. Proxy Type: Internet
+   5. Authentication: BasicAuthentication
+   6. User: Your SaccuessFactors user
+   7. Password: Your SaccuessFactors password
+4. Download or clone this repository
+5. Build and deploy **Reshuffle_DB**
+6. Insert a row into Config table as follows:
+   1. startDateTime: any date
+   2. span: any number
+   3. rateFormKeyN: **formTemplateId** from OData service **FormTemplate**
+7. Build and deploy **Reshuffle_Configuration**, **Reshuffle_Applicants** and **Reshuffle_Simulation**
 
 ## License
 Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.

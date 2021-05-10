@@ -1,0 +1,21 @@
+<mvc:View controllerName="com.sap.sfsf.simulation.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:tnt="sap.tnt"
+    height="100%" displayBlock="true">
+    <App>
+        <pages>
+			<Page title="{i18n>homePageTitle}{/startDateTime}" titleAlignment="Center">
+                <content>
+                    <IconTabBar id="idIconTabBarNoIcons" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+                        <items>
+                            <IconTabFilter text="{i18n>viewname_simulationcheck}">
+                                <mvc:XMLView id="CandidatesList" viewName="com.sap.sfsf.simulation.view.CandidatesList"/>
+                            </IconTabFilter>
+                            <IconTabFilter text="{i18n>viewname_candidatefix}">
+                                <mvc:XMLView id="CandidatesListConfirmed" viewName="com.sap.sfsf.simulation.view.CandidatesListConfirmed"/>
+                            </IconTabFilter>
+                        </items>
+                    </IconTabBar>
+                </content>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>

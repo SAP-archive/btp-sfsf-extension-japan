@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<ResponsivePopover
+		class="sapUiPopupWithPadding"
+		placement="Bottom" >
+		<content>
+			<Button id="sendMail" type="Emphasized" text="{i18n>b_send_immediately}" press="onSendMail" width="15rem" />
+			<ToolbarSpacer/>
+			<Button id="sendMailJob" type="Emphasized" text="{i18n>b_send_reservation}" press="onSendMailJob" width="15rem" />
+			<ToolbarSpacer/>
+			<Text text="{/CandidateId}" />
+			<DateTimePicker
+					id="sendMailDate"
+					width="15rem"
+					displayFormat="short"
+					value="{
+						path: '/sendMailDate',
+						type: 'sap.ui.model.type.DateTime'}" />
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

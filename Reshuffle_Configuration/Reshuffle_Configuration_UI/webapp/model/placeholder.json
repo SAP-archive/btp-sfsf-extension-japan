@@ -1,0 +1,42 @@
+{
+	"candidateId": {
+		"placeholder": ":candidateId",
+		"sample": "ID_KNUTH"
+	},
+	"candidateName": {
+		"placeholder": ":candidateName",
+		"sample": "クヌース（サンプル候補者）"
+	},
+	"division": {
+		"placeholder": ":division",
+		"sample":"食品販売ディビジョン"
+	},
+	"department": {
+		"placeholder": ":department",
+		"sample":"APJ地域担当デパートメント"
+	},
+	"position": {
+		"placeholder": ":position",
+		"sample":"ファラフェル販売促進"
+	},
+	"jobGrade": {
+		"placeholder": ":jobGrade",
+		"sample":"Grade_FF01"
+	},
+	"nextDivision": {
+		"placeholder": ":nextDivision",
+		"sample":"食品研究開発ディビジョン"
+	},
+	"nextDepartment": {
+		"placeholder": ":nextDepartment",
+		"sample":"芋開発デパートメント"
+	},
+	"nextPosition": {
+		"placeholder": ":nextPosition",
+		"sample":"ザワークラウト開発主担当"
+	},
+	"nextJobGrade": {
+		"placeholder": ":nextJobGrade",
+		"sample":"Grade_DE02"
+	}
+}

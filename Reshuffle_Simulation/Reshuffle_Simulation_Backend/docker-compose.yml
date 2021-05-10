@@ -1,0 +1,22 @@
+version: '2'
+services:
+    config-server:
+        container_name: app
+        build:
+            context: .
+            dockerfile: Dockerfile.app
+        image: app:latest
+        expose:
+            - 8080
+        ports:
+            - 8080:8080
+            - 465:465
+        networks:
+            - spring-network
+        environment:
+            - VCAP_SERVICES='your-vcap_services-value'
+            - VCAP_APPLICATION={}
+        mem_limit: 2g
+networks:
+    spring-network:
+        driver: bridge            

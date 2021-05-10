@@ -1,0 +1,6 @@
+/.che/**
+/target/**
+.settings
+.classpath
+.project
+/target/

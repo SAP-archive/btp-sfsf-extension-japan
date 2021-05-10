@@ -1,0 +1,16 @@
+{
+  "welcomeFile": "/comsapsfsfsimulation/index.html",
+  "authenticationMethod": "none",
+  "routes": [{
+		"source": "/srv_api/(.*)$",
+		"target": "$1",
+		"authenticationType": "none",
+		"destination": "srv_api",
+		"csrfProtection": true
+	},{
+		"source": "/config_api/(.*)$",
+		"target": "$1",
+		"authenticationType": "none",
+		"destination": "config_api"
+	}]
+}

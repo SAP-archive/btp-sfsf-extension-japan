@@ -1,0 +1,96 @@
+[{
+	"externalCode": "INSIDE_SALES",
+	"startDate": "/Date(631152000000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "インサイドセールス本部"
+}, {
+	"externalCode": "PROF_SVCS",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "サービス本部"
+}, {
+	"externalCode": "GCS_NA",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "GCS アメリカ統括本部"
+}, {
+	"externalCode": "GCS_LATAM",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "GCS ラテンアメリカ統括本部"
+}, {
+	"externalCode": "GCS_EMEA",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "GCS ヨーロッパ・中東・ アフリカ統括本部"
+}, {
+	"externalCode": "GCS_APJ",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "GCS アジア・パシフィック・ジャパン統括本部"
+}, {
+	"externalCode": "BUS_DEV",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "財務経理本部"
+}, {
+	"externalCode": "RWEST",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "小売 - 西"
+}, {
+	"externalCode": "RNW",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "小売 - 北西"
+}, {
+	"externalCode": "RCENTRAL",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "小売 - 中央"
+}, {
+	"externalCode": "RNE",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "小売 - 北東"
+}, {
+	"externalCode": "RSE",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "小売 - 南東"
+}, {
+	"externalCode": "RC",
+	"startDate": "/Date(-2208988800000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "小売 - 企業"
+}, {
+	"externalCode": "CORP_SVCS",
+	"startDate": "/Date(1451606400000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "コーポレートサービス本部"
+}, {
+	"externalCode": "DIR_SALES",
+	"startDate": "/Date(1451606400000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "営業本部"
+}, {
+	"externalCode": "EXEC",
+	"startDate": "/Date(1451606400000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "社長室"
+}, {
+	"externalCode": "IT",
+	"startDate": "/Date(1451606400000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "情報システム本部"
+}, {
+	"externalCode": "MANU",
+	"startDate": "/Date(1451606400000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "生産本部"
+}, {
+	"externalCode": "DEV",
+	"startDate": "/Date(1451606400000)/",
+	"endDate": "/Date(253402214400000)/",
+	"name": "開発本部"
+}]

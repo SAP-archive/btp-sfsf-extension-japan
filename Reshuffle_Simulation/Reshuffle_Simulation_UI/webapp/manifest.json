@@ -1,0 +1,82 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "com.sap.sfsf.simulation",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"sourceTemplate": {
+			"id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
+			"version": "1.40.12"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "com.sap.sfsf.simulation.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.72",
+			"libs": {
+				"sap.m": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy":false
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.sap.sfsf.simulation.i18n.i18n"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"routes": [
+				{
+					"name": "CandidatesListView",
+					"pattern": "RouteView1",
+					"target": [
+						"CandidatesList"
+					]
+				}
+			],
+			"targets": {
+				"CandidatesList": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "CandidatesList",
+					"viewName": "CandidatesList"
+				},
+				"CandidatesListConfirmed": {
+					"viewType": "XML",
+					"viewName": "CandidatesListConfirmed"
+				}
+			}
+		}
+	}
+}
