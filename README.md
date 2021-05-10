@@ -2,7 +2,7 @@
 
 ## Description
 
-This **SAP SuccessFactors Extension on BTP for Japan** project contains a collection of Full-stack SuccessFactors extension app to demonstrate the implementation of Cloud Foundry application consists of **SAPUI5** and **Cloud SDK (Java)** in the context of extending Japanese-specific process "Tamatsuki-Jinji" in SAP SuccessFactors.
+The **SAP SuccessFactors Extension on BTP for Japan** project contains a collection of full-stack SuccessFactors extension apps that demonstrate the implementation of a Cloud Foundry application built with **SAPUI5** and **Cloud SDK (Java)**. This is in the context of extending the Japanese-specific process "Tamatsuki-Jinji" in SAP SuccessFactors.
 
 ## List of projects
 
@@ -17,7 +17,7 @@ This **SAP SuccessFactors Extension on BTP for Japan** project contains a collec
 
 For all the applications, you would require the following:
 
-1. SAP Business Technology Platform (trial account or production account)
+1. [SAP Business Technology Platform](https://www.sap.com/products/business-technology-platform/trial.html) (trial account or production account)
 2. SAP SuccessFactors 
 3. Active subscription or entitlement:
    1. Cloud Foundry Runtime: > 8 GB
