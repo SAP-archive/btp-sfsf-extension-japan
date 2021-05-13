@@ -15,9 +15,33 @@ public class EnvConfig {
     
     @Value("${btp.destination}")
     private String destinationName;
+
+    @Value("${sfsf_termination_code}")
+    private String terminationCode;
+
+    @Value("${default_timezone}")
+    private String timezone;
+
+    @Value("${exception_tenure_position}")
+    private int exceptionalInt = DEFAULT_INT;
     
     @Bean
     public String getDestinationName() {
         return destinationName;
+    }
+
+    @Bean
+    public String getTerminationCode() {
+        return terminationCode;
+    }
+
+    @Bean
+    public String getTimezone() {
+        return timezone;
+    }
+
+    @Bean
+    public int getExceptinalInt() {
+        return exceptionalInt;
     }
 }

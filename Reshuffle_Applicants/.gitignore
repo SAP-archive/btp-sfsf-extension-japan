@@ -17,7 +17,7 @@ APIExternalProducer.js
 .*/APIExternalProducer.js
 Reshuffle_Applicants_ui_deployer/node_modules
 Reshuffle_Applicants_Backend/bin
-.idea/
+.idea/]
 .Reshuffle_Applicants_mta_build_tmp/
 mta_archives/
 Reshuffle_Applicants_UI/node_modules
@@ -26,3 +26,8 @@ Reshuffle_Applicants_UI/package-lock.json
 Reshuffle_Applicants_ui_deployer/resources/
 MakeFile*
 project.json
+*/package-lock.json
+*/.env*
+.vscode/
+/.project
+.che/

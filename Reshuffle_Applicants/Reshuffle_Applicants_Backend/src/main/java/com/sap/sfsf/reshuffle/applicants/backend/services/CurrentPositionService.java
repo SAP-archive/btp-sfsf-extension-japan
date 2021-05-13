@@ -23,6 +23,7 @@ import com.sap.cloud.sdk.odatav2.connectivity.FilterExpression;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQuery;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
+import com.sap.sfsf.reshuffle.applicants.backend.config.EnvConfig;
 import com.sap.sfsf.reshuffle.applicants.backend.model.Candidate;
 import com.sap.sfsf.reshuffle.applicants.backend.model.Config;
 import com.sap.sfsf.reshuffle.applicants.backend.model.ExCandidate;
@@ -47,11 +48,13 @@ public class CurrentPositionService {
 	Logger logger = LoggerFactory.getLogger(CurrentPositionService.class);
 
 	@Autowired
-	ConfigService configService;
+    ConfigService configService;
+    
+    @Autowired
+	private EnvConfig envConfig;
 
-	private final String DESTINATION = "SFSF_2nd";
+
 	private final int EXCEPTIONAL_INT = -1;
-	private final String TERMINATIONCODE = "3680";
 	private final String TIMEZONE = "UTC";
 
 	@Autowired
@@ -133,7 +136,8 @@ public class CurrentPositionService {
 
 		String name = getName(lastName, firstName);
 
-		String isRetire = event.equals(TERMINATIONCODE)? "yes": "no";
+		String terminationCode = envConfig.getTerminationCode();
+		String isRetire = event.equals(terminationCode)? "yes": "no";
 
 		Photo photoIst = photoMap != null? photoMap.get(userId) : null;
 		String rawBase64 = photoIst != null? photoIst.getPhoto(): null;
@@ -181,10 +185,11 @@ public class CurrentPositionService {
 
 	protected int getTenurePosition(Date startDate, LocalDateTime today) {
 		if(startDate != null) {
+            String timezone = envConfig.getTimezone();
 			LocalDate localStartDate = LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.of(TIMEZONE)).toLocalDate();
 			return Period.between(localStartDate, today.toLocalDate()).getYears();
 		} else {
-			return EXCEPTIONAL_INT;
+			return envConfig.getExceptinalInt();
 		}
 	}
 
@@ -225,7 +230,8 @@ public class CurrentPositionService {
 
 		logger.info("Candidate Query:" + query.toString());
 
-		return query.execute(DESTINATION)
+        String destName = envConfig.getDestinationName();
+		return query.execute(destName)
 				.asList(ExEmpJob.class);
 	}
 
@@ -238,8 +244,9 @@ public class CurrentPositionService {
 				.param("$filter", filter)
 				.build();
 
-		logger.info("Will Query:" + query.toString());
-		List<Willingness> list = query.execute(DESTINATION)
+        logger.info("Will Query:" + query.toString());
+        String destName = envConfig.getDestinationName();
+		List<Willingness> list = query.execute(destName)
 				.asList(Willingness.class);
 
 		return ListToMapUtil.getMap("userId", list);
@@ -257,8 +264,9 @@ public class CurrentPositionService {
 					.param("$filter", filter)
 					.build();
 
-			logger.info("Rating Query:" + query.toString());
-			List<Rating> list = query.execute(DESTINATION)
+            logger.info("Rating Query:" + query.toString());
+            String destName = envConfig.getDestinationName();
+			List<Rating> list = query.execute(destName)
 					.asList(Rating.class);
 
 			return ListToMapUtil.getMap("userId", list);
@@ -277,8 +285,9 @@ public class CurrentPositionService {
 				.param("$filter", filter)
 				.build();
 
-		logger.info("Photo Query:" + query.toString());
-		List<Photo> list = query.execute(DESTINATION)
+        logger.info("Photo Query:" + query.toString());
+        String destName = envConfig.getDestinationName();
+		List<Photo> list = query.execute(destName)
 				.asList(Photo.class);
 
 		return ListToMapUtil.getMap("userId", list);

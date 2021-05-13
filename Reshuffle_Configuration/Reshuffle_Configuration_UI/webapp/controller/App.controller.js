@@ -41,7 +41,8 @@ sap.ui.define([
 					"rateFormInput2",
 					"rateFormInput3"
 				];
-
+			var aEnableSwitchIds = [
+				];
 			this.getView().byId("editBtn").setVisible(false);
 			this._switchVisibles(aVisibleSwitchIds, true);
 			this._switchEditables(aEditableSwitchIds, true);
@@ -59,11 +60,9 @@ sap.ui.define([
 					"rateFormInput2",
 					"rateFormInput3"
 				];
-
+			var aEnableSwitchIds = [
+				];
 			this.getView().byId("editBtn").setVisible(true);
-			this._switchVisibles(aVisibleSwitchIds, false);
-			this._switchEditables(aEditableSwitchIds, false);
-			
 			this._retrieveConfigFromRemote();
 		},
 		
@@ -99,7 +98,8 @@ sap.ui.define([
 						"rateFormInput2",
 						"rateFormInput3"
 					];
-
+					var aEnableSwitchIds = [
+					];
 					this.getView().byId("editBtn").setVisible(true);
 					this._switchVisibles(aVisibleSwitchIds, false);
 					this._switchEditables(aEditableSwitchIds, false);
@@ -172,7 +172,7 @@ sap.ui.define([
 			}).always(function() {
 				var aNotBusyConfigSwitchIds = [
 					"pubNextDate",
-					"pubTenureInput"
+					"pubTenureInput",
 				];
 				that._switchBusyIndicators(aNotBusyConfigSwitchIds, false);
 			});
@@ -227,7 +227,8 @@ sap.ui.define([
 				"startDateTime": sDate,
 				"span": Number(sSpan),
 				"rateFormKey1": sRate1,
-				"rateFormKey2": sRate2
+				"rateFormKey2": sRate2,
+				"rateFormKey3": sRate3
 			});
 			return sPostingJson;
 		},

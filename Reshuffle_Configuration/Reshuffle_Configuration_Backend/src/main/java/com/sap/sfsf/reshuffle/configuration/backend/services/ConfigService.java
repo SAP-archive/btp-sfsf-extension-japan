@@ -7,8 +7,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional;
 
 import com.sap.cloud.sdk.odatav2.connectivity.FilterExpression;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
@@ -58,7 +57,7 @@ public class ConfigService {
 		
 		logger.info("RateForm Query: " + query.toString());
 		try {
-			list = query.execute("SFSF_2nd")
+			list = query.execute("<your-destination-name>")
 					.asList(RateForm.class);
 		} catch (ODataException e) {
 			e.printStackTrace();

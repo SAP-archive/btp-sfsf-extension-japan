@@ -16,6 +16,7 @@ import com.sap.cloud.sdk.odatav2.connectivity.FilterExpression;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQuery;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
+import com.sap.sfsf.reshuffle.applicants.backend.config.EnvConfig;
 import com.sap.sfsf.reshuffle.applicants.backend.model.Config;
 import com.sap.sfsf.reshuffle.applicants.backend.model.ExEmpJob;
 import com.sap.sfsf.reshuffle.applicants.backend.model.NextPosition;
@@ -34,11 +35,12 @@ import com.sap.sfsf.reshuffle.applicants.backend.util.EmptyConfigException;
 
 @Service
 public class NextPositionService extends CurrentPositionService {
-	
-	private final String TERMINATIONCODE = "3680";
-	
+		
 	@Autowired
-	ConfigService configService;
+    ConfigService configService;
+    
+    @Autowired
+	EnvConfig envConfig;
 	
 	//This method consists of 5 steps below...
 	//  1. Get an extended-EmpJob list
@@ -150,7 +152,8 @@ public class NextPositionService extends CurrentPositionService {
 
 		String name = getName(lastName, firstName);
 		
-		String isRetire = event.equals(TERMINATIONCODE)? "yes": "no";
+		String terminationCode = envConfig.getTerminationCode();
+		String isRetire = event.equals(terminationCode)? "yes": "no";
 		
 		Photo photoIst = photoMap != null? photoMap.get(userId) : null;
 		String rawBase64 = photoIst != null? photoIst.getPhoto(): null;
