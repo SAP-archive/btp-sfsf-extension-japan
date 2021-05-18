@@ -5,6 +5,10 @@
 
 The **SAP SuccessFactors Extension on BTP for Japan** project contains a collection of full-stack SuccessFactors extension apps that demonstrate the implementation of a Cloud Foundry application built with **SAPUI5** and **Cloud SDK (Java)**. This is in the context of extending the Japanese-specific process "Tamatsuki-Jinji" in SAP SuccessFactors.
 
+### Note
+
+Read [here](./README_JP.md) if you want to get a doc written in Japanese.
+
 ## List of projects
 
 | Application             | Scenario Description                                         |
@@ -13,6 +17,30 @@ The **SAP SuccessFactors Extension on BTP for Japan** project contains a collect
 | Reshuffle_Simulation    | UI5 and Java app to confirm a consistency of created plan    |
 | Reshuffle_Configuration | UI5 and Java app to configure properties of **Reshuffle_Applicants** and **Reshuffle_Simulation**. |
 | Reshuffle_DB            | HANA DB module for **Reshuffle_Applicants**, **Reshuffle_Simulation**, **Reshuffle_Configuration** |
+
+## Solution Diagram
+
+### Diagram
+
+![Diagram](./figs/solutionDiagram.png)
+
+### Service List
+
+| **No.** | **Service Name**                            |
+| ------- | ------------------------------------------- |
+| 1       | Cloud Foundry Runtime                       |
+| 2       | HTML5 Application Repository  Service       |
+| 3       | Destination                                 |
+| 4       | SAP HANA Cloud                              |
+| 5       | Job Scheduling Service                      |
+| 6       | SAP Workflow Service                        |
+| 7       | SAP Business Application Studio             |
+| 8       | Authorization and Trust  Management Service |
+| 9       | Identity Authentication                     |
+| 10      | SAP SuccessFactors Extensibility  Service   |
+| 11      | Forms Service by Adobe                      |
+| 12      | Application Logging  Service                |
+| 13      | Alert Notification Service                  |
 
 ## Requirements
 
@@ -50,7 +78,7 @@ For all the applications, you would require the following:
 ## How to obtain support
 
 [Create an issue](https://github.com/SAP-samples/btp-sfsf-extentsion-japan/issues) in this repository if you find a bug or have questions about the content.
- 
+
 For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
 
 ## License
