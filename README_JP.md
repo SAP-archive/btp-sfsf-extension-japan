@@ -1,6 +1,6 @@
 # BTPを用いたSAP SuccessFactors拡張：玉突き人事
 
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-sfsf-extentsion-japan)
+![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-sfsf-extentsion-japan)
 
 ## 概要
 
