@@ -4,7 +4,7 @@
 
 ## 概要
 
-本プロジェクトはSAP Business Technology Platform（以降、BTP）のCloud Foundry（以降、CF）環境上に構築された玉突き人事を管理するためのアプリケーションセットである。このアプリケーションセットはSAP SuccessFactorsから人事情報を取得して玉突き人事計画をデータベース上に保存し、保存したデータに対して異動可能要件のチェックを実施することができる。このアプリケーションセットの技術的な構成要素は主にSAPUI5、SAP Cloud SDK（Java）およびSAP HANA Cloudである。
+本プロジェクトはSAP Business Technology PlatformのCloud Foundry環境上に構築された玉突き人事を管理するためのアプリケーションセットである。このアプリケーションセットはSAP SuccessFactorsから人事情報を取得して玉突き人事計画をデータベース上に保存し、保存したデータに対して異動可能要件のチェックできる。このアプリケーションセットの技術的な構成要素は主にSAPUI5、SAP Cloud SDK（Java）およびSAP HANA Cloudである。
 
 ## プロジェクトリスト
 
