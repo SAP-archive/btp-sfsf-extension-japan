@@ -7,7 +7,7 @@ sap.ui.define([
 ], function (Controller, UIComponent, Filter, FilterOperator, Fragment) {
 	"use strict";
 
-	return Controller.extend("com.yodobashi.sample.commonlib.controls.BaseController", {
+	return Controller.extend("com.sap.sfsf.simulation.controller.BaseController", {
 		 _getResourceText: function (sKey) {
             return this.getView().getModel("i18n").getResourceBundle().getText(sKey);
         },
