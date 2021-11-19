@@ -15,10 +15,15 @@ import com.sap.sfsf.vdm.services.DefaultECPersonalInformationService;
 
 @Service
 public class PersonService {
-	final ErpHttpDestination destination = DestinationAccessor.getDestination("SFSF_2nd").asHttp()
-			.decorate(DefaultErpHttpDestination::new);
+	private ErpHttpDestination destination;
 
 	private Logger LOG = LoggerFactory.getLogger(PersonService.class);
+
+	private void init(){
+		this.destination = DestinationAccessor.getDestination("SFSF").asHttp()
+		.decorate(DefaultErpHttpDestination::new);
+	}
+	
 
 	/**
 	 * IDを利用してEmailアドレスを取得
@@ -26,6 +31,7 @@ public class PersonService {
 	 * @return
 	 */
 	public String getEmailAddressById(String personIdExternal) {
+		this.init();
 		PerEmailByKeyFluentHelper query = new DefaultECPersonalInformationService().withServicePath("odata/v2")
 				.getPerEmailByKey("8448", personIdExternal);
 		LOG.debug("PerEmail query:" + query);

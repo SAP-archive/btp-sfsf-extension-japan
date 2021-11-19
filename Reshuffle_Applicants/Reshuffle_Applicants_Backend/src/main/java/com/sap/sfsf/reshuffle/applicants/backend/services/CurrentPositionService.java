@@ -10,14 +10,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.sap.cloud.sdk.odatav2.connectivity.FilterExpression;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
@@ -36,26 +30,28 @@ import com.sap.sfsf.reshuffle.applicants.backend.model.details.DivisionDetails;
 import com.sap.sfsf.reshuffle.applicants.backend.model.details.PayGradeDetails;
 import com.sap.sfsf.reshuffle.applicants.backend.model.details.PositionDetails;
 import com.sap.sfsf.reshuffle.applicants.backend.model.details.UserDetails;
-import com.sap.sfsf.reshuffle.applicants.backend.model.filters.CurrentPositionFilter;
+import com.sap.sfsf.reshuffle.applicants.backend.model.filters.CandidateFilter;
 import com.sap.sfsf.reshuffle.applicants.backend.repository.CandidateRepository;
 import com.sap.sfsf.reshuffle.applicants.backend.util.CustomFilterExpression;
 import com.sap.sfsf.reshuffle.applicants.backend.util.DateTimeUtil;
 import com.sap.sfsf.reshuffle.applicants.backend.util.EmptyConfigException;
 import com.sap.sfsf.reshuffle.applicants.backend.util.ListToMapUtil;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
+
 @Service
 public class CurrentPositionService {
 	Logger logger = LoggerFactory.getLogger(CurrentPositionService.class);
 
 	@Autowired
-    ConfigService configService;
-    
-    @Autowired
+	ConfigService configService;
+
+	@Autowired
 	private EnvConfig envConfig;
-
-
-	private final int EXCEPTIONAL_INT = -1;
-	private final String TIMEZONE = "UTC";
 
 	@Autowired
 	private CandidateRepository candidateRepository;
@@ -71,12 +67,12 @@ public class CurrentPositionService {
 	//  3. Combine the Photo map to the extended-Empjob list
 	//  4. Convert Extended-EmpJob list to a Candidate list
 	//  5. Return the Candidate list
-	public List<ExCandidate> findAllFromSfsf(CurrentPositionFilter candidateFilter) throws ODataException, EmptyConfigException {
+	public List<ExCandidate> findAllFromSfsf(CandidateFilter candidateFilter) throws ODataException, EmptyConfigException {
 		List<ExEmpJob> exList = null;
 		List<ExCandidate> retList = new ArrayList<ExCandidate>();
 		LocalDateTime today = DateTimeUtil.getToday();
 
-		exList = getExEmpJobList(candidateFilter, today);
+        exList = getExEmpJobList(candidateFilter, today);
 
 		if(exList != null && exList.size() != 0) {
 			String userIds = exList.stream()
@@ -102,7 +98,7 @@ public class CurrentPositionService {
 
 	protected ExCandidate convertToCandidate(ExEmpJob exEmpJob, LocalDateTime today, 
 			Map<String, Photo> photoMap, Map<String, Willingness> willMap, Map<String, Rating> rate1Map, Map<String, Rating> rate2Map, Map<String, Rating> rate3Map,
-			CurrentPositionFilter candidateFilter) {
+			CandidateFilter candidateFilter) {
 
 		String department = exEmpJob.getDepartment();
 		String division = exEmpJob.getDivision();
@@ -185,8 +181,8 @@ public class CurrentPositionService {
 
 	protected int getTenurePosition(Date startDate, LocalDateTime today) {
 		if(startDate != null) {
-            String timezone = envConfig.getTimezone();
-			LocalDate localStartDate = LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.of(TIMEZONE)).toLocalDate();
+			String timezone = envConfig.getTimezone();
+			LocalDate localStartDate = LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.of(timezone)).toLocalDate();
 			return Period.between(localStartDate, today.toLocalDate()).getYears();
 		} else {
 			return envConfig.getExceptinalInt();
@@ -205,7 +201,7 @@ public class CurrentPositionService {
 		return name;
 	}
 
-	protected List<ExEmpJob> getExEmpJobList(CurrentPositionFilter candidateFilter, LocalDateTime today) throws ODataException, EmptyConfigException {
+	protected List<ExEmpJob> getExEmpJobList(CandidateFilter candidateFilter, LocalDateTime today) throws ODataException, EmptyConfigException {
 		String[] selects = {"userId", "userNav/firstName", "userNav/lastName",
 				"startDate", "event",
 				"department", "departmentNav/description_ja_JP", 
@@ -214,6 +210,8 @@ public class CurrentPositionService {
 
 		String[] expands = {"userNav", "departmentNav", "divisionNav", "positionNav"};
 
+		//filter= 
+		//  (startDate <= today) and (endDate >= today) and (arguments filters)
 		FilterExpression filters = null;
 		CustomFilterExpression filterEndDate = new CustomFilterExpression("endDate", "gt", DateTimeUtil.getDateTimeFilter(today));
 		CustomFilterExpression filterStartDate = new CustomFilterExpression("startDate", "le", DateTimeUtil.getDateTimeFilter(today));
@@ -229,8 +227,9 @@ public class CurrentPositionService {
 				.build();
 
 		logger.info("Candidate Query:" + query.toString());
+		String destName = envConfig.getDestinationName();
+		logger.debug("query destination: " + destName);
 
-        String destName = envConfig.getDestinationName();
 		return query.execute(destName)
 				.asList(ExEmpJob.class);
 	}
@@ -244,8 +243,10 @@ public class CurrentPositionService {
 				.param("$filter", filter)
 				.build();
 
-        logger.info("Will Query:" + query.toString());
-        String destName = envConfig.getDestinationName();
+		String destName = envConfig.getDestinationName();
+		logger.info("Will Query:" + query.toString());
+		logger.debug("query destination: " + destName);
+
 		List<Willingness> list = query.execute(destName)
 				.asList(Willingness.class);
 
@@ -264,8 +265,10 @@ public class CurrentPositionService {
 					.param("$filter", filter)
 					.build();
 
-            logger.info("Rating Query:" + query.toString());
-            String destName = envConfig.getDestinationName();
+			String destName = envConfig.getDestinationName();
+			logger.info("Rating Query:" + query.toString());
+			logger.debug("query destination: " + destName);
+
 			List<Rating> list = query.execute(destName)
 					.asList(Rating.class);
 
@@ -285,8 +288,10 @@ public class CurrentPositionService {
 				.param("$filter", filter)
 				.build();
 
-        logger.info("Photo Query:" + query.toString());
-        String destName = envConfig.getDestinationName();
+		String destName = envConfig.getDestinationName();
+		logger.info("Photo Query:" + query.toString());
+		logger.debug("query destination: " + destName);
+
 		List<Photo> list = query.execute(destName)
 				.asList(Photo.class);
 
@@ -312,7 +317,16 @@ public class CurrentPositionService {
 	}
 
 	public void saveAll(List<Candidate> candidateList) {
-		candidateRepository.deleteAll();
 		candidateRepository.saveAll(candidateList);
+	}
+
+	public List<String> findDistinctCaseId() {
+		Optional<List<String>> optCaseIdList = Optional.ofNullable(candidateRepository.findDistinctCaseId());
+		return optCaseIdList.orElse(null);
+	}
+
+	public List<Candidate> findByCaseid(String caseId) {
+		Optional<List<Candidate>> optCandidateList = Optional.ofNullable(candidateRepository.findByCaseid(caseId));
+		return optCandidateList.orElse(null);
 	}
 }

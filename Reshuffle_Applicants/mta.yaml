@@ -32,6 +32,8 @@ modules:
     path: Reshuffle_Applicants_Backend
     parameters:
       memory: 3584M 
+    properties:
+      SPRING_PROFILES_ACTIVE: 'cloud'
     provides:
       - name: Reshuffle_Applicants_Backend_api
         properties:
@@ -40,6 +42,7 @@ modules:
       build-result: 'target/*.jar'
     requires:
       - name: dest_Reshuffle_Applicants
+      - name: uaa_Reshuffle
       - name: hdi_db
 
 
@@ -87,6 +90,10 @@ resources:
       service: html5-apps-repo
     type: org.cloudfoundry.managed-service
   - name: uaa_Reshuffle
+    # parameters:
+    #   path: ./xs-security.json
+    #   service-plan: application
+    #   service: xsuaa
     type: org.cloudfoundry.existing-service
   - name: dest_Reshuffle_Applicants
     parameters:

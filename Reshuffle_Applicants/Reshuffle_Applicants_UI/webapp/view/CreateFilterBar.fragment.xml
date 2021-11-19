@@ -1,0 +1,64 @@
+<c:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:c="sap.ui.core"
+    xmlns:m="sap.m" 
+    xmlns:fb="sap.ui.comp.filterbar" 
+    xmlns:f="sap.f" 
+    xmlns:l="sap.ui.layout"
+    xmlns:v="sap.ui.comp.variants">
+	<fb:FilterBar id="RightFilterBar" header="{i18n>nextPositionList}" reset="onRightReset" search="onGoButton" showRestoreButton="true" showClearButton="true" showGoOnFB="true" showClearOnFB="true" clear="onRightReset" showFilterConfiguration="true" useToolbar="true">
+            <fb:filterGroupItems>
+                <fb:FilterGroupItem id="filterGroupItem1" groupName="Group1" name="G" label="{i18n>CaseId}" labelTooltip="Tooltip Example" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true" visible="false">
+                    <fb:control>
+                        <m:Select id="slCaseid" forceSelection="true" items="{ path: '/caseid' }" showSecondaryValues="true" busy="{view>/caseidBusy}">
+                            <c:ListItem key="{status}" text="{name}"/>
+                        </m:Select>
+                    </fb:control>
+                </fb:FilterGroupItem>
+				<fb:FilterGroupItem id="filterGroupItem2" groupName="Group1" name="A" label="{i18n>company}" labelTooltip="Tooltip Example" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="false">
+					<fb:control>
+						<m:Select id="slNextCompany" forceSelection="true" items="{ path: '/company' }" showSecondaryValues="true" change="onSlNextCompanyChange" busy="{view>/companyBusy}">
+							<c:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem id="filterGroupItem3" groupName="Group1" name="B" label="{i18n>businessunit}" labelTooltip="Tooltip Example" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="false">
+					<fb:control>
+						<m:Select id="slNextBusinessunit" forceSelection="true" items="{ path: '/nextBusinessunit' }" showSecondaryValues="true" change="onSlNextBusinessUnitChange" busy="{view>/businessunitBusy}">
+							<c:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem id="filterGroupItem4" groupName="Group1" name="C" label="{i18n>division}" labelTooltip="Tooltip Example" mandatory="true" partOfCurrentVariant="true" visibleInFilterBar="true">
+					<fb:control>
+						<m:Select id="slNextDivision" forceSelection="true" items="{ path: '/nextDivision' }" showSecondaryValues="true" change="onSlNextDivisionChange" busy="{view>/divisionBusy}">
+							<c:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem id="filterGroupItem5" groupName="Group1" name="D" label="{i18n>department}" labelTooltip="Tooltip Example" mandatory="true" partOfCurrentVariant="true" visibleInFilterBar="true">
+					<fb:control>
+						<m:Select id="slNextDepartment" forceSelection="true" items="{ path: '/nextDepartment' }" showSecondaryValues="true" change="onSlNextDepartmentChange" busy="{view>/departmentBusy}">
+							<c:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem id="filterGroupItem6" groupName="Group1" name="E" label="{i18n>position}" labelTooltip="Tooltip Example" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+					<fb:control>
+						<m:Select id="slNextPosition" forceSelection="true" items="{ path: '/nextPosition' }" showSecondaryValues="true" busy="{view>/positionBusy}">
+							<c:ListItem key="{code}" text="{name}" additionalText="{code}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+				<fb:FilterGroupItem id="filterGroupItem7" groupName="Group1" name="F" label="{i18n>retirementplan}" labelTooltip="Tooltip Example" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+					<fb:control>
+						<m:Select id="slRetirePlan" forceSelection="true">
+							<c:Item key="{key}" text="ALL"/>
+							<c:Item key="{key}" text="yes"/>
+							<c:Item key="{key}" text="no"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+			</fb:filterGroupItems>
+		</fb:FilterBar>   
+</c:FragmentDefinition>

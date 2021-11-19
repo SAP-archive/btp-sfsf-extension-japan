@@ -65,12 +65,18 @@ public class HelloController {
 			
 			int span = utils.getOptionalIntField(jsonObj, "span");
 			config.setSpan(span);
+			int competencyThreshold = utils.getOptionalIntField(jsonObj, "competencyThreshold");
+			config.setCompetencyThreshold(competencyThreshold);
 			String rateFormKey1 = utils.getOptinalStringField(jsonObj, "rateFormKey1");
 			String rateFormKey2 = utils.getOptinalStringField(jsonObj, "rateFormKey2");
 			String rateFormKey3 = utils.getOptinalStringField(jsonObj, "rateFormKey3");
+			String presidentName = utils.getOptinalStringField(jsonObj, "presidentName");
+			String mailTemplate = utils.getOptinalStringField(jsonObj, "mailTemplate");
 			config.setRateFormKey1(rateFormKey1);
 			config.setRateFormKey2(rateFormKey2);
 			config.setRateFormKey3(rateFormKey3);
+			config.setPresidentName(presidentName);
+			config.setMailTemplate(mailTemplate);
 			
 			configService.update(config);
 			

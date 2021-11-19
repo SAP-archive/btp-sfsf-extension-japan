@@ -1,5 +1,6 @@
 package com.sap.sfsf.reshuffle.simulation.backend.services;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,18 @@ public class ConfigService {
 		} else {
 			return null;
 		}
-	}
+    }
+    
+    public String getJpStartDate(){
+        Date startDate = getStartDate();
+        SimpleDateFormat jpFormat = new SimpleDateFormat("yyyy年MM月dd日");
+        return jpFormat.format(startDate);
+    }
 
+	public String getMailTemplate() {
+		Config config = configRepo.findOne();
+		String mailTemplate = config.getMailTemplate();
+		return mailTemplate;
+	}
+	
 }

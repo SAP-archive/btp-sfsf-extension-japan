@@ -1,9 +1,9 @@
 column table history (
      status nvarchar(10),
-     checkedBy nvarchar(20),
+	checkedBy nvarchar(20),
      checkedAt DateTime,
      totalCnt int,
-     okCnt int,
+	okCnt int,
      ngCnt int,
      warnCnt int
 )

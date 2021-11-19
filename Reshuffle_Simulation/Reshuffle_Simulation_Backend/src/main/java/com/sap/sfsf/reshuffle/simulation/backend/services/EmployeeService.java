@@ -33,16 +33,102 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeService {
-	final ErpHttpDestination destination = DestinationAccessor.getDestination("SFSF_2nd").asHttp()
-			.decorate(DefaultErpHttpDestination::new);
+	private ErpHttpDestination destination;
+
+	private void init(){
+		this.destination = DestinationAccessor.getDestination("SFSF").asHttp()
+		.decorate(DefaultErpHttpDestination::new);
+	}
 	
 	private Logger LOG = LoggerFactory.getLogger(EmployeeService.class);
 	
+	public List<EmpJob> getEmpJobs() {
+		this.init();
+		List<EmpJob> list = null;
+		try {
+			list = new DefaultECEmploymentInformationService()
+				.withServicePath("odata/v2")
+				.getAllEmpJob()
+				.select(
+						EmpJob.USER_ID,
+						EmpJob.START_DATE,
+						EmpJob.END_DATE,
+						EmpJob.EVENT,
+						EmpJob.EVENT_REASON
+						)
+				.top(100)
+				.orderBy(EmpJob.END_DATE, Order.DESC)
+				.execute(destination);
+		} catch (ODataException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	/**
+	 * User ID を利用して EmpJob情報を取得
+	 * @param userID
+	 * @return
+	 */
+	public List<EmpJob> getEmpJobsByID(String userID) {
+		this.init();
+		List<EmpJob> list = null;
+		try {
+			list = new DefaultECEmploymentInformationService()
+				.withServicePath("odata/v2")
+				.getAllEmpJob()
+				.select(
+						EmpJob.USER_ID,
+						EmpJob.START_DATE,
+						EmpJob.END_DATE,
+						EmpJob.EVENT,
+						EmpJob.EVENT_REASON
+						)
+				.filter(EmpJob.USER_ID.eq(userID)
+						//.and(EmpJob.EVENT.eq("3681"))
+						)
+				.orderBy(EmpJob.END_DATE, Order.DESC)
+				.execute(destination);
+		} catch (ODataException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/**
+	 * User ID を利用して異動履歴情報を取得
+	 * @param userID
+	 * @return
+	 */
+	public long getTransferTimesByID(String userID) {
+		this.init();
+		long cnt = 0;
+		LOG.info("=== Get Transfer Times by ID ===");
+		
+		try {
+			cnt = new DefaultECEmploymentInformationService()
+				.withServicePath("odata/v2")
+				.getAllEmpJob()
+				.filter(
+						EmpJob.USER_ID.eq(userID)
+						.and(EmpJob.EVENT.eq("3681"))
+						)
+				.execute(destination)
+				.size();
+		} catch (ODataException e) {
+			LOG.error("=== Error Getting Transfer Times by ID ===");
+			e.printStackTrace();
+		}
+		
+		return cnt;
+	}
+
 	/**
 	 * 異動履歴の一覧を取得
 	 * @return
 	 */
 	public List<EmpJob> getTransferList() {
+		this.init();
 		LOG.debug("=== Get transfer list start ===");
 		List<EmpJob> list = null;
 		try {
@@ -84,10 +170,53 @@ public class EmployeeService {
 	}
 	
 	/**
+	 * User ID を利用して現在の EmpJob情報を取得
+	 * @param userID
+	 * @return
+	 */
+	public EmpJob getCurrentJobByID(String userID) {
+		this.init();
+		EmpJob empJob = null;
+		List<EmpJob> list = null;
+
+		LocalDateTime endDate = DateTimeUtil.getEndDate();
+		LocalDateTime today = DateTimeUtil.getToday();
+		
+		EmpJobFluentHelper empQuery = new DefaultECEmploymentInformationService()
+				.withServicePath("odata/v2")
+				.getAllEmpJob()
+				.select(
+						EmpJob.USER_ID,
+						EmpJob.START_DATE,
+						EmpJob.END_DATE,
+						EmpJob.EVENT,
+						EmpJob.EVENT_REASON
+						)
+				.filter(EmpJob.USER_ID.eq(userID)
+						.and(EmpJob.END_DATE.eq(endDate))
+						.and(EmpJob.START_DATE.le(today))
+						//.and(EmpJob.EVENT.eq("3681"))
+						)
+				.top(1)
+				.orderBy(EmpJob.END_DATE, Order.DESC);
+		LOG.info("Query:"+empQuery.toQuery().toString());
+		try {
+			list = empQuery.execute(destination);
+		} catch (ODataException e) {
+			e.printStackTrace();
+		}
+		if(list.size()>0) {
+			empJob = list.get(0);
+		}
+		return empJob;
+	}
+
+	/**
 	 * 現在の EmpJob List情報を取得
 	 * @return
 	 */
 	public List<EmpJob> getCurrentJobs() {
+		this.init();
 		LOG.debug("=== Get current jobs start ===");
 		List<EmpJob> list = null;
 
@@ -144,7 +273,7 @@ public class EmployeeService {
 		LOG.debug("Query:"+query.toString());
 		try {
 			list = query
-					.execute("SFSF_2nd")
+					.execute("SFSF")
 					.asList(MyEmpJob.class);
 		} catch (ODataException e) {
 			e.printStackTrace();
@@ -183,14 +312,41 @@ public class EmployeeService {
 		LocalDateTime today = DateTimeUtil.getToday();
 		CustomFilterExpression filter1 = new CustomFilterExpression("startDate","le",DateTimeUtil.getDateTimeFilter(today));
 		CustomFilterExpression filter2 = new CustomFilterExpression("endDate","gt",DateTimeUtil.getDateTimeFilter(today));
-		//FilterExpression filter3 = new FilterExpression("customString13","eq", new ODataType<String>("5458"));
+		//FilterExpression filter3 = new CustomFilterExpression("customString20","ne", "null");
 		try {
 			list = ODataQueryBuilder
 					.withEntity("odata/v2", "PerGlobalInfoJPN")
 					.select(selects)
 					.filter(filter1.and(filter2))
 					.build()
-					.execute("SFSF_2nd")
+					.execute("SFSF")
+					.asList(MyPerGlobalInfoJPN.class);
+		} catch (ODataException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	
+	/**
+	 * 要介護家族存在情報を取得
+	 * @return
+	 */
+	public List<MyPerGlobalInfoJPN> getFamilyMemeberNeedsCareByQuery(){
+		List<MyPerGlobalInfoJPN> list = null;
+		String[] selects = {"personIdExternal","customString13","customString20"};
+		LocalDateTime today = DateTimeUtil.getToday();
+		CustomFilterExpression filter1 = new CustomFilterExpression("startDate","le",DateTimeUtil.getDateTimeFilter(today));
+		CustomFilterExpression filter2 = new CustomFilterExpression("endDate","gt",DateTimeUtil.getDateTimeFilter(today));
+		FilterExpression filter3 = new FilterExpression("customString13","eq", new ODataType<String>("5458"));
+		try {
+			list = ODataQueryBuilder
+					.withEntity("odata/v2", "PerGlobalInfoJPN")
+					.select(selects)
+					.filter(filter1.and(filter2).and(filter3))
+					.build()
+					.execute("SFSF")
 					.asList(MyPerGlobalInfoJPN.class);
 		} catch (ODataException e) {
 			e.printStackTrace();
@@ -209,6 +365,15 @@ public class EmployeeService {
 	}
 	
 	/**
+	 * 要介護家族Mapを取得
+	 * @return
+	 */
+	public Map<String,MyPerGlobalInfoJPN> getFamilyMemberNeedsCareListMap(){
+		List<MyPerGlobalInfoJPN> list = this.getSpouseByQuery();
+		return ListToMapUtil.getMap("personIdExternal", list);
+	}
+	
+	/**
 	 * User IDを利用して直近3回評価歴を取得
 	 * @param userID
 	 * @return
@@ -222,7 +387,7 @@ public class EmployeeService {
 					.select(selects)
 					.top(3)
 					.build()
-					.execute("SFSF_2nd")
+					.execute("SFSF")
 					.asList(MyRating.class);
 		} catch (ODataException e) {
 			e.printStackTrace();
@@ -250,7 +415,7 @@ public class EmployeeService {
 		LOG.debug("Rating List Query:"+query.toString());
 		try {
 			list = query
-					.execute("SFSF_2nd")
+					.execute("SFSF")
 					.asList(MyRating.class);
 		} catch (ODataException e) {
 			e.printStackTrace();

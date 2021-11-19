@@ -18,14 +18,14 @@
 		<java.source.level>1.8</java.source.level>
 		<java.target.level>${java.source.level}</java.target.level>
 		
-		<sap.cloud.security.version>2.6.2</sap.cloud.security.version>
+		<sap.cloud.security.version>2.7.2</sap.cloud.security.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>com.sap.cloud.sdk</groupId>
 				<artifactId>sdk-bom</artifactId>
-				<version>3.43.0</version>
+				<version>3.23.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -92,14 +92,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-<!--         
+		       
 		<dependency>
             <groupId>com.sap.cloud.security.xsuaa</groupId>
             <artifactId>xsuaa-spring-boot-starter</artifactId>
             <version>${sap.cloud.security.version}</version>
         </dependency> 
--->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -155,12 +153,13 @@
 					<includes>
 						<include>**/Test*Unit*</include>
 					</includes>
+					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.6</version>
+				<version>0.7.9</version>
 				<executions>
 					<execution>
 						<id>default-prepare-agent</id>

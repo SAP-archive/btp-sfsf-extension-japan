@@ -1,4 +1,3 @@
-  
 package com.sap.sfsf.reshuffle.applicants.backend;
 
 import org.springframework.boot.SpringApplication;

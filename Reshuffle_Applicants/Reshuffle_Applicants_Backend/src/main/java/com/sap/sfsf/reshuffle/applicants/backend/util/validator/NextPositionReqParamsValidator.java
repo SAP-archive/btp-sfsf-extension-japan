@@ -8,6 +8,7 @@ public class NextPositionReqParamsValidator extends Validator {
 
 	private boolean hasDivision = false;
 	private boolean hasDepartment = false;
+	private boolean hasCaseId = false;
 
 	private static final String COMPANY = "company";
 	private static final String BUSINESSUNIT = "businessUnit";
@@ -15,6 +16,7 @@ public class NextPositionReqParamsValidator extends Validator {
 	private static final String DEPARTMENT = "department";
 	private static final String POSITION = "position";
 	private static final String RETIREMENT = "retirement";
+	private static final String CASEID = "caseId";
 
 	private static int STRUL = 50;
 	private static int STRLL = 1;
@@ -28,6 +30,9 @@ public class NextPositionReqParamsValidator extends Validator {
 			int length =  v.length();
 			
 			switch (k) {
+            case CASEID:
+				setHasCaseId(true);
+				break;
 			case COMPANY:
 				if(length < STRLL || length > STRUL)
 					addErrorList(COMPANY + LENGTHERRMSG);
@@ -69,8 +74,10 @@ public class NextPositionReqParamsValidator extends Validator {
 			}
 		});
 
-		if(hasDivision != true) addErrorList(DIVISION + MANDTERRMSG);
-		if(hasDepartment != true) addErrorList(DEPARTMENT + MANDTERRMSG);
+		if(hasCaseId != true) {
+			if(hasDivision != true) addErrorList(DIVISION + MANDTERRMSG);
+			if(hasDepartment != true) addErrorList(DEPARTMENT + MANDTERRMSG);
+		}
 	}
 	
 	private void setHasDivision(boolean bool) {
@@ -79,5 +86,13 @@ public class NextPositionReqParamsValidator extends Validator {
 	
 	private void setHasDepartment(boolean bool) {
 		this.hasDepartment = bool;
+	}
+
+	private void setHasCaseId(boolean bool) {
+		this.hasCaseId = bool;
+	}
+
+	public boolean hasCaseId() {
+		return this.hasCaseId;
 	}
 }

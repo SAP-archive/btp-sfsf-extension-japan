@@ -1,0 +1,25 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" >
+	<Dialog
+		id="marginDialog"
+		title="{i18n>mdHeader}">
+		<Label text="{i18n>marginValue}" labelFor="marginInput" />
+		<Input 
+			id="marginInput" 
+			placeholder="{i18n>marginPlaceholder}"
+			valueStateText="{i18n>pdTenureValueState}"
+			value="{
+					type : 'sap.ui.model.type.Integer',
+					constraints : {
+						minimum: 0,
+						maximum: 720
+					},
+					value: '0'
+			}" />
+		<buttons>
+   			<Button text="{i18n>mdOK}" type="Emphasized" press="onMarginOk" />
+	   		<Button text="{i18n>mdCancel}" press="onMarginCancel" />
+		</buttons>
+   </Dialog>
+</core:FragmentDefinition>

@@ -25,6 +25,9 @@ public class Config {
 	@Column(name = "SPAN")
 	private int span;
 	
+	@Column(name = "COMPETENCYTHRESHOLD")
+	private int competencyThreshold;
+	
 	@Column(name = "RATEFORMKEY1")
 	private String rateFormKey1;
 
@@ -33,6 +36,12 @@ public class Config {
 
 	@Column(name = "RATEFORMKEY3")
 	private String rateFormKey3;
+	
+	@Column(name = "PRESIDENTNAME")
+	private String presidentName;
+	
+	@Column(name = "MAILTEMPLATE")
+	private String mailTemplate;
 	
 	private static final String NAIVEFORMAT = "yyyy/MM/dd";
 	private static final String JPFORMAT = "yyyy年MM月dd日";
@@ -54,9 +63,12 @@ public class Config {
 		JSONObject json = new JSONObject();
 		json.put("startDateTime", str);
 		json.put("span", this.span);
+		json.put("competencyThreshold", this.competencyThreshold);
 		json.put("rateFormKey1", this.rateFormKey1);
 		json.put("rateFormKey2", this.rateFormKey2);
 		json.put("rateFormKey3", this.rateFormKey3);
+		json.put("presidentName", this.presidentName);
+		json.put("mailTemplate", this.mailTemplate);
 		
 		return json;
 	}
@@ -68,7 +80,6 @@ public class Config {
 		
 		return;
 	}
-
 	public JSONObject getFixedJpDateConfig() throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日");
 		
@@ -80,4 +91,11 @@ public class Config {
 		
 		return json;
 	}
+	
+	// public JSONObject getMailTemplate() {
+	// 	JSONObject json = new JSONObject();
+	// 	json.put("mailTemplate", this.mailTemplate);
+		
+	// 	return json;
+	// }
 }

@@ -14,7 +14,9 @@ public class Config {
 	@Column(name="startdatetime")
 	private Date startDateTime;
 
-
+	@Column(name = "MAILTEMPLATE")
+	private String mailTemplate;
+	
 	public Config() {
 		
 	}
@@ -23,9 +25,12 @@ public class Config {
 		return startDateTime;
 	}
 
-
 	public void setStartDateTime(Date startDateTime) {
 		this.startDateTime = startDateTime;
+	}
+	
+	public String getMailTemplate() {
+		return this.mailTemplate;
 	}
 
 }

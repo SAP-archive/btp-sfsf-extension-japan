@@ -15,9 +15,9 @@ AppVariantPreviewPayload.zip
 mergedManifestDescriptor.json
 APIExternalProducer.js
 .*/APIExternalProducer.js
-package-lock.json
-.Reshuffle_Configuration_mta_build_tmp/
+Makefile*
 
 */node_modules/
+*/package-lock.json
 */dist/
 */resources/

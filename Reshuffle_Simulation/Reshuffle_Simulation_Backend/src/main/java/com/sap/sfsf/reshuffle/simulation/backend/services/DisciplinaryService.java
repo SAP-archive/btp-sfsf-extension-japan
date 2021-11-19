@@ -29,7 +29,7 @@ public class DisciplinaryService {
 					.select(selects)
 					.filter(filter)
 					.build()
-					.execute("SFSF_2nd")
+					.execute("SFSF")
 					.asList(MyDisciplinary.class);
 		} catch (ODataException e) {
 			e.printStackTrace();

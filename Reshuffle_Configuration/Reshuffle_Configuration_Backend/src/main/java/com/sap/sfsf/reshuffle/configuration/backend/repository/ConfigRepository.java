@@ -5,5 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sap.sfsf.reshuffle.configuration.backend.model.Config;
 
+
 @Repository
-public interface ConfigRepository extends CrudRepository<Config, Integer>{}
+public interface ConfigRepository extends CrudRepository<Config, Integer>{
+
+}

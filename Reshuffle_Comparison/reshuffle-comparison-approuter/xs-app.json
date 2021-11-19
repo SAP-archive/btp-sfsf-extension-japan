@@ -1,0 +1,16 @@
+{
+  "welcomeFile": "/comsapsfsfcomparisonReshuffle_Comparison_UI/index.html",
+  "authenticationMethod": "route",
+  "routes": [{
+		"source": "/srv_api/(.*)$",
+		"target": "$1",
+		"authenticationType": "xsuaa",
+		"destination": "srv_api",
+		"csrfProtection": false
+	},{
+		"source": "/config_api/(.*)$",
+		"target": "$1",
+		"authenticationType": "xsuaa",
+		"destination": "config_api"
+	}]
+}

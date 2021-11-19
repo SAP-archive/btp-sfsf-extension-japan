@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sap.cloud.sdk.odatav2.connectivity.FilterExpression;
@@ -13,17 +14,22 @@ import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQuery;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataType;
+import com.sap.sfsf.reshuffle.applicants.backend.config.EnvConfig;
 import com.sap.sfsf.reshuffle.applicants.backend.model.filters.BusinessUnitFilter;
 import com.sap.sfsf.reshuffle.applicants.backend.model.filters.CompanyFilter;
 import com.sap.sfsf.reshuffle.applicants.backend.model.filters.DepartmentFilter;
 import com.sap.sfsf.reshuffle.applicants.backend.model.filters.DivisionFilter;
 import com.sap.sfsf.reshuffle.applicants.backend.model.filters.PositionFilter;
+import com.sap.sfsf.reshuffle.applicants.backend.model.filters.RatingFilter;
 import com.sap.sfsf.reshuffle.applicants.backend.util.CustomFilterExpression;
 import com.sap.sfsf.reshuffle.applicants.backend.util.DateTimeUtil;
 
 @Service
 public class FilterService {
 	private Logger Logger = LoggerFactory.getLogger(FilterService.class);
+
+	@Autowired
+	private EnvConfig envConfig;
 
 	public List<CompanyFilter> getCompanyFilter() throws Exception, ODataException {
 		LocalDateTime today = DateTimeUtil.getToday();
@@ -43,7 +49,10 @@ public class FilterService {
 
 		Logger.debug("Business Unit Filter Query: " + query.toString());
 
-		list = query.execute("SFSF_2nd")
+		String destName = envConfig.getDestinationName();
+		Logger.debug("query destination: " + destName);
+
+		list = query.execute(destName)
 				.asList(CompanyFilter.class);
 
 		return list;
@@ -67,7 +76,10 @@ public class FilterService {
 
 		Logger.debug("Business Unit Filter Query: " + query.toString());
 
-		list = query.execute("SFSF_2nd")
+		String destName = envConfig.getDestinationName();
+		Logger.debug("Query destination: " + destName);
+
+		list = query.execute(destName)
 				.asList(BusinessUnitFilter.class);
 
 		return list;
@@ -93,13 +105,17 @@ public class FilterService {
 
 		Logger.debug("Division Filter Query: " + query.toString());
 
-		list = query.execute("SFSF_2nd")
+		String destName = envConfig.getDestinationName();
+		Logger.debug("Query destination: " + destName);
+
+		list = query.execute(destName)
 				.asList(DivisionFilter.class);
 
 		return list;
 	}
 
 	public List<DepartmentFilter> getDepartmentFilter() throws Exception, ODataException {
+		//LocalDateTime endDate = DateTimeUtil.getEndDate();
 		LocalDateTime today = DateTimeUtil.getToday();
 
 		String[] selects = {"externalCode", "startDate", "endDate", "name_ja_JP", "cust_toDivision/externalCode"};
@@ -118,13 +134,17 @@ public class FilterService {
 
 		Logger.debug("Department Filter Query: " + query.toString());
 
-		list = query.execute("SFSF_2nd")
+		String destName = envConfig.getDestinationName();
+		Logger.debug("Query destination: " + destName);
+
+		list = query.execute(destName)
 				.asList(DepartmentFilter.class);
 
 		return list;
 	}
 
 	public List<PositionFilter> getPositionFilter() throws Exception, ODataException {
+		//LocalDateTime endDate = DateTimeUtil.getEndDate();
 		LocalDateTime today = DateTimeUtil.getToday();
 
 		String[] selects = {"code", "effectiveStartDate", "effectiveEndDate", "externalName_ja_JP", "company", "businessUnit", "division", "department"};
@@ -144,10 +164,34 @@ public class FilterService {
 
 		Logger.info("Position Filter Query: " + query.toString());
 
-		list = query.execute("SFSF_2nd")
+		String destName = envConfig.getDestinationName();
+		Logger.debug("Query destination: " + destName);
+
+		list = query.execute(destName)
 				.asList(PositionFilter.class);
 
 		return list;
 	}
 
+	public List<RatingFilter> getRatingFilter() throws Exception, ODataException {
+		FilterExpression filter = new FilterExpression("formTemplateType", "eq", ODataType.of("Review"));
+		String[] selects = {"formTemplateId", "formTemplateName"};
+
+		List<RatingFilter> list = null;
+		ODataQuery query = ODataQueryBuilder
+				.withEntity("odata/v2", "FormTemplate")
+				.select(selects)
+				.filter(filter)
+				.build();
+
+		Logger.info("Rating Filter Query: " + query.toString());
+
+		String destName = envConfig.getDestinationName();
+		Logger.debug("Query destination: " + destName);
+
+		list = query.execute(destName)
+				.asList(RatingFilter.class);
+
+		return list;
+	}
 }

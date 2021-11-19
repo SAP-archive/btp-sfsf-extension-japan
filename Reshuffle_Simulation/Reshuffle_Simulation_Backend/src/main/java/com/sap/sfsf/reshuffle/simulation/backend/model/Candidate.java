@@ -5,11 +5,18 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CANDIDATE")
+@IdClass(CandidateId.class)
 public class Candidate {
+    
+    @Id
+	@Column(name = "CASEID")
+	private String caseID;
+	
 	@Id
 	@Column(name = "CANDIDATEID")
 	private String candidateID;
@@ -23,6 +30,9 @@ public class Candidate {
 	@Column(name = "CURRENTDIVISION")
 	private String currentDivision;
 
+    @Column(name = "CURRENTMANAGER")
+    private String currentManager;   
+
 	@Column(name = "CURRENTPOSITION")
 	private String currentPosition;
 
@@ -31,6 +41,9 @@ public class Candidate {
 
 	@Column(name = "NEXTDIVISION")
 	private String nextDivision;
+
+    @Column(name = "NEXTMANAGER")
+    private String nextManager;   
 
 	@Column(name = "NEXTPOSITION")
 	private String nextPosition;
@@ -115,6 +128,10 @@ public class Candidate {
 		this.checkResult = "";
 	}
 
+	public String getCaseID() {
+		return caseID;
+	}
+	
 	public String getCandidateID() {
 		return candidateID;
 	}
@@ -167,6 +184,10 @@ public class Candidate {
 		return currentJobGradeName;
 	}
 
+	public String getCurrentManager() {
+		return currentManager;
+	}
+
 	public String getCurrentPosition() {
 		return currentPosition;
 	}
@@ -209,6 +230,10 @@ public class Candidate {
 
 	public String getNextPosition() {
 		return nextPosition;
+	}
+
+	public String getNextManager() {
+		return nextManager;
 	}
 
 	public String getNextPositionName() {
@@ -271,6 +296,10 @@ public class Candidate {
 		this.currentJobGradeName = currentJobGradeName;
 	}
 
+	public void setCurrentManager(String currentManager) {
+		this.currentManager = currentManager;
+	}
+
 	public void setCurrentPosition(String currentPosition) {
 		this.currentPosition = currentPosition;
 	}
@@ -309,6 +338,10 @@ public class Candidate {
 
 	public void setNextJobGradeName(String nextJobGradeName) {
 		this.nextJobGradeName = nextJobGradeName;
+	}
+
+	public void setNextManager(String nextManager) {
+		this.nextManager = nextManager;
 	}
 
 	public void setNextPosition(String nextPosition) {

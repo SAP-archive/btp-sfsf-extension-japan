@@ -73,11 +73,7 @@ resources:
       service: html5-apps-repo
     type: org.cloudfoundry.managed-service
   - name: uaa_Reshuffle
-    parameters:
-      path: ./xs-security.json
-      service-plan: application
-      service: xsuaa
-    type: org.cloudfoundry.managed-service
+    type: org.cloudfoundry.existing-service
   - name: dest_Reshuffle_Configuration
     parameters:
       service-plan: lite

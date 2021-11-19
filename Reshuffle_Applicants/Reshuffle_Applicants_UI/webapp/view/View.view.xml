@@ -1,4 +1,14 @@
-<mvc:View xmlns="sap.ui.table" xmlns:dnd="sap.ui.core.dnd" xmlns:mvc="sap.ui.core.mvc" xmlns:c="sap.ui.core" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:f="sap.f" xmlns:l="sap.ui.layout" controllerName="com.sap.sfsf.applicants.controller.Controller" height="100%">
+<mvc:View xmlns="sap.ui.table" 
+    xmlns:dnd="sap.ui.core.dnd" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:c="sap.ui.core" 
+    xmlns:m="sap.m" 
+    xmlns:fb="sap.ui.comp.filterbar" 
+    xmlns:f="sap.f" 
+    xmlns:l="sap.ui.layout"
+    xmlns:v="sap.ui.comp.variants" 
+    controllerName="com.sap.sfsf.applicants.controller.Controller" 
+    height="100%">
 	<m:App>
     	<m:pages>
 			<m:Page title="{i18n>title}{/jpconfig}" showHeader="true" enableScrolling="true" titleAlignment="Center" id="CandidatesList">
@@ -76,13 +86,20 @@
 								</fb:filterGroupItems>
 							</fb:FilterBar>                    					
 							<m:OverflowToolbar>
-								<m:Label text = "アサイン済 {/noTransferflagCount} / 全候補 {/applicantsCount}"/>
+								<m:Label text = "{i18n>assigned} {/noTransferflagCount} / {i18n>allApplicants} {/applicantsCount}"/>
 								<m:ProgressIndicator id="leftProgressIndicator" width="20%" class="sapUiSmallMarginBottom" percentValue="30" showValue="true" state="None" />
 								<m:ToolbarSpacer/>	
 								<m:Button id="dataLeftExport" type="Default" press="onDataLeftExport" text="{i18n>dataExport}"/>
-								<m:Button id="transferDestinationPositionButton" type="Default" text="{i18n>transferDestinationPosition}" press="onTransferDestination"/>
+								<m:MenuButton text="{i18n>transferDestinationPosition}">
+									<m:menu>
+										<m:Menu>
+											<m:MenuItem text="{i18n>openNextPositionPane}" press="onOpenNextPositionPane" />
+											<m:MenuItem text="{i18n>openEditExistingCasePane}" press="onOpenEditExistingCasePane" />
+										</m:Menu>
+									</m:menu>
+								</m:MenuButton>
 							</m:OverflowToolbar>
-							<Table id="applicantListTable" selectionMode="None" ariaLabelledBy="title" rows="{         path: '/candidates/'        }" visibleRowCount="13" rowHeight="30">
+							<Table id="applicantListTable" selectionMode="MultiToggle" ariaLabelledBy="title" rows="{         path: '/candidates/'        }" visibleRowCount="13" rowHeight="30">
 							<columns>
 							<Column width="2rem">
 								<template>
@@ -169,61 +186,15 @@
 						<m:VBox id="nextPositionListBox" justifyContent="End" width="100%">
 							<m:layoutData>
 								<l:SplitterLayoutData id="right" size="50%" resizable="true"/>
-							</m:layoutData>
-							<fb:FilterBar header="{i18n>nextPositionList}" reset="onRightReset" search="onCheckCandidateId" showRestoreButton="true" showClearButton="true" showGoOnFB="true" showClearOnFB="true" clear="onRightReset" showFilterConfiguration="true">
-								<fb:filterGroupItems>
-									<fb:FilterGroupItem groupName="Group1" name="A" label="{i18n>company}" labelTooltip="Tooltip Example" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="false">
-										<fb:control>
-											<m:Select id="slNextCompany" forceSelection="true" items="{ path: '/company' }" showSecondaryValues="true" change="onSlNextCompanyChange" busy="{view>/companyBusy}">
-												<c:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
-											</m:Select>
-										</fb:control>
-									</fb:FilterGroupItem>
-									<fb:FilterGroupItem groupName="Group1" name="B" label="{i18n>businessunit}" labelTooltip="Tooltip Example" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="false">
-										<fb:control>
-											<m:Select id="slNextBusinessunit" forceSelection="true" items="{ path: '/nextBusinessunit' }" showSecondaryValues="true" change="onSlNextBusinessUnitChange" busy="{view>/businessunitBusy}">
-												<c:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
-											</m:Select>
-										</fb:control>
-									</fb:FilterGroupItem>
-									<fb:FilterGroupItem groupName="Group1" name="C" label="{i18n>division}" labelTooltip="Tooltip Example" mandatory="true" partOfCurrentVariant="true" visibleInFilterBar="true">
-										<fb:control>
-											<m:Select id="slNextDivision" forceSelection="true" items="{ path: '/nextDivision' }" showSecondaryValues="true" change="onSlNextDivisionChange" busy="{view>/divisionBusy}">
-												<c:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
-											</m:Select>
-										</fb:control>
-									</fb:FilterGroupItem>
-									<fb:FilterGroupItem groupName="Group1" name="D" label="{i18n>department}" labelTooltip="Tooltip Example" mandatory="true" partOfCurrentVariant="true" visibleInFilterBar="true">
-										<fb:control>
-											<m:Select id="slNextDepartment" forceSelection="true" items="{ path: '/nextDepartment' }" showSecondaryValues="true" change="onSlNextDepartmentChange" busy="{view>/departmentBusy}">
-												<c:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
-											</m:Select>
-										</fb:control>
-									</fb:FilterGroupItem>
-									<fb:FilterGroupItem groupName="Group1" name="E" label="{i18n>position}" labelTooltip="Tooltip Example" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
-										<fb:control>
-											<m:Select id="slNextPosition" forceSelection="true" items="{ path: '/nextPosition' }" showSecondaryValues="true" busy="{view>/positionBusy}">
-												<c:ListItem key="{code}" text="{name}" additionalText="{code}"/>
-											</m:Select>
-										</fb:control>
-									</fb:FilterGroupItem>
-									<fb:FilterGroupItem groupName="Group1" name="F" label="{i18n>retirementplan}" labelTooltip="Tooltip Example" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
-										<fb:control>
-											<m:Select id="slRetirePlan" forceSelection="true">
-												<c:Item key="{key}" text="ALL"/>
-												<c:Item key="{key}" text="yes"/>
-												<c:Item key="{key}" text="no"/>
-											</m:Select>
-										</fb:control>
-									</fb:FilterGroupItem>
-								</fb:filterGroupItems>
-							</fb:FilterBar>       					
+                            </m:layoutData>
+							 <c:Fragment fragmentName="com.sap.sfsf.applicants.view.CreateFilterBar" type="XML" />       					
 							<m:OverflowToolbar id="otb1">
-								<m:Label text = "割り当て済 {/availabilityCount} / 全ポジション {/nextpostionsCount}"/>
+								<m:Label text = "{i18n>allocated} {/availabilityCount} / {i18n>allPosition} {/nextpostionsCount}"/>
 								<m:ProgressIndicator id="rightProgressIndicator" width="20%" class="sapUiSmallMarginBottom" percentValue="30"  showValue="true" state="None" />
 
 								<m:ToolbarSpacer/>
 								<m:Button id="cancel" type="Default" text="{i18n>cancel}" press="onCancelBtn" />
+								<m:Button id="deleteCandidatePlanBtn" type="Default" text="{i18n>deleteCandidatePlanBtn}" press="onDeleteCandidatePlanBtn" visible="false" enabled="false" />
 								<m:Button id="dataRightExport" type="Default" text="{i18n>dataExport}" press="onDataRightExport" />
 								<m:Button type="Default" text="{i18n>save}" press="onSave"/>
 								<m:Button type="Default" text="{i18n>hide}" press="onHideRight"/>
@@ -251,7 +222,8 @@
 							<Column width="11rem" sortProperty="nextPosition">
 								<m:Label text="{i18n>position}"/>
 								<template>
-									<m:Text text="{nextPositionName}" wrapping="false"/>
+									<!--<m:Text text="{nextPositionName}" wrapping="false"/>-->
+									<m:Link id="positionName" text="{nextPositionName}" press="mentionDuplicate"/>
 								</template>
 							</Column>	
 							<Column width="6rem" sortProperty="currentEmpName">

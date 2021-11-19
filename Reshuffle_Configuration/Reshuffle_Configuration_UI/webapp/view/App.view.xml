@@ -28,6 +28,37 @@
 				</ObjectPageDynamicHeaderTitle>
 			</headerTitle>
 			<sections>
+				<ObjectPageSection titleUppercase="false" title="{i18n>mtSectionTitle}">
+					<subSections>
+						<ObjectPageSubSection titleUppercase="false">
+							<blocks>
+								<l:VerticalLayout class="sapUiContentPadding" width="100%">
+									<m:OverflowToolbar>
+										<m:Label text="{i18n>mtToolBarTitle}" />
+										<m:Button id="mtBtnPreview" text="{i18n>mtToolBarPreview}" type="Transparent" press="onMailPreview" />
+										<m:Button id="mtBtnSizeChanger" text="{i18n>mtToolBarEditorSizeChanger}" type="Transparent" press="onResizeEditor" />
+										<m:Button id="mtBtnMarginConfig" text="{i18n>mtToolBarMarginConfig}" type="Transparent" press="onMarginConfig" enabled="false" />
+										<m:ToolbarSpacer />
+										<m:Button xmlns="sap.m" icon="sap-icon://message-information" press="onInfoPopover" type="Transparent" />
+									</m:OverflowToolbar>
+									<rich:RichTextEditor id="mailEditor" value='{/mailTemplate}' customToolbar="true" showGroupFont="true" showGroupFontStyle="true" width="100%" height="300px" editable="false"></rich:RichTextEditor>
+								</l:VerticalLayout>
+							</blocks>
+						</ObjectPageSubSection>
+						<ObjectPageSubSection title="{i18n>mtPresidentName}" titleUppercase="false">
+							<blocks>
+								<m:Input id="mtPresidentName" class="sapUiSmallMarginBottom" liveChange="true" editable="false" required="true" placeholder="{i18n>mtPresidentNamePlaceholder}" valueStateText="{i18n>mtPresidentNameValueState}" type="Text" value="{
+									path: '/presidentName',
+									type : 'sap.ui.model.type.String',
+									constraints : {
+										minLength: 1,
+										maxLength: 32
+									}
+								}" />
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
 				<ObjectPageSection titleUppercase="false" title="{i18n>pdSectionTitle}" importance="Medium">
 					<subSections>
 						<ObjectPageSubSection title="{i18n>pdNextPubDate}" titleUppercase="false">
@@ -78,6 +109,13 @@
 										</m:Select>
 									</l:HorizontalLayout>
 								</l:VerticalLayout>
+							</blocks>
+						</ObjectPageSubSection>
+						<ObjectPageSubSection title="{i18n>evalCompetencyThreshold}" importance="Medium" titleUppercase="false">
+							<blocks>
+								<m:Slider id="CompThresholdSlider" min="0" max="5" value="{/competencyThreshold}" enableTickmarks="true" class="sapUiSmallMarginBottom" width="100%" enabled="false">
+									<m:ResponsiveScale tickmarksBetweenLabels="1" />
+								</m:Slider>
 							</blocks>
 						</ObjectPageSubSection>
 					</subSections>

@@ -1,4 +1,5 @@
 column table candidate(
+	 caseID nvarchar(50),
 	 candidateID nvarchar(50),
 	 candidateName nvarchar(50),
 	 currentDivision nvarchar(10) ,
@@ -33,6 +34,8 @@ column table candidate(
 	 checkResult nvarchar(500),
 	 checkStatus nvarchar(5),
 	 checkDateTime DateTime,
+	 mailSentFlg nvarchar(5),
+	 mailSentAt Datetime,
 	 upsertFlg nvarchar(5),
 	 upsertAt Datetime,
 	 modifiedAt Datetime,

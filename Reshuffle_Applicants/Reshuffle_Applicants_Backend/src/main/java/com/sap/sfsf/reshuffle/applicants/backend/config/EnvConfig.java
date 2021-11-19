@@ -13,16 +13,16 @@ public class EnvConfig {
     private Logger logger = LoggerFactory.getLogger(EnvConfig.class);
     private final int DEFAULT_INT = -1;
     
-    @Value("${btp.destination}")
+    @Value("${scp.destination}")
     private String destinationName;
 
-    @Value("${sfsf_termination_code}")
+    @Value("${sfsf.terminationcode}")
     private String terminationCode;
 
-    @Value("${default_timezone}")
+    @Value("${default.timezone}")
     private String timezone;
 
-    @Value("${exception_tenure_position}")
+    @Value("${default.exception.int}")
     private int exceptionalInt = DEFAULT_INT;
     
     @Bean

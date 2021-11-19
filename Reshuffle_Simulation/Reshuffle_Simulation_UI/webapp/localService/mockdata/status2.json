@@ -1,8 +1,8 @@
 {
-    "status": "WARN",
-    "checkedDateTime": "2020/07/13 13:57:09",
-    "TOTAL":600,
-    "OK": 100,
-    "NG": 200,
-    "WARN": 300
+    "status": "OK",
+    "checkedDateTime": "2020/10/05 13:57:09",
+    "TOTAL":5,
+    "OK": 5,
+    "NG": 0,
+    "WARN": 0
 }

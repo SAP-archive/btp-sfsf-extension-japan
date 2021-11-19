@@ -1,0 +1,42 @@
+[
+    {
+        "currentEmpId": "mhirayama",
+        "currentEmpName": "平山 桃華",
+        "competencyPercentage": "50"
+    },
+    {
+        "currentEmpId": "tkawasaki",
+        "currentEmpName": "河崎 健史",
+        "competencyPercentage": "42"
+    },
+    {
+        "currentEmpId": "dkusa",
+        "currentEmpName": "草野 大治郎",
+        "competencyPercentage": "60"
+    },
+    {
+    	"currentEmpId": "rgoda",
+        "currentEmpName": "郷田 凌士",
+        "competencyPercentage": "30"
+    },
+    {
+        "currentEmpId": "mtana",
+        "currentEmpName": "田中 誠",
+        "competencyPercentage": "10"
+    },
+    {
+        "currentEmpId": "VictorK",
+        "currentEmpName": "Victor Kris",
+        "competencyPercentage": "80"
+    },
+    {
+        "currentEmpId": "Rashm",
+        "currentEmpName": "Muhammad Rashidan",
+        "competencyPercentage": "90"
+    },
+    {
+        "currentEmpId": "Tang",
+        "currentEmpName": "Tan Gladys",
+    	"competencyPercentage": "50"
+    }
+]

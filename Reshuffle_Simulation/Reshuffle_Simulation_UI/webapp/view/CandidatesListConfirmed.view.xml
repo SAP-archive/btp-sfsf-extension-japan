@@ -21,6 +21,16 @@
 			<l:VerticalLayout width="100%">
 				<fb:FilterBar id="filterbar" search="onSearch" showRestoreButton="true" showClearButton="true" showClearOnFB="true" clear="onClear">
 					<fb:filterGroupItems>
+						<fb:FilterGroupItem groupName="Group1" name="N" label="{i18n>caseId}" labelTooltip="{i18n>caseId}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+							<fb:control>
+								<m:ComboBox id="slCaseId" 
+									required="true"
+                                    forceSelection="true" 
+									items="{ path: '/caseid' }">
+									<core:ListItem key="{status}" text="{name}" />
+								</m:ComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
 						<fb:FilterGroupItem groupName="Group1" name="A" label="{i18n>mailSentFlg}" labelTooltip="{i18n>mailSentFlg}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
 							<fb:control>
 								<m:Select id="slMailSent" 
@@ -122,11 +132,21 @@
 						<m:OverflowToolbar>
 							<m:Title id="title" text="{i18n>Candidates}"/>
 							<m:ToolbarSpacer/>
-							<m:Button id="sendMail" type="Emphasized" text="{i18n>b_send_mail}" press="onPressSendMail" enabled="{= ${/status/status} === 'OK' ? true : false }" />
-							<m:Button id="sfsf" type="Emphasized" text="{i18n>b_fix_sfsf}" press="onSendSFSF" enabled="{= ${/status/status} === 'OK' ? true : false }" />
+							<m:Button id="workflow" type="Emphasized" text="{i18n>b_wf_start}" press="onWF" enabled="{= ${/status/status} === 'OK' ? true : false }" />
+							<m:Button id="export" type="Emphasized" text="{i18n>b_print_pdf}" press="onPDF" enabled="{= ${/status/status} === 'APPD' ? true : false }" />
+							<m:Button id="sendMail" type="Emphasized" text="{i18n>b_send_mail}" press="onPressSendMail" enabled="{= ${/status/status} === 'APPD' ? true : false }" />
+							<m:Button id="sfsf" type="Emphasized" text="{i18n>b_fix_sfsf}" press="onSendSFSF" enabled="{= ${/status/status} === 'APPD' ? true : false }" />
 						</m:OverflowToolbar>
 					</table:extension>
 					<table:columns>
+						<table:Column
+							sortProperty="caseID"
+							width="8rem">
+							<m:Label text="{i18n>caseId}" />
+							<table:template>
+								<m:Text text="{caseID}" wrapping="false" />
+							</table:template>
+						</table:Column>
 						<table:Column
 							sortProperty="mailSentFlg"
 							width="8rem">

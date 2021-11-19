@@ -28,4 +28,7 @@ public class Config {
 	
 	@Column(name = "RATEFORMKEY3")
 	private String rateFormKey3;
+
+	@Column(name = "COMPETENCYTHRESHOLD")
+	private int competencyThreshold;
 }

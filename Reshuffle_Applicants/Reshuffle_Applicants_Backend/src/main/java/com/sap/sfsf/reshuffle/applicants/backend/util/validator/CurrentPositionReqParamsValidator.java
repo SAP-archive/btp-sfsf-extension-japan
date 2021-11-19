@@ -17,9 +17,11 @@ public class CurrentPositionReqParamsValidator extends Validator {
 	private static final String TENURELL = "tenureLL";
 	private static final String TENUREUL = "tenureUL";
 	private static final String WILLINGNESS = "willingness";
+	private static final String EMPID = "currentEmpIds";
 
 	private static int STRUL = 50;
 	private static int STRLL = 1;
+	private static int EMPIDUL = 512;
 	
 	private static final String LENGTHERRMSG = " length is not between " + STRLL + "to " + STRUL;
 	private static final String MANDTERRMSG = " is mandatory";
@@ -84,6 +86,13 @@ public class CurrentPositionReqParamsValidator extends Validator {
 			    	addErrorList(WILLINGNESS + " is not yes, no, or -");
 				break;
 
+			case EMPID:
+				if(length > EMPIDUL || STRLL > length) {
+					addErrorList(EMPID + " is not between 1 and 512");
+				}
+				clearMandtFlags();
+				break;
+
 			default:
 				addErrorList(k + " is not a filter key");
 			}
@@ -100,5 +109,10 @@ public class CurrentPositionReqParamsValidator extends Validator {
 	
 	private void setHasDepartment(boolean bool) {
 		this.hasDepartment = bool;
+	}
+
+	private void clearMandtFlags() {
+		this.hasDepartment = true;
+		this.hasDivision = true;
 	}
 }

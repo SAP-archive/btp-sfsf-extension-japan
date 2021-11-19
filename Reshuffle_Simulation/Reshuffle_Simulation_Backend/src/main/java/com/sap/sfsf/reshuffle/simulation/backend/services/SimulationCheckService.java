@@ -81,6 +81,7 @@ public class SimulationCheckService {
 	public void checkPersonInformation(List<Candidate> list) {
 		Map<String, MyEmpJob> empJobMap = employeeService.getCurrentJobListMapByQuery();
 		Map<String, MyPerGlobalInfoJPN> spouseListMap = employeeService.getSpouseListMap();
+		Map<String, MyPerGlobalInfoJPN> familyMemberListMap = employeeService.getFamilyMemberNeedsCareListMap();
 		Map<String, MyDisciplinary> harassmentMap = disciplinaryService.getHarassmentMap();
 		Map<String, MyDisciplinary> victimMap = disciplinaryService.getVictimMap();
 		Map<String, Candidate> candidateMap = ListToMapUtil.getMap("candidateID", list);
@@ -89,6 +90,7 @@ public class SimulationCheckService {
 		for (Candidate candidate : list) {
 			checkRating(candidate);
 			checkRelative(candidate, spouseListMap, empJobMap);
+			checkFamilyMemberNeedsCare(candidate, familyMemberListMap);
 			checkDisplinary(candidate, candidateMap, harassmentMap, empJobMap);
 			checkHarassment(candidate, candidateMap, victimMap, empJobMap);
 		}
@@ -152,14 +154,25 @@ public class SimulationCheckService {
 		String candidateId = candidate.getCandidateID();
 		String candidateDepartment = candidate.getNextDepartment();
 		if (spouseListMap.containsKey(candidateId)) {
-			String spouseId = spouseListMap.get(candidateId).getPersonIdExternal();
-			String spouseDepartment = empJobMap.get(spouseId).getDepartment();
-			if (spouseDepartment.equals(candidateDepartment)) {
-				candidate.setCheckStatus("NG");
-				appendCheckResult(candidate, "Employee and spouse cannot be in the same department!");
+			String spouseId = spouseListMap.get(candidateId).getCustomString20();
+			if (spouseId != null) {
+				String spouseDepartment = empJobMap.get(spouseId).getDepartment();
+				if (spouseDepartment.equals(candidateDepartment)) {
+					candidate.setCheckStatus("NG");
+					appendCheckResult(candidate, "Employee and spouse cannot be in the same department!");
+				}
 			}
 		}
 		LOG.debug("=== Relative check end ===");
+	}
+
+	private void checkFamilyMemberNeedsCare(Candidate candidate, Map<String, MyPerGlobalInfoJPN> familyMemberListMap) {
+		if (familyMemberListMap.containsKey(candidate.getCandidateID())) {
+			if (candidate.getCheckStatus() == null) {
+				candidate.setCheckStatus("WARN");
+			}
+			appendCheckResult(candidate, "Employee has family member to take care of!");
+		}
 	}
 
 	public void preCheck(List<Candidate> list) {
@@ -180,7 +193,7 @@ public class SimulationCheckService {
 			}
 			candidate.setCheckDateTime(now);
 		}
-		candidateService.deleteAll();
+		// candidateService.deleteAll();
 		candidateService.saveAll(list);
 	}
 
@@ -194,8 +207,8 @@ public class SimulationCheckService {
 		LOG.debug("=== Check Rating Start ===");
 		Integer r1, r2, r3;
 		r1 = candidate.getRating1() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getRating1());
-		r2 = candidate.getRating2() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getRating2());
-		r3 = candidate.getRating3() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getRating3());
+		r2 = candidate.getRating1() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getRating2());
+		r3 = candidate.getRating1() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getRating3());
 		if (r1 < ratingLimit || r2 < ratingLimit || r3 < ratingLimit) {
 			candidate.setCheckStatus("NG");
 			appendCheckResult(candidate, "Employee's performance is not good enough!");

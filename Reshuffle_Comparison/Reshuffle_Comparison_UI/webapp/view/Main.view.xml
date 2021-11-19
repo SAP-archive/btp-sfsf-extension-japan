@@ -1,0 +1,168 @@
+<mvc:View 
+	controllerName="com.sap.sfsf.comparison.Reshuffle_Comparison_UI.controller.Main"
+	xmlns="sap.m" 
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f" 
+	xmlns:layout="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:tnt="sap.tnt"
+	height="100%">
+
+		<App id="rootControl">
+		<Page title="候補者一覧{/startDateTime}" class="sapUiContentPadding">
+			<content>
+				<layout:VerticalLayout width="100%">
+					<fb:FilterBar id="filterbar" search="onSearch" showRestoreButton="true" showClearButton="true" showClearOnFB="true" clear="onClear">
+						<fb:filterGroupItems>
+							<fb:FilterGroupItem groupName="Group1" name="caseId" label="{i18n>caseId}" labelTooltip="{i18n>caseId}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<MultiComboBox
+										id="slCaseId"
+										selectionFinish="handleCaseIdSelectionFinish"
+										placeholder="CaseID ..."
+										width="350px"
+										items="{
+											path: '/caseid',
+											sorter: { path: 'caseid' }
+										}">
+										<core:Item key="{status}" text="{name}"/>
+									</MultiComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="Group1" name="nextDivision" label="{i18n>nextDivision}" labelTooltip="{i18n>nextDivision}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<Select id="slNextDivision" 
+											forceSelection="true" 
+											showSecondaryValues= "true"
+											items="{path: '/nextDivision'}">
+										<core:ListItem key="{nextDivision}" text="{nextDivisionName}" additionalText="{nextDivision}"/>
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="Group1" name="nextDepartment" label="{i18n>nextDepartment}" labelTooltip="{i18n>nextDepartment}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<Select id="slNextDepartment" 
+											forceSelection="true" 
+											showSecondaryValues= "true"
+											items="{path: '/nextDepartment'}">
+										<core:ListItem key="{nextDepartment}" text="{nextDepartmentName}" additionalText="{nextDepartment}" />
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="Group1" name="nextPosition" label="{i18n>nextPosition}" labelTooltip="{i18n>nextPosition}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<Select id="slNextPosition" 
+											forceSelection="true" 
+											showSecondaryValues= "true"
+											items="{ path: '/nextPosition' }">
+										<core:ListItem key="{nextPosition}" text="{nextPositionName}" additionalText="{nextPosition}" />
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="Group1" name="currentDivision" label="{i18n>currentDivision}" labelTooltip="{i18n>currentDivision}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="false">
+								<fb:control>
+									<Select id="slDivision" 
+											forceSelection="true" 
+											showSecondaryValues= "true"
+											items="{ path: '/currentDivision' }">
+										<core:ListItem key="{currentDivision}" text="{currentDivisionName}" additionalText="{currentDivision}" />
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="Group1" name="currentDepartment" label="{i18n>currentDepartment}" labelTooltip="{i18n>currentDepartment}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="false">
+								<fb:control>
+									<Select id="slDepartment" 
+											forceSelection="true" 
+											showSecondaryValues= "true"
+											items="{path: '/currentDepartment'}">
+										<core:ListItem key="{currentDepartment}" text="{currentDepartmentName}" additionalText="{currentDepartment}"/>
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="Group1" name="currentPosition" label="{i18n>currentPosition}" labelTooltip="{i18n>currentPosition}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="false">
+								<fb:control>
+									<Select id="slPosition" 
+											forceSelection="true" 
+											showSecondaryValues= "true"
+											items="{ path: '/currentPosition' }">
+										<core:ListItem key="{currentPosition}" text="{currentPositionName}" additionalText="{currentPosition}"/>
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="Group1" name="candidateID" label="{i18n>candidateID}" labelTooltip="{i18n>candidateID}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="candidateId" placeholder="CandidatesId ..." value="{/candidateId}" />
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="Group1" name="candidateName" label="{i18n>candidateName}" labelTooltip="{i18n>candidateName}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="candidateName" placeholder="CandidatesName ..." value="{/candidateName}" />
+								</fb:control>
+							</fb:FilterGroupItem>
+						</fb:filterGroupItems>				
+				    </fb:FilterBar>		
+				    <OverflowToolbar id="_IDGenOverflowToolbar1" class="sapFDynamicPageAlignContent">
+						<ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+						<OverflowToolbarButton id="_IDGenOverflowToolbarButton2" icon="sap-icon://sort" type="Transparent" press=".onSort"/>
+						<OverflowToolbarButton id="_IDGenOverflowToolbarButton3" icon="sap-icon://group-2" type="Transparent" press=".onGroup"/>
+						<OverflowToolbarButton id="_IDGenOverflowToolbarButton4" icon="sap-icon://action-settings" type="Transparent" press=".onSetting"/>
+					</OverflowToolbar>
+					<Table id="CandidatesTable" selectionChange="onSelection" mode="MultiSelect" inset="false" items="{ path: '/list' }">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="{i18n>Candidates}" level="H2"/>
+								<ToolbarSpacer/>
+								<Button id="compareBtn" visible="false" press="onToNextPage" type="Emphasized"/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column id="_IDGenColumn1">
+								<Text text="{i18n>caseId}"/>
+							</Column>
+							<Column id="_IDGenColumn7">
+								<Text text="{i18n>nextDivisionName}"/>
+							</Column>
+							<Column id="_IDGenColumn8">
+								<Text text="{i18n>nextDepartmentName}"/>
+							</Column>
+							<Column id="_IDGenColumn9">
+								<Text text="{i18n>nextPositionName}"/>
+							</Column>
+							<Column id="_IDGenColumn2">
+								<Text text="{i18n>candidateID}"/>
+							</Column>
+							<Column id="_IDGenColumn3">
+								<Text text="{i18n>candidateName}"/>
+							</Column>
+							<Column id="_IDGenColumn4" visible="false">
+								<Text text="{i18n>currentDivisionName}"/>
+							</Column>
+							<Column id="_IDGenColumn5" visible="false">
+								<Text text="{i18n>currentDepartmentName}"/>
+							</Column>
+							<Column id="_IDGenColumn6" visible="false">
+								<Text text="{i18n>currentPositionName}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem vAlign="Middle" type="Inactive">
+								<cells>
+									<ObjectIdentifier text="{caseID}"/>
+									<Text text="{nextDivisionName}" wrapping="false" tooltip="{nextDivisionName}"/>
+									<Text text="{nextDepartmentName}" wrapping="false" tooltip="{nextDepartmentName}"/>
+									<Text text="{nextPositionName}" wrapping="false" tooltip="{nextPositionName}"/>
+									<Text text="{candidateID}" wrapping="false" tooltip="{candidateID}"/>
+									<Text text="{candidateName}" wrapping="false" tooltip="{candidateName}"/>
+									<Text text="{currentDivisionName}" wrapping="false" tooltip="{currentDivisionName}"/>
+									<Text text="{currentDepartmentName}" wrapping="false" tooltip="{currentDepartmentName}"/>
+									<Text text="{currentPositionName}" wrapping="false" tooltip="{currentPositionName}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</layout:VerticalLayout>
+			</content>
+		</Page>
+	</App>
+</mvc:View>

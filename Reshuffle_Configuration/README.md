@@ -12,7 +12,9 @@ Get configurable values used on Applicants app and Simulation app.
     "rateFormKey1": 801,
     "rateFormKey2": 401,
     "rateFormKey3": 201,
-    "span": 120
+    "span": 120,
+    "competencyThreshold": 2,
+    "mailTemplate": "<p>html template</p>"
 }
 
 ```
@@ -28,7 +30,9 @@ Update configurable values used on Applicants app and Simulation app.
     "rateFormKey1": 801,
     "rateFormKey2": 401,
     "rateFormKey3": 201,
-    "span": 120
+    "span": 120,
+    "competencyThreshold": 2,
+    "mailTemplate": "<p>html template</p>"
 }
 
 ```

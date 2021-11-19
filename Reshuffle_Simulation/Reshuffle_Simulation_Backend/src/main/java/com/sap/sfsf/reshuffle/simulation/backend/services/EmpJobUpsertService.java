@@ -24,15 +24,15 @@ import com.sap.sfsf.reshuffle.simulation.backend.model.UpsertResult;
 @Service
 public class EmpJobUpsertService {
 	private Logger LOG = LoggerFactory.getLogger(EmpJobUpsertService.class);
-	Destination dest = DestinationAccessor.getDestination("SFSF_2nd");
 	Gson gson = new GsonBuilder().serializeNulls().create();
-
+	private Destination dest;
 	/**
 	 * EmpJobをSFSFへ更新しに行く
 	 * 
 	 * @param list
 	 */
 	public void upsert(List<MyEmpJobUpsert> list) throws Exception {
+		dest = DestinationAccessor.getDestination("SFSF");
 		for (String prop : dest.getPropertyNames()) {
 			LOG.debug(prop);
 		}
@@ -49,6 +49,7 @@ public class EmpJobUpsertService {
 	}
 
 	private String getAuthCode() {
+		dest = DestinationAccessor.getDestination("SFSF");
 		String user = dest.get("User").getOrElse("").toString();
 		String password = dest.get("Password").getOrElse("").toString();
 		byte[] bytes = (user + ":" + password).getBytes();

@@ -44,7 +44,7 @@ public class FilterService {
 		LOG.debug("Query:"+query.toString());
 		try {
 			list = query
-					.execute("SFSF_2nd")
+					.execute("SFSF")
 					.asList(MyCompany.class);
 		} catch (ODataException e) {
 			e.printStackTrace();
@@ -73,7 +73,7 @@ public class FilterService {
 		LOG.debug("Query:"+query.toString());
 		try {
 			list = query
-					.execute("SFSF_2nd")
+					.execute("SFSF")
 					.asList(MyBusinessUnit.class);
 		} catch (ODataException e) {
 			e.printStackTrace();
@@ -107,7 +107,7 @@ public class FilterService {
 		LOG.debug("Query:"+query.toString());
 		try {
 			list = query
-					.execute("SFSF_2nd")
+					.execute("SFSF")
 					.asList(MyDivision.class);
 		} catch (ODataException e) {
 			e.printStackTrace();
@@ -142,7 +142,7 @@ public class FilterService {
 		LOG.debug("Query:"+query.toString());
 		try {
 			list = query
-					.execute("SFSF_2nd")
+					.execute("SFSF")
 					.asList(MyDepartment.class);
 		} catch (ODataException e) {
 			e.printStackTrace();
@@ -180,7 +180,7 @@ public class FilterService {
 		LOG.debug("Query:"+query.toString());
 		try {
 			list = query
-					.execute("SFSF_2nd")
+					.execute("SFSF")
 					.asList(MyPosition.class);
 		} catch (ODataException e) {
 			e.printStackTrace();

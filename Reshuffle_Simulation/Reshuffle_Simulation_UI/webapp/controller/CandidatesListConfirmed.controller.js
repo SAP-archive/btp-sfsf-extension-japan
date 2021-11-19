@@ -125,18 +125,30 @@ sap.ui.define([
 					oViewModel.setProperty("/positionBusy", false);
 				}
 			});
-
+			
 			$.ajax({
-				url: "/srv_api/status",
+				url: "/srv_api/caseid",
 				method: "GET",
 				contentType: "application/json",
 				success: function (result, xhr, data) {
-					modelData.status = result;
+					var caseidList = [];
+					var caseidDefault = that._getResourceText("caseIdDefaultText");
+					caseidList.push({status:"", name:caseidDefault});
+					for (var item of result){
+						caseidList.push({status:item, name:item});
+					}
+					modelData.caseid = caseidList;
+					oModel.setData(modelData);
 				},
 				error: function (xhr, status, err) {
 					MessageBox.error("division error");
 				}
+            });
+            
+            this.getView().byId("slCaseId").setFilterFunction(function(sTerm, oItem) {
+				return oItem.getText().match(new RegExp(sTerm, "i")) || oItem.getKey().match(new RegExp(sTerm, "i"));
 			});
+
 			
 			modelData.mailSentFlag = mailSentFlag;
 			modelData.candidateId = "";
@@ -166,8 +178,15 @@ sap.ui.define([
 			var oView = this.getView();
 			var oModel = oView.getModel();
 			var oModelData = oModel.getData();
+			var caseId = this._getSelectedItemText(this._getSelect("slCaseId"));
+			
+			if(!caseId){
+				MessageBox.error(this._getResourceText("ms_selectCaseId"));
+				return;
+			}
+			
+			var sendData = {caseID:caseId};
 			var that = this;
-
 			$.ajax({
 				url: "/srv_api/list",
 				method: "GET",
@@ -175,7 +194,8 @@ sap.ui.define([
 				success: function (result, xhr, data) {
 
 					var searchResult = result;
-					searchResult = that.searchSentMailFlag(searchResult, that._getSelectedItemText(that._getSelect("slMailSent")));
+					searchResult = that._searchCaseId(searchResult, caseId);
+					searchResult = that._searchSentMailFlag(searchResult, that._getSelectedItemText(that._getSelect("slMailSent")));
 					searchResult = that._searchDivision(searchResult, that._getSelectedItemText(that._getSelect("slDivision")), "C");
 					searchResult = that._searchDepartment(searchResult, that._getSelectedItemText(that._getSelect("slDepartment")), "C");
 					searchResult = that._searchPosition(searchResult, that._getSelectedItemText(that._getSelect("slPosition")), "C");
@@ -190,49 +210,32 @@ sap.ui.define([
 					oModel.refresh(true);
 				},
 				error: function (xhr, status, err) {
-					MessageBox.error("list error");
+					MessageBox.error(that._getResourceText("ms_error"));
 				}
 			});
 			
 			$.ajax({
 				url: "/srv_api/status",
 				method: "GET",
+				data:sendData,
 				contentType: "application/json",
 				success: function (result, xhr, data) {
 					oModelData.status = result;
+					oModel.setData(oModelData);
+					oModel.refresh(true);
+
 					that._createMessageStrip(result);
 				},
 				error: function (xhr, status, err) {
-					MessageBox.error("division error");
 				}
 			});
 			
 			this.getView().setModel(oModel);
 		},
 		
-		searchSentMailFlag: function (searchResult, key) {
-			if (key === "") {
-				return searchResult;
-			} else if (key === "-") {
-				return searchResult.filter(function (item, index) {
-					if (item.mailSentFlg === null) {
-						return true;
-					} else {
-						return false;
-					}
-				});
-			} else {
-				return searchResult.filter(function (item, index) {
-					if (item.mailSentFlg === key) {
-						return true;
-					} else {
-						return false;
-					}
-				});
-			}
-		},
-		
 		onClear: function (oEvent) {
+			this._getSelect("slCaseId").setSelectedKey(null);
+			this._getSelect("slCaseId").setSelectedKey("");
 			this._getSelect("slMailSent").setSelectedKey("");
 			this._getSelect("slDivision").setSelectedKey("");
 			this._getSelect("slDepartment").setSelectedKey("");
@@ -319,7 +322,8 @@ sap.ui.define([
 						MessageBox.error(that._getResourceText("ms_send_mail_error"));
 					}
 					var searchResult = data;
-					searchResult = that.searchSentMailFlag(searchResult, that._getSelectedItemText(that._getSelect("slMailSent")));
+					searchResult = that._searchCaseId(searchResult, that._getSelectedItemText(that._getSelect("slCaseId")));
+					searchResult = that._searchSentMailFlag(searchResult, that._getSelectedItemText(that._getSelect("slMailSent")));
 					searchResult = that._searchDivision(searchResult, that._getSelectedItemText(that._getSelect("slDivision")), "C");
 					searchResult = that._searchDepartment(searchResult, that._getSelectedItemText(that._getSelect("slDepartment")), "C");
 					searchResult = that._searchPosition(searchResult, that._getSelectedItemText(that._getSelect("slPosition")), "C");
@@ -385,7 +389,8 @@ sap.ui.define([
 					}
 
 					var searchResult = data;
-					searchResult = that.searchSentMailFlag(searchResult, that._getSelectedItemText(that._getSelect("slMailSent")));
+					searchResult = that._searchCaseId(searchResult, that._getSelectedItemText(that._getSelect("slCaseId")));
+					searchResult = that._searchSentMailFlag(searchResult, that._getSelectedItemText(that._getSelect("slMailSent")));
 					searchResult = that._searchDivision(searchResult, that._getSelectedItemText(that._getSelect("slDivision")), "C");
 					searchResult = that._searchDepartment(searchResult, that._getSelectedItemText(that._getSelect("slDepartment")), "C");
 					searchResult = that._searchPosition(searchResult, that._getSelectedItemText(that._getSelect("slPosition")), "C");
@@ -450,7 +455,8 @@ sap.ui.define([
 								}
 								
 								var searchResult = data;
-								searchResult = that.searchSentMailFlag(searchResult, that._getSelectedItemText(that._getSelect("slMailSent")));
+								searchResult = that._searchCaseId(searchResult, that._getSelectedItemText(that._getSelect("slCaseId")));
+								searchResult = that._searchSentMailFlag(searchResult, that._getSelectedItemText(that._getSelect("slMailSent")));
 								searchResult = that._searchDivision(searchResult, that._getSelectedItemText(that._getSelect("slDivision")), "C");
 								searchResult = that._searchDepartment(searchResult, that._getSelectedItemText(that._getSelect("slDepartment")), "C");
 								searchResult = that._searchPosition(searchResult, that._getSelectedItemText(that._getSelect("slPosition")), "C");
@@ -492,6 +498,18 @@ sap.ui.define([
 				}else if(result.status === "WARN"){
 					statusText = this._getResourceText("ms_statusText2_w1") + result.WARN + " " +this._getResourceText("ms_statusText2_w2") + " " +  this._getResourceText("ms_statusText2_w3") + result.checkedDateTime;
 					statusType ="Warning";
+				}else if(result.status === "APPL"){
+					statusText = this._getResourceText("ms_statusText1_i5");
+					statusType = "Information";
+				}else if(result.status === "APPD"){
+					statusText = this._getResourceText("ms_statusText1_i6");
+                    statusType = "Information";
+   				}else if(result.status === "DENY"){
+					statusText = this._getResourceText("ms_statusText1_i7");
+					statusType = "Information";
+				} else if (result.status === null) {
+					statusText = this._getResourceText("ms_statusText2_e4");
+					statusType = "Information";
 				}
 			}
 
@@ -505,6 +523,139 @@ sap.ui.define([
 				});
 				oPage.addContent(oMsgStrip);
 			}
+		},
+		
+		onWF:function(oEvent){
+
+            BusyIndicator.show(0); 
+   			var oView = this.getView();
+			var oModel = oView.getModel();
+			var oModelData = oModel.getData();
+			var caseId = this._getSelectedItemText(this._getSelect("slCaseId"));
+			
+			if(!caseId){
+				MessageBox.error(this._getResourceText("ms_selectCaseId"));
+				return;
+			}
+			
+			var sendData = {caseID:caseId};
+			var that = this;
+			
+            $.ajax({
+                type: "POST",
+                contentType: "text/plain",
+                url: "/srv_api/workflow",
+                data: caseId,
+                async: true,
+                success: function (data, textStatus, jqXHR) {
+                    BusyIndicator.hide();
+                    oModelData.status.status = "APPL";
+                    oModel.setData(oModelData);
+                    oModel.refresh(true);
+                    that._createMessageStrip(oModelData.status);
+
+                    MessageBox.information(that._getResourceText("ms_wf_start"));
+                },
+                error: function () {
+                    BusyIndicator.hide();
+                    MessageBox.error(that._getResourceText("ms_wf_failure"));
+                }
+            });
+			this.getView().setModel(oModel);
+		},
+		
+		onPDF: function(oEvent){
+			BusyIndicator.show(0);
+
+			var oView = this.getView();
+			var oModel = oView.getModel();
+
+			var aIndices = this.byId("idCandidatesTable").getSelectedIndices();
+			if (aIndices.length === 0) {
+				MessageBox.error(this._getResourceText("ms_error_select"));
+				BusyIndicator.hide();
+				return;
+			}
+
+			var candidatesList = [];
+			for (var item in aIndices){
+				var candidateId = oModel.getObject(this.byId("idCandidatesTable").getContextByIndex(aIndices[item]).sPath).candidateID;
+				var candidateName = oModel.getObject(this.byId("idCandidatesTable").getContextByIndex(aIndices[item]).sPath).candidateName + " 殿";
+				var currentDepartmentName = oModel.getObject(this.byId("idCandidatesTable").getContextByIndex(aIndices[item]).sPath).currentDepartmentName;
+				var currentDivisionName = oModel.getObject(this.byId("idCandidatesTable").getContextByIndex(aIndices[item]).sPath).currentDivisionName;
+				var currentPositionName = oModel.getObject(this.byId("idCandidatesTable").getContextByIndex(aIndices[item]).sPath).currentPositionName;
+				var nextDepartmentName = oModel.getObject(this.byId("idCandidatesTable").getContextByIndex(aIndices[item]).sPath).nextDepartmentName;
+				var nextDivisionName = oModel.getObject(this.byId("idCandidatesTable").getContextByIndex(aIndices[item]).sPath).nextDivisionName;
+				var nextPositionName = oModel.getObject(this.byId("idCandidatesTable").getContextByIndex(aIndices[item]).sPath).nextPositionName;
+				candidatesList.push(
+					{
+						candidateID:candidateId, 
+						candidateName:candidateName, 
+						currentDepartmentName:currentDepartmentName, 
+						currentDivisionName:currentDivisionName,
+						currentPositionName:currentPositionName,
+						nextDepartmentName:nextDepartmentName,
+						nextDivisionName:nextDivisionName,
+						nextPositionName:nextPositionName
+					});
+			}
+			var sendData = JSON.stringify(candidatesList);
+			
+			var that = this;
+			var oXHR = new XMLHttpRequest();
+			oXHR.open("POST", "/srv_api/pdf");
+			oXHR.setRequestHeader("Content-Type", "application/json; charset=utf8");
+			oXHR.responseType = "blob";
+			oXHR.onload = function () {
+				if (oXHR.status < 400 && oXHR.response && oXHR.response.size > 0) {
+					BusyIndicator.hide();
+					var sHeaderContentDisposition = decodeURIComponent(oXHR.getResponseHeader("Content-Disposition"));
+					var aHeaderParts = sHeaderContentDisposition.split("filename=");
+					var sFilenameFromServer = aHeaderParts[1];
+					if (sap.ui.Device.browser.msie) {
+						window.navigator.msSaveOrOpenBlob(oXHR.response, sFilenameFromServer);
+					} else {
+						var oA = document.createElement("a");
+						oA.href = window.URL.createObjectURL(oXHR.response);
+						oA.style.display = "none";
+						oA.download = "辞令.pdf";
+						document.body.appendChild(oA);
+						oA.click();
+						document.body.removeChild(oA);
+						// setTimeout is needed for safari on iOS
+						setTimeout(function () {
+							window.URL.revokeObjectURL(oA.href);
+						}, 250);
+					}
+				} else {
+					BusyIndicator.hide();
+					MessageBox.error(that._getResourceText("ms_error"));
+				}
+			}.bind(this);
+			oXHR.send(sendData);
+		},
+		
+		_searchSentMailFlag: function (searchResult, key) {
+			if (key === "") {
+				return searchResult;
+			} else if (key === "-") {
+				return searchResult.filter(function (item, index) {
+					if (item.mailSentFlg === null) {
+						return true;
+					} else {
+						return false;
+					}
+				});
+			} else {
+				return searchResult.filter(function (item, index) {
+					if (item.mailSentFlg === key) {
+						return true;
+					} else {
+						return false;
+					}
+				});
+			}
 		}
+
 	});
 });

@@ -1,0 +1,34 @@
+[{
+	"versionIdentifier": null,
+	"backgroundElementId": 98087,
+	"bgOrderPos": 3,
+	"department": "販売",
+	"endDate": null,
+	"lastModifiedDate": "/Date(1627456620000)/",
+	"startDate": "/Date(1491004800000)/",
+	"title": "営業本部長",
+	"userId": "mtana",
+	"userIdNav": null
+}, {
+	"versionIdentifier": null,
+	"backgroundElementId": 98088,
+	"bgOrderPos": 2,
+	"department": "業務推進部",
+	"endDate": "/Date(1490918400000)/",
+	"lastModifiedDate": "/Date(1627456620000)/",
+	"startDate": "/Date(1420070400000)/",
+	"title": "業務推進部長",
+	"userId": "mtana",
+	"userIdNav": null
+}, {
+	"versionIdentifier": null,
+	"backgroundElementId": 56476,
+	"bgOrderPos": 1,
+	"department": "生産管理部",
+	"endDate": "/Date(1419984000000)/",
+	"lastModifiedDate": "/Date(1627456620000)/",
+	"startDate": "/Date(1350259200000)/",
+	"title": "生産管理部長",
+	"userId": "mtana",
+	"userIdNav": null
+}]

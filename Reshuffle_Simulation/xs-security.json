@@ -1,5 +1,5 @@
 {
-  "xsappname": "Reshuffle_Simulation_phase1",
+  "xsappname": "Reshuffle_Simulation",
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
   "role-templates": [

@@ -36,6 +36,12 @@ sap.ui.define(function() {
 						return oResourceBundle.getText("Error");
 					case "WARN":
 						return oResourceBundle.getText("Warning");
+					case "APPL":
+						return oResourceBundle.getText("Success");
+					case "APPD":
+						return oResourceBundle.getText("Success");
+					case "DENY":
+						return oResourceBundle.getText("Declined");
 					default:
 						return oResourceBundle.getText("UnChecked");
 				}
@@ -87,7 +93,6 @@ sap.ui.define(function() {
 					return "None";
 			}
 		}
-
 	};
 
 	return Formatter;

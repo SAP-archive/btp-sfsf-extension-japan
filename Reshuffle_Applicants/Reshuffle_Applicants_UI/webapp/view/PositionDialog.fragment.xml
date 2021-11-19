@@ -1,0 +1,44 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="候補者一覧"
+		ok=".onPositionValueHelpOkPress"
+		cancel=".onPositionValueHelpCancelPress"
+		afterClose=".onPositionValueHelpAfterClose"
+		supportRanges="false"
+		key="currentEmpId"
+		descriptionKey="Name"
+	>
+		<filterBar>
+			<fb:FilterBar advancedMode="false" search=".onFilterBarSearch" isRunningInValueHelpDialog="false" showFilterConfiguration="false">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="{i18n>precision}"
+						label="{i18n>precisionlabel}"
+						visibleInFilterBar="true"
+					>
+						<fb:control>
+							<m:ComboBox name="currentEmpId" selectedKey="all">
+								<core:Item key="all" text="ALL" />
+								<core:Item key="{key}" text="10" />
+								<core:Item key="{key}" text="20" />
+								<core:Item key="{key}" text="30" />
+								<core:Item key="{key}" text="40" />
+								<core:Item key="{key}" text="50" />
+								<core:Item key="{key}" text="60" />
+								<core:Item key="{key}" text="70" />
+								<core:Item key="{key}" text="80" />
+								<core:Item key="{key}" text="90" />
+								<core:Item key="{key}" text="100" />
+							</m:ComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

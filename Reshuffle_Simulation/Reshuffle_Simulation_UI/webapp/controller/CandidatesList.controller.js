@@ -3,6 +3,7 @@ sap.ui.define([
 	"sap/m/Label",
 	"sap/m/MessageBox",
 	"sap/m/MessageStrip",
+	"sap/m/Token",
 	"sap/ui/core/BusyIndicator",
 	"sap/ui/core/Fragment",
 	"sap/ui/core/mvc/Controller",
@@ -13,7 +14,7 @@ sap.ui.define([
 	"sap/ui/table/library",
 	"./BaseController",
 	"../model/formatter"
-], function (Log, Label, MessageBox, MessageStrip, BusyIndicator, Fragment, Controller, Filter, FilterOperator, JSONModel, 
+], function (Log, Label, MessageBox, MessageStrip, Token, BusyIndicator, Fragment, Controller, Filter, FilterOperator, JSONModel, 
 	ResourceModel, library, BaseController, formatter) {
 
 	"use strict";
@@ -111,20 +112,40 @@ sap.ui.define([
 				method: "GET",
 				contentType: "application/json",
 				success: function (result, xhr, data) {
-					that.position = result.slice();
-					that.position.unshift(defaultPosition);
-					modelData.currentPosition = that.position;
-					modelData.nextPosition = that.position;
+                    that.position = result.slice();
+                    that.position.unshift(defaultPosition);
+                    modelData.currentPosition = that.position;
+                    modelData.nextPosition = that.position;
 
-					oViewModel.setProperty("/positionBusy", false);
-					oModel.setData(modelData);
-
+                    oViewModel.setProperty("/positionBusy", false);
+                    oModel.setData(modelData);
 				},
 				error: function (xhr, status, err) {
 					oViewModel.setProperty("/positionBusy", false);
 				}
 			});
 
+			$.ajax({
+				url: "/srv_api/caseid",
+				method: "GET",
+				contentType: "application/json",
+				success: function (result, xhr, data) {
+ 					var caseidList = [];
+					for (var item of result){
+						caseidList.push({status:item, name:item});
+					}
+					modelData.caseid = caseidList;
+					oModel.setData(modelData);
+				},
+				error: function (xhr, status, err) {
+					MessageBox.error("caseid error");
+				}
+            });
+            
+            this.getView().byId("slCaseId").setFilterFunction(function(sTerm, oItem) {
+				return oItem.getText().match(new RegExp(sTerm, "i")) || oItem.getKey().match(new RegExp(sTerm, "i"));
+			});
+            
 			modelData.checkStatus = checkStatus;
 			modelData.candidateId = "";
 			modelData.candidateName = "";
@@ -153,7 +174,16 @@ sap.ui.define([
 			var oView = this.getView();
 			var oModel = oView.getModel();
 			var oModelData = oModel.getData();
+            oModelData.checkEnablement = "";
+            oModelData.exportEnablement = "";
+			var caseId = this._getSelectedItemText(this._getSelect("slCaseId"));
+			
+			if(!caseId){
+				MessageBox.error(this._getResourceText("ms_selectCaseId"));
+				return;
+			}
 
+			var sendData = {caseID:caseId};
 			var that = this;
 			$.ajax({
 				url: "/srv_api/list",
@@ -162,6 +192,7 @@ sap.ui.define([
 				success: function (result, xhr, data) {
 					// Filter処理
 					var searchResult = result;
+                    searchResult = that._searchCaseId(searchResult, that._getSelectedItemText(that._getSelect("slCaseId")));
 					searchResult = that._searchCheckStatus(searchResult, that._getSelectedItemText(that._getSelect("slCheckStatus")));
 					searchResult = that._searchDivision(searchResult, that._getSelectedItemText(that._getSelect("slDivision")), "C");
 					searchResult = that._searchDepartment(searchResult, that._getSelectedItemText(that._getSelect("slDepartment")), "C");
@@ -184,12 +215,27 @@ sap.ui.define([
 			$.ajax({
 				url: "/srv_api/status",
 				method: "GET",
+				data:sendData,
 				contentType: "application/json",
 				success: function (result, xhr, data) {
+                    oModelData.status = result;
+                    oModelData.checkEnablement = "";
+                    oModelData.exportEnablement = "";
+					if(result.status == null || result.status === "NG" || result.status === "WARN" ){
+						oModelData.checkEnablement = "TRUE"; 
+                    }
+                    if(result.status === "NG" || result.status === "WARN"){
+						oModelData.exportEnablement = "TRUE"; 
+                    }
+                    oModel.setData(oModelData);
+                    oModel.refresh(true);
 					that._createMessageStrip(result);
 				},
 				error: function (xhr, status, err) {}
 			});
+
+            oModel.setData(oModelData);
+            oModel.refresh(true);
 			this.getView().setModel(oModel);
 		},
 
@@ -199,6 +245,7 @@ sap.ui.define([
 			oModelData.candidateName = "";
 			this.getView().getModel().setData(oModelData);
 
+			this._getSelect("slCaseId").setSelectedKey(null);
 			this._getSelect("slCheckStatus").setSelectedKey("");
 			this._getSelect("slDivision").setSelectedKey("");
 			this._getSelect("slDepartment").setSelectedKey("");
@@ -214,11 +261,21 @@ sap.ui.define([
 			var oView = this.getView();
 			var oModel = oView.getModel();
 			var oModelData = oView.getModel().getData();
+            oModelData.checkEnablement = "";
+            oModelData.exportEnablement = "";
+			var caseId = this._getSelectedItemText(this._getSelect("slCaseId"));
 
+			if(!caseId){
+				MessageBox.error(this._getResourceText("ms_selectCaseId"));
+				return;
+			}
+
+			var sendData = {caseID:caseId};
 			var that = this;
 			var check = function () {
 				return $.ajax({
 					type: "POST",
+					data:caseId,
 					contentType: "application/json",
 					url: "/srv_api/check",
 					dataType: "json",
@@ -226,6 +283,7 @@ sap.ui.define([
 					success: function (data, textStatus, jqXHR) {
 						// Filter処理
 						var searchResult = data;
+                        searchResult = that._searchCaseId(searchResult, that._getSelectedItemText(that._getSelect("slCaseId")));
 						searchResult = that._searchCheckStatus(searchResult, that._getSelectedItemText(that._getSelect("slCheckStatus")));
 						searchResult = that._searchDivision(searchResult, that._getSelectedItemText(that._getSelect("slDivision")), "C");
 						searchResult = that._searchDepartment(searchResult, that._getSelectedItemText(that._getSelect("slDepartment")), "C");
@@ -251,9 +309,19 @@ sap.ui.define([
 			var getStatus = function () {
 				return $.ajax({
 					url: "/srv_api/status",
+					data:sendData,
 					method: "GET",
 					contentType: "application/json",
 					success: function (result, xhr, data) {
+						oModelData.status = result;
+                        if(result.status == null || result.status === "NG" || result.status === "WARN" ){
+                            oModelData.checkEnablement = "TRUE"; 
+                        }
+                        if(result.status === "NG" || result.status === "WARN"){
+                            oModelData.exportEnablement = "TRUE"; 
+                        }
+                        oModel.setData(oModelData);
+                        oModel.refresh(true);
 						that._createMessageStrip(result);
 					},
 					error: function (xhr, status, err) {}
@@ -338,9 +406,9 @@ sap.ui.define([
 		
 		onClosePress: function () {
 			this._oPopover.close();
-		},
-		
-		_createMessageStrip: function(result){
+        },
+        
+        _createMessageStrip: function(result){
 			var oMs = sap.ui.getCore().byId("msgStrip");
 			if (oMs) {
 				oMs.destroy();
@@ -362,7 +430,16 @@ sap.ui.define([
 				} else if (result.status === null) {
 					statusText = this._getResourceText("ms_statusText1_i4");
 					statusType = "Information";
-				}
+				}else if(result.status === "APPL"){
+					statusText = this._getResourceText("ms_statusText1_i5");
+					statusType = "Information";
+				}else if(result.status === "APPD"){
+					statusText = this._getResourceText("ms_statusText1_i6");
+					statusType = "Information";
+				}else if(result.status === "DENY"){
+					statusText = this._getResourceText("ms_statusText1_i7");
+					statusType = "Information";
+                }
 			} else {
 				statusText = this._getResourceText("ms_statusText1_i4");
 				statusType = "Information";

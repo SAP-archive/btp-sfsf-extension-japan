@@ -1,5 +1,7 @@
 package com.sap.sfsf.reshuffle.applicants.backend.services;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,14 +11,30 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.sap.cloud.sdk.cloudplatform.connectivity.DefaultHttpDestination;
+import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationAccessor;
+import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
+import com.sap.cloud.sdk.cloudplatform.connectivity.HttpDestination;
+import com.sap.cloud.sdk.cloudplatform.connectivity.ScpCfDestination;
 import com.sap.cloud.sdk.odatav2.connectivity.FilterExpression;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQuery;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
+import com.sap.cloud.sdk.s4hana.connectivity.DefaultErpHttpDestination;
+import com.sap.cloud.sdk.s4hana.connectivity.ErpHttpDestination;
 import com.sap.sfsf.reshuffle.applicants.backend.config.EnvConfig;
+import com.sap.sfsf.reshuffle.applicants.backend.model.Candidate;
 import com.sap.sfsf.reshuffle.applicants.backend.model.Config;
 import com.sap.sfsf.reshuffle.applicants.backend.model.ExEmpJob;
 import com.sap.sfsf.reshuffle.applicants.backend.model.NextPosition;
@@ -28,32 +46,37 @@ import com.sap.sfsf.reshuffle.applicants.backend.model.details.DivisionDetails;
 import com.sap.sfsf.reshuffle.applicants.backend.model.details.PayGradeDetails;
 import com.sap.sfsf.reshuffle.applicants.backend.model.details.PositionDetails;
 import com.sap.sfsf.reshuffle.applicants.backend.model.details.UserDetails;
-import com.sap.sfsf.reshuffle.applicants.backend.model.filters.CurrentPositionFilter;
+import com.sap.sfsf.reshuffle.applicants.backend.model.filters.CandidateFilter;
+import com.sap.sfsf.reshuffle.applicants.backend.repository.CandidateRepository;
 import com.sap.sfsf.reshuffle.applicants.backend.util.CustomFilterExpression;
 import com.sap.sfsf.reshuffle.applicants.backend.util.DateTimeUtil;
 import com.sap.sfsf.reshuffle.applicants.backend.util.EmptyConfigException;
 
 @Service
 public class NextPositionService extends CurrentPositionService {
-		
+	Logger logger = LoggerFactory.getLogger(NextPositionService.class);
+
 	@Autowired
-    ConfigService configService;
-    
-    @Autowired
+	ConfigService configService;
+
+	@Autowired
 	EnvConfig envConfig;
 	
+	@Autowired
+	CandidateRepository candidateRepository;
+
 	//This method consists of 5 steps below...
 	//  1. Get an extended-EmpJob list
 	//  2. Get a Photo map
 	//  3. Combine the Photo map to the extended-Empjob list
 	//  4. Convert Extended-EmpJob list to a Candidate list
 	//  5. Return the Candidate list
-	public List<NextPosition> findAllfromSfsfNP(CurrentPositionFilter candidateFilter) throws ODataException, EmptyConfigException {
+	public List<NextPosition> findAllfromSfsfNP(CandidateFilter candidateFilter) throws ODataException, EmptyConfigException {
 		List<ExEmpJob> exList = null;
 		List<NextPosition> retList = new ArrayList<NextPosition>();
 
 		exList = getExEmpJobList(candidateFilter, null);
-		
+
 		if(exList != null && exList.size() != 0) {
 			String userIds = exList.stream()
 					.map(exEmpJob -> exEmpJob.getUserId())
@@ -70,7 +93,7 @@ public class NextPositionService extends CurrentPositionService {
 	}
 
 	@Override
-	protected List<ExEmpJob> getExEmpJobList(CurrentPositionFilter candidateFilter, LocalDateTime startDate) throws ODataException, EmptyConfigException {
+	protected List<ExEmpJob> getExEmpJobList(CandidateFilter candidateFilter, LocalDateTime startDate) throws ODataException, EmptyConfigException {
 		String[] selects = {"userId", 
 				"userNav/firstName", "userNav/lastName", 
 				"startDate", "event",
@@ -101,9 +124,11 @@ public class NextPositionService extends CurrentPositionService {
 		CustomFilterExpression filterEndDate = new CustomFilterExpression("endDate", "eq", DateTimeUtil.getDateTimeFilter(endDate));
 		CustomFilterExpression filterNextStartDate = new CustomFilterExpression("startDate", "ge", DateTimeUtil.getDateTimeFilter(nextStartDate));
 		CustomFilterExpression filterNextEndDate = new CustomFilterExpression("endDate", "le", DateTimeUtil.getDateTimeFilter(nextEndDate));
+		CustomFilterExpression filterPosition = new CustomFilterExpression("position", "ne", "null");
 		FilterExpression nextFilters1 = filterNextStartDate.and(filterNextEndDate);
 		FilterExpression nextFilters2 = filterNextStartDate.and(filterEndDate);
 		filters = nextFilters1.or(nextFilters2);	
+		filters = filters.and(filterPosition);
 		filters = candidateFilter != null? candidateFilter.addArgsFilter(filters): filters;	
 
 		ODataQuery query = null;
@@ -116,8 +141,16 @@ public class NextPositionService extends CurrentPositionService {
 
 		logger.info("Query:" + query.toString());
 
-		return query.execute("SFSF_2nd")
+		String destName = envConfig.getDestinationName();
+		logger.debug("query destination: " + destName);
+
+		return query.execute(destName)
 				.asList(ExEmpJob.class);
+	}
+
+	public List<Candidate> findByCaseid(String caseId) {
+		Optional<List<Candidate>> optCandidateList = Optional.ofNullable(candidateRepository.findByCaseid(caseId));
+		return optCandidateList.orElse(null);
 	}
 
 	protected NextPosition convertToNextPosition(ExEmpJob exEmpJob, LocalDateTime today, 

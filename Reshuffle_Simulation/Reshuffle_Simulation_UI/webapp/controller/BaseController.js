@@ -111,7 +111,7 @@ sap.ui.define([
 				return searchResult;
 			} else if (key === "-") {
 				return searchResult.filter(function (item, index) {
-					if (item.checkStatus === "") {
+					if (!item.checkStatus) {
 						return true;
 					} else {
 						return false;
@@ -119,11 +119,19 @@ sap.ui.define([
 				});
 			} else {
 				return searchResult.filter(function (item, index) {
-					if (item.checkStatus === key) {
-						return true;
-					} else {
-						return false;
-					}
+                    if (key === "NG"){
+                        if (item.checkStatus === key) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }else{
+                        if (item.checkStatus !== "NG") {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
 				});
 			}
 		},
@@ -231,7 +239,21 @@ sap.ui.define([
 
 		_getSelectedItemText: function (oSelect) {
 			return oSelect.getSelectedItem() ? oSelect.getSelectedItem().getKey() : "";
+		},
+
+		_searchCaseId: function (searchResult, key) {
+			if(key !== "-"){
+				return searchResult.filter(function (item, index) {
+					if (item.caseID === key) {
+						return true;
+					} else {
+						return false;
+					}
+				});
+			}else{
+				return searchResult;
+			}
 		}
-		
+
 	});
 });

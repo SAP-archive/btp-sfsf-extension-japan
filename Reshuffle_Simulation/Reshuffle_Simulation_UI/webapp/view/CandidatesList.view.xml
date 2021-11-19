@@ -21,6 +21,19 @@
 			<l:VerticalLayout width="100%">
 				<fb:FilterBar id="filterbar" search="onSearch" showRestoreButton="true" showClearButton="true" showClearOnFB="true" clear="onClear">
 					<fb:filterGroupItems>
+						<fb:FilterGroupItem groupName="Group1" name="N" label="{i18n>caseId}" labelTooltip="{i18n>caseId}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+							<fb:control>
+                                <m:ComboBox width="40%"
+                                    required="true"
+                                    id="slCaseId"
+                                    items="{
+                                        path: '/caseid',
+                                        sorter: { path: 'text' }
+                                    }">
+                                    <core:Item key="{status}" text="{name}" />
+                                </m:ComboBox>
+							</fb:control>
+						</fb:FilterGroupItem>
 						<fb:FilterGroupItem groupName="Group1" name="A" label="{i18n>checkStatus}" labelTooltip="{i18n>checkStatus}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
 							<fb:control>
 								<m:Select id="slCheckStatus" 
@@ -124,11 +137,19 @@
 						<m:OverflowToolbar>
 							<m:Title id="title" text="{i18n>Candidates}"/>
 							<m:ToolbarSpacer/>
-							<m:Button id="check" type="Emphasized" text="{i18n>b_check}" press="onSimulationCheck" />
-							<m:Button id="export" type="Emphasized" text="{i18n>b_export}" press="onDataExport" />
+							<m:Button id="check" type="Emphasized" text="{i18n>b_check}" press="onSimulationCheck" enabled="{= ${/checkEnablement} === 'TRUE' ? true : false }"/>
+							<m:Button id="export" type="Emphasized" text="{i18n>b_export}" press="onDataExport" enabled="{= ${/exportEnablement} === 'TRUE' ? true : false }"/>
 						</m:OverflowToolbar>
 					</table:extension>
 					<table:columns>
+						<table:Column
+							sortProperty="caseID"
+							width="8rem">
+							<m:Label text="{i18n>caseId}" />
+							<table:template>
+								<m:Text text="{caseID}" wrapping="false" />
+							</table:template>
+						</table:Column>
 						<table:Column
 							sortProperty="checkStatus"
 							width="11rem">

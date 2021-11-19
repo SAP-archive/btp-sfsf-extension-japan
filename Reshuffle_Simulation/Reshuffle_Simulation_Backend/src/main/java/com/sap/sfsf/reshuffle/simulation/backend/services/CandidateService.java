@@ -28,6 +28,14 @@ public class CandidateService {
 		return candidateRepo.findAll();
 	}
 
+	public Candidate findByCaseidAndCandidateidIn(String caseId, String candidateId) {
+		return candidateRepo.findByCaseidAndCandidateidIn(caseId, candidateId);
+	}
+	
+	public List<String> findDistinctCaseid() {
+		return candidateRepo.findDistinctCaseid();
+	}
+	
 	public void deleteAll() {
 		candidateRepo.deleteAll();
 	}
@@ -45,6 +53,9 @@ public class CandidateService {
 		long ngCnt = ngCnt(list);
 		long okCnt = okCnt(list);
 		long warnCnt = warnCnt(list);
+		long applCnt = applCnt(list);
+        long appdCnt = appdCnt(list);
+        long denyCnt = denyCnt(list);
 
 		if (okCnt == list.size()) {
 			return "OK";
@@ -55,7 +66,16 @@ public class CandidateService {
 		if (ngCnt > 0) {
 			return "NG";
 		}
-		return "NG";
+		if(applCnt > 0){
+			return "APPL";
+		}
+		if(appdCnt > 0){
+			return "APPD";
+		}
+		if(denyCnt > 0){
+			return "DENY";
+		}
+		return "";
 	}
 
 	public long ngCnt(List<Candidate> list) {
@@ -70,9 +90,26 @@ public class CandidateService {
 		return list.stream().filter(c -> c.getCheckStatus().equals("OK")).count();
 	}
 	
-	public Candidate findCheckedOne() {
+	public long applCnt(List<Candidate> list) {
+		return list.stream().filter(c -> c.getCheckStatus().equals("APPL")).count();
+	}
+	
+	public long appdCnt(List<Candidate> list) {
+		return list.stream().filter(c -> c.getCheckStatus().equals("APPD")).count();
+	}
+	
+	public long denyCnt(List<Candidate> list) {
+		return list.stream().filter(c -> c.getCheckStatus().equals("DENY")).count();
+	}
+
+    public Candidate findCheckedOne() {
 		return candidateRepo.findCheckedOne();
 	}
+	
+	public Candidate findCheckedOnebyCaseID(String caseID) {
+		return candidateRepo.findCheckedOnebyCaseID(caseID);
+	}
+
 
 	@Transactional
 	public List<Candidate> updateMailFlg(List<Candidate> list, String flg) {
@@ -110,5 +147,30 @@ public class CandidateService {
 		candidateRepo.saveAll(listForUpdate);
 		return listForUpdate;
 	}
+	
+	public List <Candidate> findByCaseid(String caseID) {
+		List <Candidate> candidates = candidateRepo.findByCaseid(caseID);
+		return candidates;
+	}
+	
+	@Transactional
+	public void approval (String caseID) {
+        caseID = caseID.replace("\"","");
+        List<Candidate> candidates = candidateRepo.findByCaseid(caseID);
+		for (Candidate c : candidates) {
+			c.setCheckStatus("APPD");
+		}
+		candidateRepo.saveAll(candidates);
+	} 
+
+    @Transactional
+	public void denial (String caseID) {
+        caseID = caseID.replace("\"","");
+        List<Candidate> candidates = candidateRepo.findByCaseid(caseID);
+		for (Candidate c : candidates) {
+			c.setCheckStatus("DENY");
+		}
+		candidateRepo.saveAll(candidates);
+	} 
 
 }

@@ -1,0 +1,29 @@
+<c:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:c="sap.ui.core"
+    xmlns:m="sap.m" 
+    xmlns:fb="sap.ui.comp.filterbar" 
+    xmlns:f="sap.f" 
+    xmlns:l="sap.ui.layout"
+    xmlns:v="sap.ui.comp.variants">
+	<fb:FilterBar header="{i18n>nextPositionList}" 
+        reset="onRightReset" 
+        search="onGoByCaseID" 
+        showRestoreButton="true" 
+        showClearButton="true" 
+        showGoOnFB="true" 
+        showClearOnFB="true" 
+        clear="onRightReset" 
+        showFilterConfiguration="true" 
+        useToolbar="true">
+        <fb:filterGroupItems>
+			<fb:FilterGroupItem groupName="Group1" name="A" label="{i18n>CaseId}" labelTooltip="Tooltip Example" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
+				<fb:control>
+					<m:Select id="slCaseid" forceSelection="true" items="{ path: '/caseid' }" showSecondaryValues="true" busy="{view>/caseidBusy}">
+						<c:ListItem key="{caseid}" text="{caseid}"/>
+					</m:Select>
+				</fb:control>
+			</fb:FilterGroupItem>
+		</fb:filterGroupItems>
+	</fb:FilterBar> 
+</c:FragmentDefinition>

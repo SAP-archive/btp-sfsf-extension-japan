@@ -11,9 +11,6 @@ modules:
 
 resources:
  - name: hdi_db
-   parameters:
-     config:
-       database_id: '<your-hana-instance-id>'
    properties:
      hdi-container-name: ${service-name}
    type: com.sap.xs.hdi-container

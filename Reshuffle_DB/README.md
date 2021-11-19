@@ -3,6 +3,7 @@
 ## Candidate Table
 ```SQL
 column table candidate(
+	 caseID nvarchar(50), 					--Case ID
 	 candidateID nvarchar(50),              --候補者ID
 	 candidateName nvarchar(50),            --候補者名
 	 currentDivision nvarchar(10) ,         --候補者現事業部
@@ -37,6 +38,8 @@ column table candidate(
 	 checkResult nvarchar(500),             --チェック結果詳細
 	 checkStatus nvarchar(5),               --チェック結果ステータス
 	 checkDateTime DateTime                 --チェックタイムスタンプ
+	 mailSentFlg nvarchar(5),				--メール送信フラグ
+	 mailSentAt Datetime					--メール送信日時
 	 upsertFlg nvarchar(5),					--SFSF更新フラグ
 	 upsertAt Datetime,						--SFSF更新日時
 	 createdAt Datetime,
@@ -49,8 +52,11 @@ column table candidate(
 column table config (
 	 startDateTime DateTime,         --発令日
 	 span int,                       --次回発令日までの期間（月数）
+	 competencyThreshold int         --コンピテンシー閾値
 	 rateFormKey1 nvarchar(10),      --評価項目1
 	 rateFormKey2 nvarchar(10),      --評価項目2
  	 rateFormKey3 nvarchar(10)       --評価項目3
+ 	 presidentName nvarchar(32)      --社長名（メールテンプレート内で使用）
+ 	 mailTemplate nvarchar(4112)     --メールテンプレート
 )
 ```

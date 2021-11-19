@@ -1,0 +1,109 @@
+{
+    "id": "hrapprove",
+    "schemaVersion": "1.1.0",
+    "name": "HRApprove",
+    "revision": "1.0",
+    "type": "task",
+    "readOnly": false,
+    "content": [
+        {
+            "id": "_",
+            "type": "section",
+            "title": "異動候補者",
+            "content": [
+                {
+                    "id": "_",
+                    "type": "collection",
+                    "title": "異動対象者（送り出し）",
+                    "addEnabled": false,
+                    "deleteEnabled": false,
+                    "value": "${context.allCurrentCandidates}",
+                    "content": [
+                        {
+                            "id": "id",
+                            "type": "string",
+                            "label": "id",
+                            "readOnly": true,
+                            "value": "${item.id}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "name",
+                            "type": "string",
+                            "label": "name",
+                            "readOnly": true,
+                            "value": "${item.name}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "next_position",
+                            "type": "string",
+                            "label": "next position",
+                            "readOnly": true,
+                            "value": "${item.nextPositionName}",
+                            "constraints": {
+                                "required": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "__1",
+                    "type": "collection",
+                    "title": "異動対象者（受け入れ）",
+                    "addEnabled": false,
+                    "deleteEnabled": false,
+                    "value": "${context.allNextCandidates}",
+                    "content": [
+                        {
+                            "id": "id",
+                            "type": "string",
+                            "label": "id",
+                            "readOnly": true,
+                            "value": "${item.id}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "name",
+                            "type": "string",
+                            "label": "name",
+                            "readOnly": true,
+                            "value": "${item.name}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "current_position",
+                            "type": "string",
+                            "label": "current position",
+                            "readOnly": true,
+                            "value": "${item.currentPositionName}",
+                            "constraints": {
+                                "required": false
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "decisions": [
+        {
+            "id": "approve",
+            "text": "Approve",
+            "decisionType": "positive"
+        },
+        {
+            "id": "deny",
+            "text": "Deny",
+            "decisionType": "negative"
+        }
+    ]
+}

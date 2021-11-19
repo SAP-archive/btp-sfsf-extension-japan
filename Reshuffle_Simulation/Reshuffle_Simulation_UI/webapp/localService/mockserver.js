@@ -17,10 +17,14 @@ sap.ui.define([
 				_sStatusJsonFilesPath = _sAppPath + "localService/mockdata/status.json",
 				_sStatus2JsonFilesPath = _sAppPath + "localService/mockdata/status2.json",
 				_sConfigJsonFilesPath = _sAppPath + "localService/mockdata/config.json",
-				_sJpConfigJsonFilesPath = _sAppPath + "localService/mockdata/jpconfig.json";
+				_sJpConfigJsonFilesPath = _sAppPath + "localService/mockdata/jpconfig.json",
+				_sCaseIdJsonFilesPath = _sAppPath + "localService/mockdata/case.json",
+				_sCaseStatusJsonFilesPath = _sAppPath + "localService/mockdata/caseStatus.json";
+
 			// create
 			var oModel = new JSONModel();
-			//oModel.loadData(sap.ui.require.toUrl(_sJsonFilesPath),false);
+			var downloadFile = sap.ui.require.toUrl("com/sap/sfsf/Reshuffle_Simulation_UI/localService/mockdata/download.zip");
+
 			var jsonData = "";
 			jQuery.ajax(sap.ui.require.toUrl(_sJsonFilesPath), {
 				async: false,
@@ -113,6 +117,35 @@ sap.ui.define([
 				}
 			});
 			
+			var jsonCaseidData = "";
+			jQuery.ajax(sap.ui.require.toUrl(_sCaseIdJsonFilesPath), {
+				async: false,
+				dataType: "json",
+				success: function (oData) {
+					oModel.setData(oData);
+					jsonCaseidData = oData;
+				}
+			});
+
+			var jsonCaseStatusData = "";
+			jQuery.ajax(sap.ui.require.toUrl(_sCaseStatusJsonFilesPath), {
+				async: false,
+				dataType: "json",
+				success: function (oData) {
+					oModel.setData(oData);
+					jsonCaseStatusData = oData;
+				}
+			});
+			
+			var fileExport = {
+				method: "GET",
+				contentType: "application/octet-stream",
+				path: new RegExp("export(.*)"),
+				response: function (oXhr, sUrlParams) {
+					oXhr.respondJSON(200, {}, jsonData, downloadFile);
+				}
+			};
+			
 			var all = {
 				method: "GET",
 				path: new RegExp("all(.*)"),
@@ -132,7 +165,7 @@ sap.ui.define([
 				method: "POST",
 				path: new RegExp("check(.*)"),
 				response: function (oXhr, sUrlParams) {
-					oXhr.respondJSON(200, {}, jsonListCheckedData);
+					oXhr.respondJSON(200, {}, jsonListData);
 				}
 			};
 
@@ -140,7 +173,7 @@ sap.ui.define([
 				method: "POST",
 				path: new RegExp("mail(.*)"),
 				response: function (oXhr, sUrlParams) {
-					oXhr.respondJSON(200, {}, jsonListCheckedData);
+					oXhr.respondJSON(200, {}, jsonListData);
 				}
 			};
 
@@ -148,17 +181,10 @@ sap.ui.define([
 				method: "POST",
 				path: new RegExp("mailjob(.*)"),
 				response: function (oXhr, sUrlParams) {
-					oXhr.respondJSON(200, {}, jsonListCheckedData);
+					oXhr.respondJSON(200, {}, jsonListData);
 				}
 			};	
 			
-			var sendMail = {
-				method: "POST",
-				path: new RegExp("check(.*)"),
-				response: function (oXhr, sUrlParams) {
-					oXhr.respondJSON(200, {}, jsonListCheckedData);
-				}
-			};
 			var division = {
 				method: "GET",
 				contentType: "application/octet-stream",
@@ -215,10 +241,35 @@ sap.ui.define([
 					oXhr.respondJSON(200, {}, jsonJpConfigData);
 				}
 			};	
+			
+			var caseId = {
+				method: "GET",
+				path: new RegExp("caseid(.*)"),
+				response: function (oXhr, sUrlParams) {
+					oXhr.respondJSON(200, {}, jsonCaseidData);
+				}
+			};
+
+			var casestatus = {
+				method: "GET",
+				path: new RegExp("casestatus(.*)"),
+				response: function (oXhr, sUrlParams) {
+					oXhr.respondJSON(200, {}, jsonCaseStatusData);
+				}
+			};
+			
+			var pdf = {
+				method: "POST",
+				contentType: "application/octet-stream",
+				path: new RegExp("pdf(.*)"),
+				response: function (oXhr, sUrlParams) {
+					oXhr.respondJSON(200, {}, jsonData, downloadFile);
+				}
+			};
 
 			var oMockServer = new MockServer({
 				rootUri: "/srv_api/",
-				requests: [all, list, check, mail, mailjob, sendMail, division, department, position, status, status2]
+				requests: [all, list, check, mail, mailjob, division, department, position, status, status2, fileExport, pdf, caseId, casestatus]
 			});
 
 			var oMockServerConfig = new MockServer({

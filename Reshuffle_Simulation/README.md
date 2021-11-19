@@ -16,6 +16,9 @@ Get the check process status:
 ## Get /list
 Get the candidate list from HANA DB
 
+## Get /caseid
+Get the list of distinct caseid from HANA DB
+
 ## Get /company
 Get company list
 
@@ -103,6 +106,35 @@ mailjob_status: success/fail
 Updated Candidate List
 
 
+## POST /workflow
+Call the SCP workflow for a caseID validation
+
+The SCP workflow definitionId is indicated in the application.properties file as follows (example definitionId: simulation_approval)
+workflowservice.workflow.name=simulation_approval
+
+
+*Body*
+```text
+20210401-sales-case3
+```
+
+*Response Body*
+SCP Workflow Instance Response
+```JSON
+{
+    "id": "3e136f92-5957-11eb-ae11-eeee0a8a0204",
+    "definitionId": "workflowtest",
+    "definitionVersion": "1",
+    "subject": "workflowtest",
+    "status": "RUNNING",
+    "businessKey": "",
+    "parentInstanceId": null,
+    "rootInstanceId": "3e136f92-5957-11eb-ae11-eeee0a8a0204",
+    "applicationScope": "own",
+    "startedAt": "2021-01-18T06:34:40.342Z",
+    "startedBy": "sb-clone-011a6e0c-7c6d-46c5-a107-4e15b0416b9c!b341|workflow!b117",
+    "completedAt": null
+}```
 
 
 ## local test

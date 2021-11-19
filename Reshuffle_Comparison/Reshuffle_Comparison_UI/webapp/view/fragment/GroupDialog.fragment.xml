@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog id="_IDGenViewGroupDialog1"
+		confirm="handleGroupDialogConfirm">
+		<groupItems>
+			<ViewSettingsItem text="{i18n>caseId}" key="caseID" selected="true" />
+			<ViewSettingsItem text="{i18n>candidateID}" key="candidateID"/>
+			<ViewSettingsItem text="{i18n>candidateName}" key="candidateName" />
+			<ViewSettingsItem text="{i18n>currentDivisionName}" key="currentDivisionName" />
+			<ViewSettingsItem text="{i18n>currentDepartmentName}" key="currentDepartmentName" />
+            <ViewSettingsItem text="{i18n>currentPositionName}" key="currentPositionName" />
+            <ViewSettingsItem text="{i18n>nextDivisionName}" key="nextDivisionName" />
+            <ViewSettingsItem text="{i18n>nextDepartmentName}" key="nextDepartmentName" />
+            <ViewSettingsItem text="{i18n>nextPositionName}" key="nextPositionName" />
+		</groupItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

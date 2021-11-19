@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateTimeUtil {
 
@@ -44,6 +45,11 @@ public class DateTimeUtil {
 	
 	public static String formatDateTokyo(Date date) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		return LocalDateTime.ofInstant(date.toInstant(),ZoneId.of("Asia/Tokyo")).format(formatter);
+	}
+
+	public static String formatDateTokyoJP(Date date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日",Locale.JAPANESE);
 		return LocalDateTime.ofInstant(date.toInstant(),ZoneId.of("Asia/Tokyo")).format(formatter);
 	}
 	

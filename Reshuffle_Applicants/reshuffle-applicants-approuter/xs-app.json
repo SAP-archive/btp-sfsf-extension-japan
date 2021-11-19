@@ -1,17 +1,17 @@
 {
         "welcomeFile": "/comsapsfsfapplicants/index.html",
-                "authenticationMethod": "none",
+                "authenticationMethod": "route",
                 "routes": [
                 {
                         "source": "/srv_api/(.*)$",
                         "target": "$1",
-                        "authenticationType": "none",
+                        "authenticationType": "xsuaa",
                         "destination": "srv_api",
-                        "csrfProtection": true
+                        "csrfProtection": false
                 },{
                         "source": "/config_api/(.*)$",
                         "target": "$1",
-                        "authenticationType": "none",
+                        "authenticationType": "xsuaa",
                         "destination": "config_api"
                 }
                 ]

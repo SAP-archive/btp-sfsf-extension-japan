@@ -1,0 +1,69 @@
+{
+    "id": "nextmanagerapproveui",
+    "schemaVersion": "1.1.0",
+    "name": "nextManagerApproveUI",
+    "revision": "1.0",
+    "type": "task",
+    "readOnly": false,
+    "content": [
+        {
+            "id": "_",
+            "type": "section",
+            "title": "異動候補者（受け入れ）",
+            "content": [
+                {
+                    "id": "candidates",
+                    "type": "collection",
+                    "title": "candidates",
+                    "addEnabled": false,
+                    "deleteEnabled": false,
+                    "value": "${context.nmCandidates}",
+                    "content": [
+                        {
+                            "id": "id",
+                            "type": "string",
+                            "label": "id",
+                            "readOnly": true,
+                            "value": "${item.id}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "name",
+                            "type": "string",
+                            "label": "name",
+                            "readOnly": true,
+                            "value": "${item.name}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "current_position",
+                            "type": "string",
+                            "label": "current position",
+                            "readOnly": true,
+                            "value": "${item.currentPositionName}",
+                            "constraints": {
+                                "required": false
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "decisions": [
+        {
+            "id": "accept",
+            "text": "Accept",
+            "decisionType": "positive"
+        },
+        {
+            "id": "decline",
+            "text": "Decline",
+            "decisionType": "negative"
+        }
+    ]
+}

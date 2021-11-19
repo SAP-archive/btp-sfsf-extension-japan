@@ -55,7 +55,8 @@ modules:
       - name: dest_Reshuffle_Simulation
       - name: hdi_db
       - name: my-job-scheduler
-
+      - name: wm_workflow
+      
   - name: Reshuffle_Simulation_UI
     type: html5
     path: Reshuffle_Simulation_UI
@@ -89,6 +90,10 @@ resources:
       service: html5-apps-repo
     type: org.cloudfoundry.managed-service
   - name: uaa_Reshuffle
+    #parameters:
+    #  path: ./xs-security.json
+    #  service-plan: application
+    #  service: xsuaa
     type: org.cloudfoundry.existing-service
   - name: dest_Reshuffle_Simulation
     parameters:
@@ -99,3 +104,5 @@ resources:
     type: org.cloudfoundry.existing-service
   - name: my-job-scheduler
     type: org.cloudfoundry.existing-service
+  - name: wm_workflow
+    type: org.cloudfoundry.existing-service    
