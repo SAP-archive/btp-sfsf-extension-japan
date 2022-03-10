@@ -1,0 +1,49 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<ResponsivePopover id="employeeInfoPopover" class="sapUiPopupWithPadding" placement="Auto" 
+		title = "{i18n>employeeInfoPopoverTitle}" titleAlignment="Center">
+		<endButton>
+			<Button id="close" text="close" type="Transparent" press="onClickClosePopover" />
+		</endButton>
+		<l:HorizontalLayout id="employeeInfoPopoverHorizontalLayout">
+			<Image id="employeeInfoPopoverPhoto" src="{photoData}" width="4rem" alt="photo" tooltip="photo"/>
+			<Title id="employeeInfoPopoverEmpName" text="{empName}" />
+		</l:HorizontalLayout>
+		<ToolbarSpacer id="employeeInfoPopoverSpacer1"/>
+		<Label id="employeeInfoPopoverDivisionNameLabel" text="{i18n>employeeInfoPopoverDivision}:" labelFor="employeeInfoPopoverDivisionNameText" vAlign="Middle"/>
+		<Text id="employeeInfoPopoverDivisionNameText" text="{divisionName}" />
+
+		<ToolbarSpacer id="employeeInfoPopoverSpacer2"/>
+		<Label id="employeeInfoPopoverDepartmentNameLabel" text="{i18n>employeeInfoPopoverDepartment}:" labelFor="employeeInfoPopoverDepartmentNameText" vAlign="Middle"/>
+		<Text id="employeeInfoPopoverDepartmentNameText" text="{departmentName}" />
+
+		<ToolbarSpacer id="employeeInfoPopoverSpacer3"/>
+		<Label id="employeeInfoPopoverPositionNameLabel" text="{i18n>employeeInfoPopoverPosition}:" labelFor="employeeInfoPopoverPositionNameText" vAlign="Middle"/>
+		<Text id="employeeInfoPopoverPositionNameText" text="{positionName}" />
+
+		<ToolbarSpacer id="employeeInfoPopoverSpacer4"/>
+		<Label id="employeeInfoPopoverJobTenureLabel" text="{i18n>employeeInfoPopoverJobTenure}:" labelFor="employeeInfoPopoverJobTenureText" vAlign="Middle"/>
+		<Text id="employeeInfoPopoverJobTenureText" text="{empJobTenure}" />
+
+		<ToolbarSpacer id="employeeInfoPopoverSpacer5"/>
+		<Label id="employeeInfoPopoverJobGradeLabel" text="{i18n>employeeInfoPopoverJobGrade}:" labelFor="employeeInfoPopoverJobGradeText" vAlign="Middle"/>
+		<Text id="employeeInfoPopoverJobGradeText" text="{jobGradeName}" />
+
+		<ToolbarSpacer id="employeeInfoPopoverSpacer6"/>
+		<Label id="employeeInfoPopoverWillingnessLabel" text="{i18n>employeeInfoPopoverWillingness}:" labelFor="employeeInfoPopoverWillingnessText" vAlign="Middle"/>
+		<Text id="employeeInfoPopoverWillingnessText" text="{willingness}" />
+
+		<ToolbarSpacer id="employeeInfoPopoverSpacer7"/>
+		<Label id="employeeInfoPopoverLatestRatingLabel" text="{i18n>employeeInfoPopoverLatestRating}:" labelFor="employeeInfoPopoverLatestRatingText" vAlign="Middle"/>
+		<Text id="employeeInfoPopoverLatestRatingText" text="{lastRating1}" />
+
+		<ToolbarSpacer id="employeeInfoPopoverSpacer8"/>
+		<Label id="employeeInfoPopoverLastYearRatingLabel" text="{i18n>employeeInfoPopoverLastYearRating}:" labelFor="employeeInfoPopoverLastYearRatingText" vAlign="Middle"/>
+		<Text id="employeeInfoPopoverLastYearRatingText" text="{lastRating2}" />
+
+		<ToolbarSpacer id="employeeInfoPopoverSpacer9"/>
+		<Label id="employeeInfoPopoverRetirementPlanLabel" text="{i18n>employeeInfoPopoverRetirementPlan}:" labelFor="employeeInfoPopoverRetirementPlanText" vAlign="Middle"/>
+		<Text id="employeeInfoPopoverRetirementPlanText" text="{empRetire}" />
+	</ResponsivePopover>
+</core:FragmentDefinition>

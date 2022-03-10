@@ -1,0 +1,19 @@
+{
+  "xsappname": "Reshuffle_Apps_DEV_wo_jsauth",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [{
+      "name": "$XSAPPNAME.jobschedulerscope",
+      "description": "special scope for job shceduler",
+      "grant-as-authority-to-apps": ["$XSSERVICENAME(job-scheduler)"]
+  }],
+  "role-templates": [
+    {
+      "name": "Token_Exchange",
+      "description": "UAA",
+      "scope-references": [
+        "uaa.user"
+      ]
+    }
+  ]
+}

@@ -61,7 +61,8 @@ public class ConfigService {
 		
 		logger.info("RateForm Query: " + query.toString());
 		try {
-			list = query.execute("SFSF_2nd")
+			String destName = System.getenv("DEST_NAME");
+			list = query.execute(destName)
 					.asList(RateForm.class);
 		} catch (ODataException e) {
 			e.printStackTrace();

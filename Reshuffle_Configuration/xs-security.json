@@ -1,7 +1,12 @@
 {
-  "xsappname": "Reshuffle_Configuration",
+  "xsappname": "Reshuffle_Apps",
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
+  "scopes": [{
+      "name": "$XSAPPNAME.jobschedulerscope",
+      "description": "special scope for job shceduler",
+      "grant-as-authority-to-apps": ["$XSSERVICENAME(job-scheduler)"]
+  }],
   "role-templates": [
     {
       "name": "Token_Exchange",

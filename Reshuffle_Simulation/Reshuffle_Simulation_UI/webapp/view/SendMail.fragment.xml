@@ -11,13 +11,14 @@
 			<Button id="sendMailJob" type="Emphasized" text="{i18n>b_send_reservation}" press="onSendMailJob" width="15rem" />
 			<ToolbarSpacer/>
 			<Text text="{/CandidateId}" />
-			<DateTimePicker
+			<DatePicker
 					id="sendMailDate"
 					width="15rem"
-					displayFormat="short"
+                    showCurrentDateButton="true"
+                  	displayFormat="short"
 					value="{
 						path: '/sendMailDate',
-						type: 'sap.ui.model.type.DateTime'}" />
+						type: 'sap.ui.model.type.Date'}" />
 		</content>
 	</ResponsivePopover>
 </core:FragmentDefinition>

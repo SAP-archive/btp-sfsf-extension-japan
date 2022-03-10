@@ -1,0 +1,144 @@
+{
+    "resources": [
+        {
+            "name": "controller/BaseController-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "i18n/i18n_en.properties",
+            "raw": "i18n/i18n.properties",
+            "locale": "_en"
+        },
+        {
+            "name": "i18n/i18n_ja.properties",
+            "raw": "i18n/i18n.properties",
+            "locale": "_ja"
+        },
+        {
+            "name": "localService/mockdata/jpconfig.json"
+        },
+        {
+            "name": "localService/mockdata/list.json"
+        },
+        {
+            "name": "localService/mockdata/position.json"
+        },
+        {
+            "name": "localService/mockdata/jobhistory_mtana.json"
+        },
+        {
+            "name": "localService/mockdata/jobhistory_akuwa.json"
+        },
+        {
+            "name": "localService/mockdata/division.json"
+        },
+        {
+            "name": "localService/mockdata/department.json"
+        },
+        {
+            "name": "localService/mockdata/case.json"
+        },
+        {
+            "name": "localService/mockdata/candidatePosition.json"
+        },
+        {
+            "name": "localService/mockdata/candidateDivision.json"
+        },
+        {
+            "name": "localService/mockdata/candidateDepartment.json"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "localService/mockserver.js"
+        },
+        {
+            "name": "controller/Main.controller.js"
+        },
+        {
+            "name": "controller/Comparison.controller.js"
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "initMockServer.js"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "manifest-bundle.zip"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "model/formatter-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Main-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller/Comparison-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "localService/mockserver-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "initMockServer-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../../../sap-ui-version.json"
+        },
+        {
+            "name": "view/fragment/SortDialog.fragment.xml"
+        },
+        {
+            "name": "view/fragment/SettingDialog.fragment.xml"
+        },
+        {
+            "name": "view/fragment/JobHistory.fragment.xml"
+        },
+        {
+            "name": "view/fragment/GroupDialog.fragment.xml"
+        },
+        {
+            "name": "view/Main.view.xml"
+        },
+        {
+            "name": "view/Comparison.view.xml"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "index.html"
+        }
+    ]
+}

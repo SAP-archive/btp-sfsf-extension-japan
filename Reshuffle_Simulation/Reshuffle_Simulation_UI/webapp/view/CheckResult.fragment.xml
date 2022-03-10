@@ -6,7 +6,7 @@
 		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
 		placement="Right">
 		<content>
-			<FormattedText class="sapUiResponsiveMargin" htmlText="{checkResult}"/>
+			<FormattedText class="sapUiResponsiveMargin" htmlText="{simulation>simulationCheckResult}"/>
 		</content>
 		<footer>
 			<OverflowToolbar>

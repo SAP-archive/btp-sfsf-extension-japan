@@ -1,0 +1,9 @@
+systems:
+  - alias: "internal"
+    uri: "https://api40sales.sapsf.com/"
+
+stages:
+  Integration:
+    credentials:
+      - alias: 'internal'
+        credentialId: 'SFSF'

@@ -20,15 +20,15 @@ public class HistoryService {
 
 
 	public History saveHistory(List<Candidate> list) {
-		long ngCnt = list.stream().filter(c -> c.getCheckStatus().equals("NG")).count();
-		long okCnt = list.stream().filter(c -> c.getCheckStatus().equals("OK")).count();
-		long warnCnt = list.stream().filter(c -> c.getCheckStatus().equals("WARN")).count();
+		long ngCnt = list.stream().filter(c -> c.getSimulationCheckStatus().equals("NG")).count();
+		long okCnt = list.stream().filter(c -> c.getSimulationCheckStatus().equals("OK")).count();
+		long warnCnt = list.stream().filter(c -> c.getSimulationCheckStatus().equals("WARN")).count();
 
 		History history = new History();
 		String status = candidateService.checkStatus(list);
 		history.setStatus(status);
 		history.setTotalCnt((long)list.size());
-		history.setCheckedAt(list.get(0).getCheckDateTime());
+		history.setCheckedAt(list.get(0).getSimulationCheckDatetime());
 		history.setNgCnt(ngCnt);
 		history.setOkCnt(okCnt);
 		history.setWarnCnt(warnCnt);

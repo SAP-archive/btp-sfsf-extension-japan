@@ -1,0 +1,9 @@
+{
+    "name": "reshuffle_applicants_db_deployer",
+    "dependencies": {
+        "@sap/hdi-deploy": "^4.2.3"
+    },
+    "scripts": {
+        "start": "node node_modules/@sap/hdi-deploy/deploy.js"
+    }
+}

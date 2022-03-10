@@ -1,8 +1,7 @@
+_schema-version: "3.2"
 ID: Reshuffle_Simulation
-_schema-version: '2.1'
-parameters:
-  deploy_mode: html5-repo
 version: 0.0.1
+
 modules:
   - name: reshuffle-simulation-approuter
     type: approuter.nodejs
@@ -44,18 +43,21 @@ modules:
     path: Reshuffle_Simulation_Backend
     parameters:
       memory: 2048M
+    properties:
+      FIXED_SEND_MAIL_HOUR: 00am
     provides:
       - name: Reshuffle_Simulation_Backend_api
         properties:
           url: '${default-url}'
     build-parameters:
       build-result: 'target/*.jar'
+      timeout: 60m
     requires:
       - name: uaa_Reshuffle
-      - name: dest_Reshuffle_Simulation
+      - name: dest_Reshuffle
       - name: hdi_db
-      - name: my-job-scheduler
-      - name: wm_workflow
+      - name: job-scheduler
+      - name: workflow
       
   - name: Reshuffle_Simulation_UI
     type: html5
@@ -84,25 +86,28 @@ resources:
       service-plan: app-runtime
       service: html5-apps-repo
     type: org.cloudfoundry.managed-service
+
   - name: Reshuffle_Simulation_html5_repo_host
     parameters:
       service-plan: app-host
       service: html5-apps-repo
     type: org.cloudfoundry.managed-service
+
   - name: uaa_Reshuffle
-    #parameters:
-    #  path: ./xs-security.json
-    #  service-plan: application
-    #  service: xsuaa
     type: org.cloudfoundry.existing-service
-  - name: dest_Reshuffle_Simulation
-    parameters:
-      service-plan: lite
-      service: destination
-    type: org.cloudfoundry.managed-service
+
+  - name: dest_Reshuffle
+    type: org.cloudfoundry.existing-service
+
   - name: hdi_db
     type: org.cloudfoundry.existing-service
-  - name: my-job-scheduler
+
+  - name: job-scheduler
     type: org.cloudfoundry.existing-service
-  - name: wm_workflow
-    type: org.cloudfoundry.existing-service    
+
+  - name: workflow
+    type: org.cloudfoundry.managed-service    
+    parameters:
+      service-plan: standard
+      service: workflow
+      path: ./workflow-auth.json

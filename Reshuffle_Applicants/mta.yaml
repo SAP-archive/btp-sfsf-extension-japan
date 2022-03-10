@@ -1,106 +1,116 @@
+_schema-version: "3.2"
 ID: Reshuffle_Applicants
-_schema-version: '2.1'
-parameters:
-  deploy_mode: html5-repo
 version: 0.0.1
 modules:
-  - name: reshuffle-applicants-approuter
-    type: approuter.nodejs
-    path: reshuffle-applicants-approuter
-    parameters:
-      disk-quota: 256M
-      memory: 256M
-    requires:
-      - name: Reshuffle_Applicants_html5_repo_runtime
-      - name: uaa_Reshuffle
-      - name: Reshuffle_Applicants_Backend_api
-        group: destinations
-        properties:
-          forwardAuthToken: true
-          name: srv_api
-          url: '~{url}'
-          timeout: 600000
-      - name: Reshuffle_Configuration_Backend
-        group: destinations
-        properties:
-          forwardAuthToken: true
-          name: config_api
-          url: '~{url}'
 
-  - name: Reshuffle_Applicants_Backend
-    type: java
-    path: Reshuffle_Applicants_Backend
-    parameters:
-      memory: 3584M 
+- name: reshuffle-applicants-approuter
+  type: approuter.nodejs
+  path: reshuffle-applicants-approuter
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+  requires:
+  - name: Reshuffle_Applicants_html_repo_runtime
+  - name: uaa_Reshuffle
+  - name: dest_Reshuffle
+  - name: Reshuffle_Applicants_Backend_api
+    group: destinations
     properties:
-      SPRING_PROFILES_ACTIVE: 'cloud'
-    provides:
-      - name: Reshuffle_Applicants_Backend_api
-        properties:
-          url: '${default-url}'
-    build-parameters:
-      build-result: 'target/*.jar'
+      forwardAuthToken: true
+      name: srv_api
+      url: '~{url}'
+      timeout: 600000
+  - name: Reshuffle_Configuration_Backend
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      name: config_api
+      url: '~{url}'
+
+- name: Reshuffle_Applicants_UI
+  type: html5
+  path: reshuffle-applicants-ui
+  build-parameters:
+    build-result: dist
+    builder: custom
+    supported-platforms: []
+    commands:
+    - npm install
+    - npm run build:cf
+
+- name: Reshuffle_Applicants_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: Reshuffle_Applicants_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
     requires:
-      - name: dest_Reshuffle_Applicants
-      - name: uaa_Reshuffle
-      - name: hdi_db
+    - artifacts:
+      - comsapsfsfreshuffleapplicants.zip
+      name: Reshuffle_Applicants_UI
+      target-path: resources/
 
+- name: Reshuffle_Applicants_Backend
+  type: java
+  path: reshuffle-applicants-backend/srv
+  parameters:
+    memory: 1048M
+    buildpack: sap_java_buildpack
+  build-parameters:
+    builder: custom
+    commands: [mvn clean package]
+    build-result: "target/*-exec.[wj]ar"
+    timeout: 30m
+  properties:
+    TARGET_RUNTIME: tomcat
+    SET_LOGGING_LEVEL: '{ROOT: DEBUG, com.sap.cloud.sdk: DEBUG}'
+    SPRING_PROFILES_ACTIVE: 'cloud'
+  provides:
+    - name: Reshuffle_Applicants_Backend_api
+      properties:
+        url: '${default-url}'
+  requires:
+    - name: dest_Reshuffle
+    - name: hdi_db
+    - name: uaa_Reshuffle
 
-  - name: Reshuffle_Applicants_UI
-    type: html5
-    path: Reshuffle_Applicants_UI
-    build-parameters:
-       builder: custom
-       commands:
-        - npm install
-        - npm run build
-       supported-platforms: []
-       build-result: dist
-
-  - name: Reshuffle_Applicants_ui_deployer
-    type: com.sap.html5.application-content
-    path: Reshuffle_Applicants_ui_deployer
-    requires:
-      - name: Reshuffle_Applicants_html5_repo_host
-    build-parameters:
-      requires:
-        - name: Reshuffle_Applicants_UI
-          artifacts:
-            - './*'
-          target-path: resources/Reshuffle_Applicants_UI
+- name: Reshuffle_Applicants_db-deployer
+  type: hdb
+  path: reshuffle-applicants-db-deployer
+  requires:
+  - name: hdi_db
 
 resources:
-  - name: Reshuffle_Configuration_Backend
-    type: configuration
-    parameters:
-      provider-nid: mta
-      provider-id: Reshuffle_Configuration:Reshuffle_Configuration_Backend_api
-      version: ">=0.0.1" 
-      target:
-        org: ${org}     # Specifies the org of the provider MTA
-        space: ${space} # Wildcard * searches in all spaces 
-  - name: Reshuffle_Applicants_html5_repo_runtime
-    parameters:
-      service-plan: app-runtime
-      service: html5-apps-repo
-    type: org.cloudfoundry.managed-service
-  - name: Reshuffle_Applicants_html5_repo_host
-    parameters:
-      service-plan: app-host
-      service: html5-apps-repo
-    type: org.cloudfoundry.managed-service
-  - name: uaa_Reshuffle
-    # parameters:
-    #   path: ./xs-security.json
-    #   service-plan: application
-    #   service: xsuaa
-    type: org.cloudfoundry.existing-service
-  - name: dest_Reshuffle_Applicants
-    parameters:
-      service-plan: lite
-      service: destination
-    type: org.cloudfoundry.managed-service
-  - name: hdi_db
-    properties:
-      hdi-container-name: '${service-name}'
-    type: org.cloudfoundry.existing-service
+- name: Reshuffle_Applicants_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+
+- name: Reshuffle_Applicants_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+
+- name: hdi_db
+  type: org.cloudfoundry.existing-service
+
+- name: uaa_Reshuffle
+  type: org.cloudfoundry.existing-service
+
+- name: dest_Reshuffle
+  type: org.cloudfoundry.existing-service
+
+- name: Reshuffle_Configuration_Backend
+  type: configuration
+  parameters:
+    provider-nid: mta
+    provider-id: Reshuffle_Configuration:Reshuffle_Configuration_Backend_api
+    version: ">=0.0.1" 
+    target:
+      org: ${org}     # Specifies the org of the provider MTA
+      space: ${space} # Wildcard * searches in all spaces 

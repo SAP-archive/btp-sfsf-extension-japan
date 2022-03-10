@@ -27,10 +27,10 @@
                                     required="true"
                                     id="slCaseId"
                                     items="{
-                                        path: '/caseid',
+                                        path: 'simulation>/caseid',
                                         sorter: { path: 'text' }
                                     }">
-                                    <core:Item key="{status}" text="{name}" />
+                                    <core:Item key="{simulation>status}" text="{simulation>name}" />
                                 </m:ComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -38,8 +38,8 @@
 							<fb:control>
 								<m:Select id="slCheckStatus" 
 										forceSelection="true" 
-										items="{ path: '/checkStatus' }">
-									<core:ListItem key="{status}" text="{name}" />
+										items="{ path: 'simulation>/checkStatus' }">
+									<core:ListItem key="{simulation>status}" text="{simulation>name}" />
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -49,9 +49,9 @@
 										forceSelection="true" 
 										showSecondaryValues= "true"
 										change="onSlCurrentDivisionChange" 
-										items="{ path: '/currentDivision' }"
+										items="{ path: 'simulation>/currentDivision' }"
 										busy = "{view>/divisionBusy}" >
-									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}" />
+									<core:ListItem key="{simulation>externalCode}" text="{simulation>name}" additionalText="{simulation>externalCode}" />
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -61,9 +61,9 @@
 										forceSelection="true" 
 										showSecondaryValues= "true"
 										change="onSlCurrentDepartmentChange"
-										items="{path: '/currentDepartment'}"
+										items="{path: 'simulation>/currentDepartment'}"
 										busy = "{view>/departmentBusy}" >
-									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
+									<core:ListItem key="{simulation>externalCode}" text="{simulation>name}" additionalText="{simulation>externalCode}"/>
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -72,9 +72,9 @@
 								<m:Select id="slPosition" 
 										forceSelection="true" 
 										showSecondaryValues= "true"
-										items="{ path: '/currentPosition' }"
+										items="{ path: 'simulation>/currentPosition' }"
 										busy = "{view>/positionBusy}" >
-									<core:ListItem key="{code}" text="{name}" additionalText="{code}"/>
+									<core:ListItem key="{simulation>code}" text="{simulation>name}" additionalText="{simulation>code}"/>
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -84,8 +84,8 @@
 										forceSelection="true" 
 										showSecondaryValues= "true"
 										change="onSlNextDivisionChange"
-										items="{ path: '/nextDivision' }">
-									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}" />
+										items="{ path: 'simulation>/nextDivision' }">
+									<core:ListItem key="{simulation>externalCode}" text="{simulation>name}" additionalText="{simulation>externalCode}" />
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -95,8 +95,8 @@
 										forceSelection="true" 
 										showSecondaryValues= "true"
 										change="onSlNextDepartmentChange"
-										items="{path: '/nextDepartment'}">
-									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}" />
+										items="{path: 'simulation>/nextDepartment'}">
+									<core:ListItem key="{simulation>externalCode}" text="{simulation>name}" additionalText="{simulation>externalCode}" />
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -105,26 +105,26 @@
 								<m:Select id="slNextPosition" 
 										forceSelection="true" 
 										showSecondaryValues= "true"
-										items="{ path: '/nextPosition' }">
-									<core:ListItem key="{code}" text="{name}" additionalText="{code}" />
+										items="{ path: 'simulation>/nextPosition' }">
+									<core:ListItem key="{simulation>code}" text="{simulation>name}" additionalText="{simulation>code}" />
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem groupName="Group1" name="H" label="{i18n>candidateID}" labelTooltip="{i18n>candidateID}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
 							<fb:control>
-								<m:Input id="candidateId" placeholder="CandidatesId ..." value="{/candidateId}" />
+								<m:Input id="candidateId" placeholder="CandidatesId ..." value="{simulation>/candidateID}" />
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem groupName="Group1" name="I" label="{i18n>candidateName}" labelTooltip="{i18n>candidateName}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
 							<fb:control>
-								<m:Input id="candidateName" placeholder="CandidatesName ..." value="{/candidateName}" />
+								<m:Input id="candidateName" placeholder="CandidatesName ..." value="{simulation>/candidateName}" />
 							</fb:control>
 						</fb:FilterGroupItem>
 					</fb:filterGroupItems>				
 			    </fb:FilterBar>		
 				<table:Table
-					id="idCandidatesTable"
-					rows="{/list}"
+					id="simulationCandidatesTable"
+					rows="{simulation>/list}"
 					rowHeight = "20"
 					filter="filterPrice"
 					selectionMode="None"
@@ -137,8 +137,8 @@
 						<m:OverflowToolbar>
 							<m:Title id="title" text="{i18n>Candidates}"/>
 							<m:ToolbarSpacer/>
-							<m:Button id="check" type="Emphasized" text="{i18n>b_check}" press="onSimulationCheck" enabled="{= ${/checkEnablement} === 'TRUE' ? true : false }"/>
-							<m:Button id="export" type="Emphasized" text="{i18n>b_export}" press="onDataExport" enabled="{= ${/exportEnablement} === 'TRUE' ? true : false }"/>
+							<m:Button id="check" type="Emphasized" text="{i18n>b_check}" press="onSimulationCheck" enabled="{buttonStatus>/checkEnablement}"/>
+							<m:Button id="export" type="Emphasized" text="{i18n>b_export}" press="onDataExport" enabled="{buttonStatus>/exportEnablement}"/>
 						</m:OverflowToolbar>
 					</table:extension>
 					<table:columns>
@@ -147,16 +147,16 @@
 							width="8rem">
 							<m:Label text="{i18n>caseId}" />
 							<table:template>
-								<m:Text text="{caseID}" wrapping="false" />
+								<m:Text text="{simulation>caseID}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="checkStatus"
+							sortProperty="simulationCheckStatus"
 							width="11rem">
 							<m:Label text="{i18n>checkStatus}" />
 							<table:template>
-								<m:ObjectStatus text="{ path: 'checkStatus', formatter: '.formatter.getStatusName' }"
-									state="{ path: 'checkStatus', formatter: '.formatter.checkState' }"/>
+								<m:ObjectStatus text="{ path: 'simulation>simulationCheckStatus', formatter: '.formatter.getStatusName' }"
+									state="{ path: 'simulation>simulationCheckStatus', formatter: '.formatter.checkState' }"/>
 							</table:template>
 						</table:Column>
 						<table:Column
@@ -164,7 +164,7 @@
 							width="11rem">
 							<m:Label text="{i18n>candidateID}" />
 							<table:template>
-								<m:ObjectIdentifier title="{candidateID}"/>
+								<m:ObjectIdentifier title="{simulation>candidateID}"/>
 							</table:template>
 						</table:Column>
 						<table:Column
@@ -172,99 +172,99 @@
 							width="11rem">
 							<m:Label text="{i18n>candidateName}" />
 							<table:template>
-								<m:Text text="{candidateName}" wrapping="false" />
+								<m:Text text="{simulation>candidateName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="currentDivision"
+							sortProperty="candidateDivisionID"
 							width="11rem">
 							<m:Label text="{i18n>currentDivision}" />
 							<table:template>
-								<m:Text text="{currentDivisionName}" wrapping="false" />
+								<m:Text text="{simulation>candidateDivisionName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="currentDepartment"
+							sortProperty="candidateDepartmentID"
 							width="11rem">
 							<m:Label text="{i18n>currentDepartment}" />
 							<table:template>
-								<m:Text text="{currentDepartmentName}" wrapping="false" />
+								<m:Text text="{simulation>candidateDepartmentName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="currentPosition"
+							sortProperty="candidatePositionID"
 							width="11rem">
 							<m:Label text="{i18n>currentPosition}" />
 							<table:template>
-								<m:Text text="{currentPositionName}" wrapping="false" />
+								<m:Text text="{simulation>candidatePositionName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="currentJobGrade"
+							sortProperty="candidateJobGradeID"
 							width="11rem">
 							<m:Label text="{i18n>currentJobGrade}" />
 							<table:template>
-								<m:Text text="{currentJobGrade}" wrapping="false" />
+								<m:Text text="{simulation>candidateJobGradeID}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="nextDivision"
+							sortProperty="divisionID"
 							width="11rem">
 							<m:Label text="{i18n>nextDivision}" />
 							<table:template>
-								<m:Text text="{nextDivisionName}" wrapping="false" />
+								<m:Text text="{simulation>divisionName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="nextDepartment"
+							sortProperty="departmentID"
 							width="11rem">
 							<m:Label text="{i18n>nextDepartment}" />
 							<table:template>
-								<m:Text text="{nextDepartmentName}" wrapping="false" />
+								<m:Text text="{simulation>departmentName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="nextPosition"
+							sortProperty="positionID"
 							width="11rem">
 							<m:Label text="{i18n>nextPosition}" />
 							<table:template>
-								<m:Text text="{nextPositionName}" wrapping="false" />
+								<m:Text text="{simulation>positionName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="nextJobGrade"
+							sortProperty="jobGradeID"
 							width="11rem">
 							<m:Label text="{i18n>nextJobGrade}" />
 							<table:template>
-								<m:Text text="{nextJobGrade}" wrapping="false" />
+								<m:Text text="{simulation>jobGradeID}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
 							width="11rem">
 							<m:Label text="{i18n>currentEmpRetire}" />
 							<table:template>
-								<m:Text text="{currentEmpRetire}" wrapping="false" />
+								<m:Text text="{simulation>incumbentEmpRetirementIntention}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
 							width="11rem">
 							<m:Label text="{i18n>transferTimes}" />
 							<table:template>
-								<m:Text text="{transferTimes}" wrapping="false" />
+								<m:Text text="{simulation>candidateTransferTimes}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
 							width="11rem">
 							<m:Label text="{i18n>lastTransReason}" />
 							<table:template>
-								<m:Text text="{lastTransReason}" wrapping="false" />
+								<m:Text text="{simulation>candidateTransferReason}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
 							width="11rem">
 							<m:Label text="{i18n>certification}" />
 							<table:template>
-								<m:Text text="{certification}" wrapping="false" />
+								<m:Text text="{simulation>candidateCertification}" wrapping="false" />
 							</table:template>
 						</table:Column>
 					</table:columns>

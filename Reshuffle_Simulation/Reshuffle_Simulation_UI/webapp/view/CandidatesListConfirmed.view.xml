@@ -25,9 +25,8 @@
 							<fb:control>
 								<m:ComboBox id="slCaseId" 
 									required="true"
-                                    forceSelection="true" 
-									items="{ path: '/caseid' }">
-									<core:ListItem key="{status}" text="{name}" />
+									items="{ path: 'confirmation>/caseid' }">
+									<core:ListItem key="{confirmation>status}" text="{confirmation>name}" />
 								</m:ComboBox>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -35,8 +34,8 @@
 							<fb:control>
 								<m:Select id="slMailSent" 
 										forceSelection="true" 
-										items="{ path: '/mailSentFlag' }">
-									<core:ListItem key="{status}" text="{name}" />
+										items="{ path: 'confirmation>/mailSentFlag' }">
+									<core:ListItem key="{confirmation>status}" text="{confirmation>name}" />
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -46,9 +45,9 @@
 										forceSelection="true" 
 										showSecondaryValues= "true"
 										change="onSlCurrentDivisionChange" 
-										items="{ path: '/currentDivision' }"
+										items="{ path: 'confirmation>/currentDivision' }"
 										busy = "{view>/divisionBusy}" >
-									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}" />
+									<core:ListItem key="{confirmation>externalCode}" text="{confirmation>name}" additionalText="{confirmation>externalCode}" />
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -58,9 +57,9 @@
 										forceSelection="true" 
 										showSecondaryValues= "true"
 										change="onSlCurrentDepartmentChange"
-										items="{path: '/currentDepartment'}"
+										items="{path: 'confirmation>/currentDepartment'}"
 										busy = "{view>/departmentBusy}" >
-									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}"/>
+									<core:ListItem key="{confirmation>externalCode}" text="{confirmation>name}" additionalText="{confirmation>externalCode}"/>
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -69,9 +68,9 @@
 								<m:Select id="slPosition" 
 										forceSelection="true" 
 										showSecondaryValues= "true"
-										items="{ path: '/currentPosition' }"
+										items="{ path: 'confirmation>/currentPosition' }"
 										busy = "{view>/positionBusy}" >
-									<core:ListItem key="{code}" text="{name}" additionalText="{code}"/>
+									<core:ListItem key="{confirmation>code}" text="{confirmation>name}" additionalText="{confirmation>code}"/>
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -81,8 +80,8 @@
 										forceSelection="true" 
 										showSecondaryValues= "true"
 										change="onSlNextDivisionChange"
-										items="{ path: '/nextDivision' }">
-									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}" />
+										items="{ path: 'confirmation>/nextDivision' }">
+									<core:ListItem key="{confirmation>externalCode}" text="{confirmation>name}" additionalText="{confirmation>externalCode}" />
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -92,8 +91,8 @@
 										forceSelection="true" 
 										showSecondaryValues= "true"
 										change="onSlNextDepartmentChange"
-										items="{path: '/nextDepartment'}">
-									<core:ListItem key="{externalCode}" text="{name}" additionalText="{externalCode}" />
+										items="{path: 'confirmation>/nextDepartment'}">
+									<core:ListItem key="{confirmation>externalCode}" text="{confirmation>name}" additionalText="{confirmation>externalCode}" />
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
@@ -102,26 +101,26 @@
 								<m:Select id="slNextPosition" 
 										forceSelection="true" 
 										showSecondaryValues= "true"
-										items="{ path: '/nextPosition' }">
-									<core:ListItem key="{code}" text="{name}" additionalText="{code}" />
+										items="{ path: 'confirmation>/nextPosition' }">
+									<core:ListItem key="{confirmation>code}" text="{confirmation>name}" additionalText="{confirmation>code}" />
 								</m:Select>
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem groupName="Group1" name="H" label="{i18n>candidateID}" labelTooltip="{i18n>candidateID}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
 							<fb:control>
-								<m:Input id="candidateId" placeholder="CandidatesId ..." value="{/candidateId}" />
+								<m:Input id="candidateId" placeholder="CandidatesId ..." value="{confirmation>/candidateId}" />
 							</fb:control>
 						</fb:FilterGroupItem>
 						<fb:FilterGroupItem groupName="Group1" name="I" label="{i18n>candidateName}" labelTooltip="{i18n>candidateName}" mandatory="false" partOfCurrentVariant="true" visibleInFilterBar="true">
 							<fb:control>
-								<m:Input id="candidateName" placeholder="CandidatesName ..." value="{/candidateName}" />
+								<m:Input id="candidateName" placeholder="CandidatesName ..." value="{confirmation>/candidateName}" />
 							</fb:control>
 						</fb:FilterGroupItem>
 					</fb:filterGroupItems>				
 			    </fb:FilterBar>		
 				<table:Table
 					id="idCandidatesTable"
-					rows="{/list}"
+					rows="{confirmation>/confirmationList}"
 					rowHeight = "20"
 					selectionMode="MultiToggle"
 					enableCustomFilter="true"
@@ -132,10 +131,10 @@
 						<m:OverflowToolbar>
 							<m:Title id="title" text="{i18n>Candidates}"/>
 							<m:ToolbarSpacer/>
-							<m:Button id="workflow" type="Emphasized" text="{i18n>b_wf_start}" press="onWF" enabled="{= ${/status/status} === 'OK' ? true : false }" />
-							<m:Button id="export" type="Emphasized" text="{i18n>b_print_pdf}" press="onPDF" enabled="{= ${/status/status} === 'APPD' ? true : false }" />
-							<m:Button id="sendMail" type="Emphasized" text="{i18n>b_send_mail}" press="onPressSendMail" enabled="{= ${/status/status} === 'APPD' ? true : false }" />
-							<m:Button id="sfsf" type="Emphasized" text="{i18n>b_fix_sfsf}" press="onSendSFSF" enabled="{= ${/status/status} === 'APPD' ? true : false }" />
+							<m:Button id="workflow" type="Emphasized" text="{i18n>b_wf_start}" press="onWF" enabled="{buttonStatus>/enableWfButton}" />
+							<m:Button id="export" type="Emphasized" text="{i18n>b_print_pdf}" press="onPDF" enabled="{buttonStatus>/enablePDFButton}" />
+							<m:Button id="sendMail" type="Emphasized" text="{i18n>b_send_mail}" press="onPressSendMail" enabled="{buttonStatus>/enableSendMailButton}" />
+							<m:Button id="sfsf" type="Emphasized" text="{i18n>b_fix_sfsf}" press="onSendSFSF" enabled="{buttonStatus>/enableSendSFSFButton}" />
 						</m:OverflowToolbar>
 					</table:extension>
 					<table:columns>
@@ -144,7 +143,7 @@
 							width="8rem">
 							<m:Label text="{i18n>caseId}" />
 							<table:template>
-								<m:Text text="{caseID}" wrapping="false" />
+								<m:Text text="{confirmation>caseID}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
@@ -152,8 +151,8 @@
 							width="8rem">
 							<m:Label text="{i18n>mailSentFlg}" />
 							<table:template>
-								<m:ObjectStatus text="{ path: 'mailSentFlg', formatter: '.formatter.getSendMailFlagName'}" 
-								state="{ path: 'mailSentFlg', formatter: '.formatter.mailSentStatus' }"/>
+								<m:ObjectStatus text="{ path: 'confirmation>mailSentFlg', formatter: '.formatter.getSendMailFlagName'}" 
+								state="{ path: 'confirmation>mailSentFlg', formatter: '.formatter.mailSentStatus' }"/>
 							</table:template>
 						</table:Column>
 						<table:Column
@@ -161,8 +160,8 @@
 							width="8rem">
 							<m:Label text="{i18n>upsertFlg}" />
 							<table:template>
-								<m:ObjectStatus text="{ path: 'upsertFlg', formatter: '.formatter.getUpsertFlagName'}" 
-								state="{ path: 'upsertFlg', formatter: '.formatter.upsertStatus' }"/>
+								<m:ObjectStatus text="{ path: 'confirmation>upsertFlg', formatter: '.formatter.getUpsertFlagName'}" 
+								state="{ path: 'confirmation>upsertFlg', formatter: '.formatter.upsertStatus' }"/>
 							</table:template>
 						</table:Column>
 						<table:Column
@@ -170,7 +169,7 @@
 							width="11rem">
 							<m:Label text="{i18n>candidateID}" />
 							<table:template>
-								<m:ObjectIdentifier title="{candidateID}"/>
+								<m:ObjectIdentifier title="{confirmation>candidateID}"/>
 							</table:template>
 						</table:Column>
 						<table:Column
@@ -178,99 +177,99 @@
 							width="11rem">
 							<m:Label text="{i18n>candidateName}" />
 							<table:template>
-								<m:Text text="{candidateName}" wrapping="false" />
+								<m:Text text="{confirmation>candidateName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="currentDivision"
+							sortProperty="candidateDivisionID"
 							width="11rem">
 							<m:Label text="{i18n>currentDivision}" />
 							<table:template>
-								<m:Text text="{currentDivisionName}" wrapping="false" />
+								<m:Text text="{confirmation>candidateDivisionName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="currentDepartment"
+							sortProperty="candidateDepartmentID"
 							width="11rem">
 							<m:Label text="{i18n>currentDepartment}" />
 							<table:template>
-								<m:Text text="{currentDepartmentName}" wrapping="false" />
+								<m:Text text="{confirmation>candidateDepartmentName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="currentPosition"
+							sortProperty="candidatePositionID"
 							width="11rem">
 							<m:Label text="{i18n>currentPosition}" />
 							<table:template>
-								<m:Text text="{currentPositionName}" wrapping="false" />
+								<m:Text text="{confirmation>candidatePositionName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="currentJobGrade"
+							sortProperty="candidateJobGradeID"
 							width="11rem">
 							<m:Label text="{i18n>currentJobGrade}" />
 							<table:template>
-								<m:Text text="{currentJobGrade}" wrapping="false" />
+								<m:Text text="{confirmation>candidateJobGradeID}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="nextDivision"
+							sortProperty="divisionID"
 							width="11rem">
 							<m:Label text="{i18n>nextDivision}" />
 							<table:template>
-								<m:Text text="{nextDivisionName}" wrapping="false" />
+								<m:Text text="{confirmation>divisionName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="nextDepartment"
+							sortProperty="departmentID"
 							width="11rem">
 							<m:Label text="{i18n>nextDepartment}" />
 							<table:template>
-								<m:Text text="{nextDepartmentName}" wrapping="false" />
+								<m:Text text="{confirmation>departmentName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="nextPosition"
+							sortProperty="positionID"
 							width="11rem">
 							<m:Label text="{i18n>nextPosition}" />
 							<table:template>
-								<m:Text text="{nextPositionName}" wrapping="false" />
+								<m:Text text="{confirmation>positionName}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
-							sortProperty="nextJobGrade"
+							sortProperty="jobGradeID"
 							width="11rem">
 							<m:Label text="{i18n>nextJobGrade}" />
 							<table:template>
-								<m:Text text="{nextJobGrade}" wrapping="false" />
+								<m:Text text="{confirmation>jobGradeID}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
 							width="11rem">
 							<m:Label text="{i18n>currentEmpRetire}" />
 							<table:template>
-								<m:Text text="{currentEmpRetire}" wrapping="false" />
+								<m:Text text="{confirmation>incumbentEmpRetirementIntention}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
 							width="11rem">
 							<m:Label text="{i18n>transferTimes}" />
 							<table:template>
-								<m:Text text="{transferTimes}" wrapping="false" />
+								<m:Text text="{confirmation>candidateTransferTimes}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
 							width="11rem">
 							<m:Label text="{i18n>lastTransReason}" />
 							<table:template>
-								<m:Text text="{lastTransReason}" wrapping="false" />
+								<m:Text text="{confirmation>candidateTransferReason}" wrapping="false" />
 							</table:template>
 						</table:Column>
 						<table:Column
 							width="11rem">
 							<m:Label text="{i18n>certification}" />
 							<table:template>
-								<m:Text text="{certification}" wrapping="false" />
+								<m:Text text="{confirmation>candidateCertification}" wrapping="false" />
 							</table:template>
 						</table:Column>
 					</table:columns>

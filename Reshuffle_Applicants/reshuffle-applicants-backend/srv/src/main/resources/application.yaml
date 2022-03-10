@@ -1,0 +1,13 @@
+---
+spring:
+  config.activate.on-profile: default
+cds:
+  hana:
+    deploy-format: hdbtable
+
+---
+spring:
+  config.activate.on-profile: cloud
+cds:
+  hana:
+    deploy-format: hdbtable

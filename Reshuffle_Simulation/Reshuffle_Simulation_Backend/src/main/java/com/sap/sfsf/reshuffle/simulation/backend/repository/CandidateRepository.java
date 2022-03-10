@@ -14,16 +14,16 @@ import com.sap.sfsf.reshuffle.simulation.backend.model.CandidateId;
 public interface CandidateRepository extends CrudRepository<Candidate, CandidateId> {
 	List<Candidate> findAll();
 
-	@Query("select count(*) from Candidate c where c.checkStatus = 'NG'")
+	@Query("select count(*) from Candidate c where c.simulationCheckStatus = 'NG'")
 	long countNG();
 	
-	@Query("select count(*) from Candidate c where c.checkStatus = 'WARN'")
+	@Query("select count(*) from Candidate c where c.simulationCheckStatus = 'WARN'")
 	long countWARN();
 	
-	@Query(nativeQuery = true, value = "select top 1 * from Candidate c where c.CHECKDATETIME is not null")
+	@Query(nativeQuery = true, value = "select top 1 * from Candidate c where c.simulationCheckDatetime is not null")
 	Candidate findCheckedOne();
 	
-	@Query(nativeQuery = true, value = "select top 1 * from Candidate c where c.caseID = :caseID and c.CHECKDATETIME is not null")
+	@Query(nativeQuery = true, value = "select top 1 * from Candidate c where c.caseID = :caseID and c.simulationCheckDatetime is not null")
 	Candidate findCheckedOnebyCaseID(@Param(value="caseID")String caseID);
 
 	@Query("select c from Candidate c where c.candidateID in :list")
@@ -31,6 +31,9 @@ public interface CandidateRepository extends CrudRepository<Candidate, Candidate
 
 	@Query("select c from Candidate c where c.caseID in :caseID and c.candidateID in :candidateID")
 	Candidate findByCaseidAndCandidateidIn(@Param(value="caseID")String caseID, @Param(value="candidateID")String candidateID);
+
+	@Query("select c from Candidate c where c.caseID = :caseID and c.candidateID in :list")
+	List<Candidate> findByCaseidAndCandidateidsIn(@Param(value="caseID")String caseID, @Param(value="list")List<String> idList);
 
 	@Query("select c from Candidate c where c.caseID in :caseID")
 	List<Candidate> findByCaseid(@Param(value="caseID")String caseID);

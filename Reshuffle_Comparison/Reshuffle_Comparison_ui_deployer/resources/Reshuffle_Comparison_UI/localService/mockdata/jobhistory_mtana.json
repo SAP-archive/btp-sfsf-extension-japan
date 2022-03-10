@@ -1,0 +1,34 @@
+[{
+	"versionIdentifier": null,
+	"backgroundElementId": 56401,
+	"bgOrderPos": 2,
+	"department": "生産管理部",
+	"endDate": "/Date(1364688000000)/",
+	"lastModifiedDate": "/Date(1467690133000)/",
+	"startDate": "/Date(1301616000000)/",
+	"title": "生産管理チームリーダー",
+	"userId": "akuwa",
+	"userIdNav": null
+}, {
+	"versionIdentifier": null,
+	"backgroundElementId": 56402,
+	"bgOrderPos": 3,
+	"department": "生産管理部",
+	"endDate": "/Date(1427760000000)/",
+	"lastModifiedDate": "/Date(1467690133000)/",
+	"startDate": "/Date(1364774400000)/",
+	"title": "生産管理課長",
+	"userId": "akuwa",
+	"userIdNav": null
+}, {
+	"versionIdentifier": null,
+	"backgroundElementId": 56474,
+	"bgOrderPos": 1,
+	"department": null,
+	"endDate": "/Date(1301529600000)/",
+	"lastModifiedDate": "/Date(1467690133000)/",
+	"startDate": "/Date(978307200000)/",
+	"title": "生産管理エンジニア",
+	"userId": "akuwa",
+	"userIdNav": null
+}]

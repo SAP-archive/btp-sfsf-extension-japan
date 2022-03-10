@@ -4,15 +4,16 @@ sap.ui.define(function() {
 	var Formatter = {
 
 		checkState :  function (checkresult) {
-			if (checkresult === "OK") {
-				return "Success";
-			} else if (checkresult === "NG") {
-				return "Error";
-			} else if (checkresult === "WARN") {
-				return "Warning";
-			} else{
-				return "None";
-			}
+            switch(checkresult){
+                case "OK":
+					return "Success";
+                case "NG":
+                    return "Error";
+                case "WARN":
+                    return "Warning";
+                default:
+					return "None";            
+            }
 		},
 
 		checkProcessState :  function (checkresult) {
@@ -28,7 +29,7 @@ sap.ui.define(function() {
 		},		
 		getStatusName: function (statuscode) {
 			if(statuscode){
-				var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
+				var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 				switch (statuscode) {
 					case "OK":
 						return oResourceBundle.getText("Success");
@@ -50,7 +51,7 @@ sap.ui.define(function() {
 
 		getSendMailFlagName: function(mailSentFlg){
 			if(!mailSentFlg){
-				var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
+				var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 				return oResourceBundle.getText("sl_sendMail_unsent");
 				// return "未送信";
 			}else{
@@ -75,7 +76,7 @@ sap.ui.define(function() {
 		},
 		getUpsertFlagName: function(upsertFlg){
 			if(!upsertFlg){
-				var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
+				var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 				return oResourceBundle.getText("sl_upsert_unprocessed");
 			}else{
 				return upsertFlg;
@@ -92,7 +93,29 @@ sap.ui.define(function() {
 				default:
 					return "None";
 			}
-		}
+		},
+        activateWFButton : function(status){
+            switch(status){
+                case "OK":
+                    console.log("status is " + status);
+                    return true;
+                default: 
+                    return false;
+            }            
+        },
+
+        activatePdfButton : function (){
+            return true;
+
+        },
+        activateSendMailButton : function(){
+            return true;
+
+        },
+        activateSendSFSFButton : function(){
+            return true;
+            
+        }
 	};
 
 	return Formatter;

@@ -107,16 +107,16 @@ public class TestController {
 	public ResponseEntity<ByteArrayResource> testPDF() {
 		Candidate c = new Candidate();
 		c.setCandidateName("テスト社員");
-		c.setCurrentDepartmentName("テスト元課");
-		c.setCurrentDivisionName("テスト元部");
-		c.setNextDepartmentName("テスト先課");
-		c.setNextDivisionName("テスト先部");
+		c.setCandidateDepartmentName("テスト元課");
+		c.setCandidateDivisionName("テスト元部");
+		c.setDepartmentName("テスト先課");
+		c.setDivisionName("テスト先部");
 		Candidate c2 = new Candidate();
 		c2.setCandidateName("テスト社員2");
-		c2.setCurrentDepartmentName("テスト元課2");
-		c2.setCurrentDivisionName("テスト元部2");
-		c2.setNextDepartmentName("テスト先課2");
-		c2.setNextDivisionName("テスト先部2");
+		c2.setCandidateDepartmentName("テスト元課2");
+		c2.setCandidateDivisionName("テスト元部2");
+		c2.setDepartmentName("テスト先課2");
+		c2.setDivisionName("テスト先部2");
 		List<Candidate> list = new ArrayList<Candidate>();
 		list.add(c);
 		list.add(c2);

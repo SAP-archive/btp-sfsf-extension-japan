@@ -65,7 +65,7 @@ public class WorkflowService {
 		
 		//update cahdidate status OK=>WF
 		for (Candidate c : candidates) {
-			c.setCheckStatus("APPL");
+			c.setWfStatus("APPL");
 		}
 		candidateRepo.saveAll(candidates);
 
@@ -141,25 +141,25 @@ public class WorkflowService {
 		Map<String, ArrayList<Object>> nextManMap = new HashMap<String, ArrayList<Object>>();  
 
 		for (Candidate c : candidates) {
-			if(!curManMap.containsKey(c.getCurrentManager())) {
-				curManMap.put(c.getCurrentManager(), new ArrayList<Object>());
+			if(!curManMap.containsKey(c.getCandidateManagerID())) {
+				curManMap.put(c.getCandidateManagerID(), new ArrayList<Object>());
 			}
 			
 			Map<String, Object> cinfo1 = new HashMap<String, Object>();
 			cinfo1.put("id", c.getCandidateID());
 			cinfo1.put("name", c.getCandidateName());
-			cinfo1.put("nextPositionName", c.getNextPositionName());
-			(curManMap.get(c.getCurrentManager())).add(cinfo1);
+			cinfo1.put("nextPositionName", c.getPositionName());
+			(curManMap.get(c.getCandidateManagerID())).add(cinfo1);
 
-			if(!nextManMap.containsKey(c.getNextManager())) {
-				nextManMap.put(c.getNextManager(), new ArrayList<Object>());
+			if(!nextManMap.containsKey(c.getCandidateManagerID())) {
+				nextManMap.put(c.getCandidateManagerID(), new ArrayList<Object>());
 			}
 			
 			Map<String, Object> cinfo2 = new HashMap<String, Object>();
 			cinfo2.put("id", c.getCandidateID());
 			cinfo2.put("name", c.getCandidateName());
-			cinfo2.put("currentPositionName", c.getCurrentPositionName());
-			(nextManMap.get(c.getNextManager())).add(cinfo2);
+			cinfo2.put("currentPositionName", c.getCandidatePositionName());
+			(nextManMap.get(c.getCandidateManagerID())).add(cinfo2);
 		}
 		
 		// add array of candidates by distinct managers to the arrays of current and next managers

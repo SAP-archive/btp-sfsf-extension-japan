@@ -1,0 +1,184 @@
+<core:FragmentDefinition
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<l:VerticalLayout id="CurrentPositionEmployeeTableFilterVerticalLayout" width="100%">
+		<fb:FilterBar 
+			id="CurrentPositionEmployeeTableFilterFilterBar" 
+			header="{i18n>currentPositionEmployeeTableTitle}"
+			reset="onReset" search="onSearch" showRestoreButton="true" showClearButton="true">
+			<fb:filterGroupItems>
+			<fb:FilterGroupItem id="CurrentPiositionEmployeeTableFilterCompanyFilterGroupItem" 
+					groupName="CurrentPiositionEmployeeTableFilterGroup"
+					name="CurrentPiositionEmployeeTableFilterCompanyFilterName"
+					label="{i18n>currentPositionEmployeeTableCompanyFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="false"
+					visibleInFilterBar="false">
+					<fb:control>
+						<m:Select 
+							id="CurrentPiositionEmployeeTableFilterCompanyFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true" 
+							name="CompanySelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/companies',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="CurrentPiositionEmployeeTableFilterCompanyFilterListItem" key="{id}" text="{name}" additionalText="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem id="CurrentPiositionEmployeeTableFilterBusinessUnitFilterGroupItem" 
+					groupName="CurrentPiositionEmployeeTableFilterGroup"
+					name="CurrentPiositionEmployeeTableFilterGroupBusinessUnitFilterName"
+					label="{i18n>currentPositionEmployeeTableBusinessUnitFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="false"
+					visibleInFilterBar="false">
+					<fb:control>
+						<m:Select 
+							id="CurrentPiositionEmployeeTableFilterBusinessUnitFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true"
+							name="BusinessUnitSelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/businessunits',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="CurrentPiositionEmployeeTableFilterBusinessUnitFilterListItem" 
+								key="{id}" text="{name}" additionalText="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem id="CurrentPiositionEmployeeTableFilterDivisionFilterGroupItem" 
+					groupName="CurrentPiositionEmployeeTableFilterGroup"
+					name="CurrentPiositionEmployeeTableFilterGroupDivisionFilterName"
+					label="{i18n>currentPositionEmployeeTableDivisionFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="true"
+					visibleInFilterBar="true">
+					<fb:control>
+						<m:Select 
+							id="CurrentPiositionEmployeeTableFilterDivisionFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true" 
+							name="DivisionSelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/divisions',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="CurrentPiositionEmployeeTableFilterDivisionFilterListItem" 
+								key="{id}" text="{name}" additionalText="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem id="CurrentPiositionEmployeeTableFilterDepartmentFilterGroupItem" 
+					groupName="CurrentPiositionEmployeeTableFilterGroup"
+					name="CurrentPiositionEmployeeTableFilterGroupDepartmentFilterName"
+					label="{i18n>currentPositionEmployeeTableDepartmentFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="true"
+					visibleInFilterBar="true">
+					<fb:control>
+						<m:Select 
+							id="CurrentPiositionEmployeeTableFilterDepartmentFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true" 
+							name="DepartmentSelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/departments',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="CurrentPiositionEmployeeTableFilterDepartmentFilterListItem" 
+								key="{id}" text="{name}" additionalText="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem id="CurrentPiositionEmployeeTableFilterPositionFilterGroupItem" 
+					groupName="CurrentPiositionEmployeeTableFilterGroup"
+					name="CurrentPiositionEmployeeTableFilterGroupPositionFilterName"
+					label="{i18n>currentPositionEmployeeTablePositionFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="false"
+					visibleInFilterBar="true">
+					<fb:control>
+						<m:Select 
+							id="CurrentPiositionEmployeeTableFilterPositionFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true" 
+							name="PositionSelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/positions',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="CurrentPiositionEmployeeTableFilterPositionFilterListItem" 
+								key="{id}" text="{name}" additionalText="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem 
+					id="CurrentPiositionEmployeeTableFilterTenureLLFilterGroupItem" 
+					groupName="CurrentPiositionEmployeeTableFilterGroup" 
+					name="CurrentPiositionEmployeeTableFilterGroupTenureLLFilterName" 
+					label="{i18n>currentPositionEmployeeTableTenureLLFilterName}" 
+					mandatory="false" 
+					partOfCurrentVariant="true" 
+					visibleInFilterBar="false">
+					<fb:control>
+						<m:Input id="CurrentPiositionEmployeeTableFilterGroupTenureLLFilterInput" type="Number" class="sapUiSmallMarginBottom" width="4rem"/>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem 
+					id="CurrentPiositionEmployeeTableFilterTenureULFilterGroupItem" 
+					groupName="CurrentPiositionEmployeeTableFilterGroup" 
+					name="CurrentPiositionEmployeeTableFilterGroupTenureULFilterName" 
+					label="{i18n>currentPositionEmployeeTableTenureULFilterName}" 
+					mandatory="false" 
+					partOfCurrentVariant="true" 
+					visibleInFilterBar="false">
+					<fb:control>
+						<m:Input id="CurrentPiositionEmployeeTableFilterGroupTenureULFilterInput" type="Number" class="sapUiSmallMarginBottom" width="4rem"/>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem 
+					id="CurrentPiositionEmployeeTableFilterWillingnessFilterGroupItem" 
+					groupName="CurrentPiositionEmployeeTableFilterGroup" 
+					name="CurrentPiositionEmployeeTableFilterGroupWillingnessFilterName" 
+					label="{i18n>currentPositionEmployeeTableWillingnessFilterName}" 
+					mandatory="false" 
+					partOfCurrentVariant="true" 
+					visibleInFilterBar="false">
+					<fb:control>
+						<m:Select id="CurrentPiositionEmployeeTableFilterGroupWillingnessFilterSelect" forceSelection="true">
+							<core:Item id="CurrentPiositionEmployeeTableFilterGroupWillingnessFilterSelectAll" key="" text="ALL"/>
+							<core:Item id="CurrentPiositionEmployeeTableFilterGroupWillingnessFilterSelectYes" key="yes" text="yes"/>
+							<core:Item id="CurrentPiositionEmployeeTableFilterGroupWillingnessFilterSelectNo" key="no" text="no"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+			</fb:filterGroupItems>
+		</fb:FilterBar>
+	</l:VerticalLayout>
+</core:FragmentDefinition>

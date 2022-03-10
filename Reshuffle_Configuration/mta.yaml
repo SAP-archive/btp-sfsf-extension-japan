@@ -1,8 +1,7 @@
+_schema-version: "3.2"
 ID: Reshuffle_Configuration
-_schema-version: '2.1'
-parameters:
-  deploy_mode: html5-repo
 version: 0.0.1
+
 modules:
   - name: reshuffle-configuration-approuter
     type: approuter.nodejs
@@ -26,6 +25,8 @@ modules:
     path: Reshuffle_Configuration_Backend
     parameters:
       memory: 1024M 
+    properties:
+      DEST_NAME: SFSF
     provides:
       - name: Reshuffle_Configuration_Backend_api
         public: true
@@ -35,7 +36,7 @@ modules:
       build-result: 'target/*.jar'
     requires:
       - name: uaa_Reshuffle
-      - name: dest_Reshuffle_Configuration
+      - name: dest_Reshuffle
       - name: hdi_db
 
   - name: Reshuffle_Configuration_UI
@@ -67,19 +68,28 @@ resources:
       service-plan: app-runtime
       service: html5-apps-repo
     type: org.cloudfoundry.managed-service
+
   - name: Reshuffle_Configuration_html5_repo_host
     parameters:
       service-plan: app-host
       service: html5-apps-repo
     type: org.cloudfoundry.managed-service
-  - name: uaa_Reshuffle
+
+  - name: jobscheduler
     type: org.cloudfoundry.existing-service
-  - name: dest_Reshuffle_Configuration
+
+  - name: uaa_Reshuffle
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: application 
+      service: xsuaa 
+      path: ./xs-security.json
+
+  - name: dest_Reshuffle
+    type: org.cloudfoundry.managed-service
     parameters:
       service-plan: lite
       service: destination
-    type: org.cloudfoundry.managed-service
+
   - name: hdi_db
-    properties:
-      hdi-container-name: '${service-name}'
     type: org.cloudfoundry.existing-service

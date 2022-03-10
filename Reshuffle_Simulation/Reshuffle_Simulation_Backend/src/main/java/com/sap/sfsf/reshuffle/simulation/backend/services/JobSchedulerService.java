@@ -76,11 +76,14 @@ public class JobSchedulerService {
 	 * @return
 	 */
 	private MyJob getJob(String jobName) throws Exception {
-		String authCode = getAuthCode();
+
+		// String authCode = getAuthCode();
+        String accessToken = getAccessToken();
 		URI uri = new URI(getURL() + "?name=" + jobName);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.setBasicAuth(authCode);
+		headers.setBearerAuth(accessToken);
+		// headers.setBasicAuth(authCode);
 		HttpEntity entity = new HttpEntity(headers);
 		ResponseEntity<MyJob> response = new RestTemplate().exchange(uri, HttpMethod.GET, entity, MyJob.class);
 		MyJob job = response.getBody();
@@ -93,11 +96,11 @@ public class JobSchedulerService {
 	 * @param payload
 	 */
 	private void createJob(String payload) throws Exception {
-		String authCode = getAuthCode();
+        String accessToken = getAccessToken();
 		URI uri = new URI(getURL());
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.setBasicAuth(authCode);
+		headers.setBearerAuth(accessToken);
 		HttpEntity<String> entity = new HttpEntity<String>(payload, headers);
 		new RestTemplate().postForEntity(uri, entity, MyJob.class);
 
@@ -110,11 +113,11 @@ public class JobSchedulerService {
 	 * @param payload スケジュールJSONデータ
 	 */
 	private void createSchedule(Integer jobId, String payload) throws Exception {
-		String authCode = getAuthCode();
+        String accessToken = getAccessToken();
 		URI uri = new URI(getURL() + "/" + jobId + "/schedules");
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.setBasicAuth(authCode);
+		headers.setBearerAuth(accessToken);
 		HttpEntity<String> entity = new HttpEntity<String>(payload, headers);
 		String response = new RestTemplate().postForObject(uri, entity, String.class);
 		LOG.debug("Post schedule response:" + response);
@@ -126,14 +129,15 @@ public class JobSchedulerService {
 	 * @return
 	 */
 	private String getAuthCode() {
-		String user = arr.getJSONObject(0).getJSONObject("credentials").getString("user");
-		String password = arr.getJSONObject(0).getJSONObject("credentials").getString("password");
-		LOG.debug("user:" + user + ", password:" + password);
-		byte[] bytes = (user + ":" + password).getBytes();
+		String clientid = arr.getJSONObject(0).getJSONObject("credentials").getJSONObject("uaa").getString("clientid");
+		String clientsecret = arr.getJSONObject(0).getJSONObject("credentials").getJSONObject("uaa").getString("clientsecret");
+
+		byte[] bytes = (clientid + ":" + clientsecret).getBytes();
 		String encoded = Base64.getEncoder().encodeToString(bytes);
 		LOG.debug("base64 auth code:" + encoded);
 		return encoded;
-	}
+
+    }
 
 	/**
 	 * Job Scheduler APIのURLを取得
@@ -144,6 +148,30 @@ public class JobSchedulerService {
 	private String getURL() throws URISyntaxException {
 		String url = arr.getJSONObject(0).getJSONObject("credentials").getString("url");
 		return url + "/scheduler/jobs";
+	}
+
+
+	// get the URL to obtain a token
+	private String getAccessTokenURL() {
+		String url = arr.getJSONObject(0).getJSONObject("credentials").getJSONObject("uaa").getString("url");
+		return url + "/oauth/token?grant_type=client_credentials";
+	}
+
+	// get OAuth token using the urltaken from VCAP
+	private String getAccessToken()  throws URISyntaxException {
+		String authCode = getAuthCode();
+		URI uri = new URI(getAccessTokenURL());
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setBasicAuth(authCode);
+		HttpEntity<String> entity = new HttpEntity<String>(headers);
+		String response = new RestTemplate().postForObject(uri, entity, String.class);
+		
+		JSONObject objResponse = new JSONObject(response);
+		String accessToken = objResponse.getString("access_token");
+		LOG.debug("access token:" + accessToken);
+
+		return accessToken;
 	}
 
 }

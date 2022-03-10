@@ -7,6 +7,7 @@ public class CandidateId implements Serializable {
 
     private String caseID;
     private String candidateID;
+    private String positionID;
 
     public String getCandidateID() {
         return this.candidateID;
@@ -14,5 +15,9 @@ public class CandidateId implements Serializable {
     
     public String getCaseID() {
         return this.caseID;
+    }
+
+    public String getPositionID() {
+        return this.positionID;
     }
 }

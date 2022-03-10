@@ -12,405 +12,491 @@ import javax.persistence.Table;
 @Table(name = "CANDIDATE")
 @IdClass(CandidateId.class)
 public class Candidate {
+
+    @Id
+    @Column(name = "CASEID")
+    private String caseID;
+
+    @Id
+    @Column(name = "CANDIDATEID")
+    private String candidateID;
+
+    @Column(name = "CANDIDATENAME")
+    private String candidateName;
+
+    @Column(name = "CANDIDATEDIVISIONID")
+    private String candidateDivisionID;
+
+    @Column(name = "CANDIDATEDEPARTMENTID")
+    private String candidateDepartmentID;
+
+    @Column(name = "CANDIDATEPOSITIONID")
+    private String candidatePositionID;
+
+    @Column(name = "CANDIDATEDIVISIONNAME")
+    private String candidateDivisionName;
+
+    @Column(name = "CANDIDATEDEPARTMENTNAME")
+    private String candidateDepartmentName;
+    
+    @Column(name = "CANDIDATEPOSITIONNAME")
+    private String candidatePositionName;
+    
+    @Column(name = "CANDIDATEJOBGRADEID")
+    private String candidateJobGradeID;
+    
+    @Column(name = "CANDIDATEJOBGRADENAME")
+    private String candidateJobGradeName;
+    
+    @Column(name = "CANDIDATEJOBTENURE")
+    private Integer candidateJobTenure;
+    
+    @Column(name = "CANDIDATETRANSFERTIMES")
+    private Integer candidateTransferTimes;
+    
+    @Column(name = "CANDIDATELASTRATING1")
+    private String candidateLastRating1;
+    
+    @Column(name = "CANDIDATELASTRATING2")
+    private String candidateLastRating2;
+    
+    @Column(name = "CANDIDATELASTRATING3")
+    private String candidateLastRating3;
+    
+    @Column(name = "CANDIDATETRANSFERREASON")
+    private String candidateTransferReason;
+    
+    @Column(name = "CANDIDATECERTIFICATION")
+    private String candidateCertification;
+    
+    @Column(name = "DIVISIONID")
+    private String divisionID;
+    
+    @Column(name = "DEPARTMENTID")
+    private String departmentID;
     
     @Id
-	@Column(name = "CASEID")
-	private String caseID;
-	
-	@Id
-	@Column(name = "CANDIDATEID")
-	private String candidateID;
-
-	@Column(name = "CANDIDATENAME")
-	private String candidateName;
-
-	@Column(name = "CURRENTDEPARTMENT")
-	private String currentDepartment;
-
-	@Column(name = "CURRENTDIVISION")
-	private String currentDivision;
-
-    @Column(name = "CURRENTMANAGER")
-    private String currentManager;   
-
-	@Column(name = "CURRENTPOSITION")
-	private String currentPosition;
-
-	@Column(name = "NEXTDEPARTMENT")
-	private String nextDepartment;
-
-	@Column(name = "NEXTDIVISION")
-	private String nextDivision;
-
-    @Column(name = "NEXTMANAGER")
-    private String nextManager;   
-
-	@Column(name = "NEXTPOSITION")
-	private String nextPosition;
-	
-	@Column(name = "CURRENTDEPARTMENTNAME")
-	private String currentDepartmentName;
-
-	@Column(name = "CURRENTDIVISIONNAME")
-	private String currentDivisionName;
-
-	@Column(name = "CURRENTPOSITIONNAME")
-	private String currentPositionName;
-
-	@Column(name = "NEXTDEPARTMENTNAME")
-	private String nextDepartmentName;
-
-	@Column(name = "NEXTDIVISIONNAME")
-	private String nextDivisionName;
-
-	@Column(name = "NEXTPOSITIONNAME")
-	private String nextPositionName;
-
-	@Column(name = "TRANSFERTIMES")
-	private Integer transferTimes;
-
-	@Column(name = "LASTTRANSREASON")
-	private String lastTransReason;
-
-	@Column(name = "CERTIFICATION")
-	private String certification;
-	
-	@Column(name = "NEXTJOBGRADE")
-	private String nextJobGrade;
-	@Column(name = "NEXTJOBGRADENAME")
-	private String nextJobGradeName;
-	
-	@Column(name = "CURRENTJOBGRADE")
-	private String currentJobGrade;
-	@Column(name = "CURRENTJOBGRADENAME")
-	private String currentJobGradeName;
-	
-	@Column(name = "JOBTENURE")
-	private Integer jobTenure;
-	
-	@Column(name = "CURRENTEMPRETIRE")
-	private String currentEmpRetire;
-
-	@Column(name = "CHECKSTATUS")
-	private String checkStatus;
-
-	@Column(name = "CHECKRESULT")
-	private String checkResult;
-	
-	@Column(name = "CHECKDATETIME")
-	private Date checkDateTime;
-
-	@Column(name = "MAILSENTFLG")
-	private String mailSentFlg;
-
-	@Column(name = "MAILSENTAT")
-	private Date mailSentAt;
-
-	@Column(name = "upsertflg")
-	private String upsertFlg;
-	
-	@Column(name = "upsertat")
-	private Date upsertAt;
-	
-	@Column(name = "RATING1")
-	private String rating1;
-	@Column(name = "RATING2")
-	private String rating2;
-	@Column(name = "RATING3")
-	private String rating3;
-
-	public Candidate(){
-	}
-
-	public Candidate(String userId, String nextPosition){
-		this.candidateID = userId;
-		this.nextPosition = nextPosition;
-		this.checkResult = "";
-	}
-
-	public String getCaseID() {
-		return caseID;
-	}
-	
-	public String getCandidateID() {
-		return candidateID;
-	}
-
-	public String getCandidateName() {
-		return candidateName;
-	}
-
-	public String getCertification() {
-		return certification;
-	}
-
-	public Date getCheckDateTime() {
-		return checkDateTime;
-	}
-
-	public String getCheckResult() {
-		return checkResult;
-	}
-
-	public String getCheckStatus() {
-		return checkStatus;
-	}
-
-	public String getCurrentDepartment() {
-		return currentDepartment;
-	}
-
-	public String getCurrentDepartmentName() {
-		return currentDepartmentName;
-	}
-
-	public String getCurrentDivision() {
-		return currentDivision;
-	}
-
-	public String getCurrentDivisionName() {
-		return currentDivisionName;
-	}
-
-	public String getCurrentEmpRetire() {
-		return currentEmpRetire;
-	}
-
-	public String getCurrentJobGrade() {
-		return currentJobGrade;
-	}
-
-	public String getCurrentJobGradeName() {
-		return currentJobGradeName;
-	}
-
-	public String getCurrentManager() {
-		return currentManager;
-	}
-
-	public String getCurrentPosition() {
-		return currentPosition;
-	}
-
-	public String getCurrentPositionName() {
-		return currentPositionName;
-	}
-
-	public Integer getJobTenure() {
-		return jobTenure;
-	}
-
-	public String getLastTransReason() {
-		return lastTransReason;
-	}
-
-	public String getNextDepartment() {
-		return nextDepartment;
-	}
-
-	public String getNextDepartmentName() {
-		return nextDepartmentName;
-	}
-
-	public String getNextDivision() {
-		return nextDivision;
-	}
-
-	public String getNextDivisionName() {
-		return nextDivisionName;
-	}
-
-	public String getNextJobGrade() {
-		return nextJobGrade;
-	}
-
-	public String getNextJobGradeName() {
-		return nextJobGradeName;
-	}
-
-	public String getNextPosition() {
-		return nextPosition;
-	}
-
-	public String getNextManager() {
-		return nextManager;
-	}
-
-	public String getNextPositionName() {
-		return nextPositionName;
-	}
-
-	public Integer getTransferTimes() {
-		return transferTimes;
-	}
-
-	public void setCandidateID(String candidateID) {
-		this.candidateID = candidateID;
-	}
-
-	public void setCandidateName(String candidateName) {
-		this.candidateName = candidateName;
-	}
-
-	public void setCertification(String certification) {
-		this.certification = certification;
-	}
-
-	public void setCheckDateTime(Date checkDateTime) {
-		this.checkDateTime = checkDateTime;
-	}
-
-	public void setCheckResult(String checkResult) {
-		this.checkResult = checkResult;
-	}
-
-	public void setCheckStatus(String checkStatus) {
-		this.checkStatus = checkStatus;
-	}
-
-	public void setCurrentDepartment(String currentDepartment) {
-		this.currentDepartment = currentDepartment;
-	}
-
-	public void setCurrentDepartmentName(String currentDepartmentName) {
-		this.currentDepartmentName = currentDepartmentName;
-	}
-
-	public void setCurrentDivision(String currentDivision) {
-		this.currentDivision = currentDivision;
-	}
-
-	public void setCurrentDivisionName(String currentDivisionName) {
-		this.currentDivisionName = currentDivisionName;
-	}
-
-	public void setCurrentEmpRetire(String currentEmpRetire) {
-		this.currentEmpRetire = currentEmpRetire;
-	}
-
-	public void setCurrentJobGrade(String currentJobGrade) {
-		this.currentJobGrade = currentJobGrade;
-	}
-
-	public void setCurrentJobGradeName(String currentJobGradeName) {
-		this.currentJobGradeName = currentJobGradeName;
-	}
-
-	public void setCurrentManager(String currentManager) {
-		this.currentManager = currentManager;
-	}
-
-	public void setCurrentPosition(String currentPosition) {
-		this.currentPosition = currentPosition;
-	}
-
-	public void setCurrentPositionName(String currentPositionName) {
-		this.currentPositionName = currentPositionName;
-	}
-
-	public void setJobTenure(Integer jobTenure) {
-		this.jobTenure = jobTenure;
-	}
-
-	public void setLastTransReason(String lastTransReason) {
-		this.lastTransReason = lastTransReason;
-	}
-
-	public void setNextDepartment(String nextDepartment) {
-		this.nextDepartment = nextDepartment;
-	}
-
-	public void setNextDepartmentName(String nextDepartmentName) {
-		this.nextDepartmentName = nextDepartmentName;
-	}
-
-	public void setNextDivision(String nextDivision) {
-		this.nextDivision = nextDivision;
-	}
-
-	public void setNextDivisionName(String nextDivisionName) {
-		this.nextDivisionName = nextDivisionName;
-	}
-
-	public void setNextJobGrade(String nextJobGrade) {
-		this.nextJobGrade = nextJobGrade;
-	}
-
-	public void setNextJobGradeName(String nextJobGradeName) {
-		this.nextJobGradeName = nextJobGradeName;
-	}
-
-	public void setNextManager(String nextManager) {
-		this.nextManager = nextManager;
-	}
-
-	public void setNextPosition(String nextPosition) {
-		this.nextPosition = nextPosition;
-	}
-
-	public void setNextPositionName(String nextPositionName) {
-		this.nextPositionName = nextPositionName;
-	}
-
-	public void setTransferTimes(Integer transferTimes) {
-		this.transferTimes = transferTimes;
-	}
-
-	public String getMailSentFlg() {
-		return mailSentFlg;
-	}
-
-	public void setMailSentFlg(String mailSentFlg) {
-		this.mailSentFlg = mailSentFlg;
-	}
-
-	public Date getMailSentAt() {
-		return mailSentAt;
-	}
-
-	public void setMailSentAt(Date mailSentAt) {
-		this.mailSentAt = mailSentAt;
-	}
-
-	public String getRating1() {
-		return rating1;
-	}
-
-	public void setRating1(String rating1) {
-		this.rating1 = rating1;
-	}
-
-	public String getRating2() {
-		return rating2;
-	}
-
-	public void setRating2(String rating2) {
-		this.rating2 = rating2;
-	}
-
-	public String getRating3() {
-		return rating3;
-	}
-
-	public void setRating3(String rating3) {
-		this.rating3 = rating3;
-	}
-
-	public String getUpsertFlg() {
-		return upsertFlg;
-	}
-
-	public void setUpsertFlg(String upsertFlg) {
-		this.upsertFlg = upsertFlg;
-	}
-
-	public Date getUpsertAt() {
-		return upsertAt;
-	}
-
-	public void setUpsertAt(Date upsertAt) {
-		this.upsertAt = upsertAt;
-	}
+    @Column(name = "POSITIONID")
+    private String positionID;
+    
+    @Column(name = "DIVISIONNAME")
+    private String divisionName;
+    
+    @Column(name = "DEPARTMENTNAME")
+    private String departmentName;
+    
+    @Column(name = "POSITIONNAME")
+    private String positionName;
+    
+    @Column(name = "JOBGRADEID")
+    private String jobGradeID;
+    
+    @Column(name = "JOBGRADENAME")
+    private String jobGradeName;
+    
+    @Column(name = "INCUMBENTEMPID")
+    private String incumbentEmpID;
+    
+    @Column(name = "INCUMBENTEMPNAME")
+    private String incumbentEmpName;
+    
+    @Column(name = "INCUMBENTEMPRETIREMENTINTENTION")
+    private String incumbentEmpRetirementIntention;
+    
+    @Column(name = "INCUMBENTEMPMANAGER")
+    private String incumbentEmpManager;
+    
+    @Column(name = "CANDIDATEMANAGERID")
+    private String candidateManagerID;
+        
+    @Column(name = "SIMULATIONCHECKRESULT")
+    private String simulationCheckResult;
+    
+    @Column(name = "SIMULATIONCHECKSTATUS")
+    private String simulationCheckStatus;
+    
+    @Column(name = "SIMULATIONCHECKDATETIME")
+    private Date simulationCheckDatetime;
+    
+    @Column(name = "MAILSENTFLG")
+    private String mailSentFlg;
+    
+    @Column(name = "MAILSENTAT")
+    private Date mailSentAt;
+    
+    @Column(name = "SFUPSERTFLG")
+    private String sfUpsertFlg;
+    
+    @Column(name = "SFUPSERTAT")
+    private Date sfUpsertAt;
+    
+    @Column(name = "CREATEDAT")
+    private Date createdAt;
+    
+    @Column(name = "CREATEDBY")
+    private String createdBy;
+    
+    @Column(name = "MODIFIEDAT")
+    private Date modifiedAt;
+    
+    @Column(name = "MODIFIEDBY")
+    private String modifiedBy;
+    
+    @Column(name = "WFSTATUS")
+    private String wfStatus;
+
+    public Candidate() {
+    }
+
+    public Candidate(String userId, String nextPosition) {
+        this.candidateID = userId;
+        this.positionID = nextPosition;
+        this.simulationCheckResult = "";
+    }
+
+    public String getCaseID() {
+        return caseID;
+    }
+
+    public void setCaseID(String caseID) {
+        this.caseID = caseID;
+    }
+
+    public String getCandidateID() {
+        return candidateID;
+    }
+
+    public void setCandidateID(String candidateID) {
+        this.candidateID = candidateID;
+    }
+
+    public String getCandidateName() {
+        return candidateName;
+    }
+
+    public void setCandidateName(String candidateName) {
+        this.candidateName = candidateName;
+    }
+
+    public String getCandidateDivisionID() {
+        return candidateDivisionID;
+    }
+
+    public void setCandidateDivisionID(String candidateDivisionID) {
+        this.candidateDivisionID = candidateDivisionID;
+    }
+
+    public String getCandidateDepartmentID() {
+        return candidateDepartmentID;
+    }
+
+    public void setCandidateDepartmentID(String candidateDepartmentID) {
+        this.candidateDepartmentID = candidateDepartmentID;
+    }
+
+    public String getCandidatePositionID() {
+        return candidatePositionID;
+    }
+
+    public void setCandidatePositionID(String candidatePositionID) {
+        this.candidatePositionID = candidatePositionID;
+    }
+
+    public String getCandidateDivisionName() {
+        return candidateDivisionName;
+    }
+
+    public void setCandidateDivisionName(String candidateDivisionName) {
+        this.candidateDivisionName = candidateDivisionName;
+    }
+
+    public String getCandidateDepartmentName() {
+        return candidateDepartmentName;
+    }
+
+    public void setCandidateDepartmentName(String candidateDepartmentName) {
+        this.candidateDepartmentName = candidateDepartmentName;
+    }
+
+    public String getCandidatePositionName() {
+        return candidatePositionName;
+    }
+
+    public void setCandidatePositionName(String candidatePositionName) {
+        this.candidatePositionName = candidatePositionName;
+    }
+
+    public String getCandidateJobGradeID() {
+        return candidateJobGradeID;
+    }
+
+    public void setCandidateJobGradeID(String candidateJobGradeID) {
+        this.candidateJobGradeID = candidateJobGradeID;
+    }
+
+    public String getCandidateJobGradeName() {
+        return candidateJobGradeName;
+    }
+
+    public void setCandidateJobGradeName(String candidateJobGradeName) {
+        this.candidateJobGradeName = candidateJobGradeName;
+    }
+
+    public Integer getCandidateJobTenure() {
+        return candidateJobTenure;
+    }
+
+    public void setCandidateJobTenure(Integer candidateJobTenure) {
+        this.candidateJobTenure = candidateJobTenure;
+    }
+
+    public Integer getCandidateTransferTimes() {
+        return candidateTransferTimes;
+    }
+
+    public void setCandidateTransferTimes(Integer candidateTransferTimes) {
+        this.candidateTransferTimes = candidateTransferTimes;
+    }
+
+    public String getCandidateLastRating1() {
+        return candidateLastRating1;
+    }
+
+    public void setCandidateLastRating1(String candidateLastRating1) {
+        this.candidateLastRating1 = candidateLastRating1;
+    }
+
+    public String getCandidateLastRating2() {
+        return candidateLastRating2;
+    }
+
+    public void setCandidateLastRating2(String candidateLastRating2) {
+        this.candidateLastRating2 = candidateLastRating2;
+    }
+
+    public String getCandidateLastRating3() {
+        return candidateLastRating3;
+    }
+
+    public void setCandidateLastRating3(String candidateLastRating3) {
+        this.candidateLastRating3 = candidateLastRating3;
+    }
+
+    public String getCandidateTransferReason() {
+        return candidateTransferReason;
+    }
+
+    public void setCandidateTransferReason(String candidateTransferReason) {
+        this.candidateTransferReason = candidateTransferReason;
+    }
+
+    public String getCandidateCertification() {
+        return candidateCertification;
+    }
+
+    public void setCandidateCertification(String candidateCertification) {
+        this.candidateCertification = candidateCertification;
+    }
+
+    public String getDivisionID() {
+        return divisionID;
+    }
+
+    public void setDivisionID(String divisionID) {
+        this.divisionID = divisionID;
+    }
+
+    public String getDepartmentID() {
+        return departmentID;
+    }
+
+    public void setDepartmentID(String departmentID) {
+        this.departmentID = departmentID;
+    }
+
+    public String getPositionID() {
+        return positionID;
+    }
+
+    public void setPositionID(String positionID) {
+        this.positionID = positionID;
+    }
+
+    public String getDivisionName() {
+        return divisionName;
+    }
+
+    public void setDivisionName(String divisionName) {
+        this.divisionName = divisionName;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getPositionName() {
+        return positionName;
+    }
+
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
+    }
+
+    public String getJobGradeID() {
+        return jobGradeID;
+    }
+
+    public void setJobGradeID(String jobGradeID) {
+        this.jobGradeID = jobGradeID;
+    }
+
+    public String getJobGradeName() {
+        return jobGradeName;
+    }
+
+    public void setJobGradeName(String jobGradeName) {
+        this.jobGradeName = jobGradeName;
+    }
+
+    public String getIncumbentEmpID() {
+        return incumbentEmpID;
+    }
+
+    public void setIncumbentEmpID(String incumbentEmpID) {
+        this.incumbentEmpID = incumbentEmpID;
+    }
+
+    public String getIncumbentEmpName() {
+        return incumbentEmpName;
+    }
+
+    public void setIncumbentEmpName(String incumbentEmpName) {
+        this.incumbentEmpName = incumbentEmpName;
+    }
+
+    public String getIncumbentEmpRetirementIntention() {
+        return incumbentEmpRetirementIntention;
+    }
+
+    public void setIncumbentEmpRetirementIntention(String incumbentEmpRetirementIntention) {
+        this.incumbentEmpRetirementIntention = incumbentEmpRetirementIntention;
+    }
+
+    public String getIncumbentEmpManager() {
+        return incumbentEmpManager;
+    }
+
+    public void setIncumbentEmpManager(String incumbentEmpManager) {
+        this.incumbentEmpManager = incumbentEmpManager;
+    }
+
+    public String getCandidateManagerID() {
+        return candidateManagerID;
+    }
+
+    public void setCandidateManagerID(String candidateManagerID) {
+        this.candidateManagerID = candidateManagerID;
+    }
+
+    public String getSimulationCheckResult() {
+        return simulationCheckResult;
+    }
+
+    public void setSimulationCheckResult(String simulationCheckResult) {
+        this.simulationCheckResult = simulationCheckResult;
+    }
+
+    public String getSimulationCheckStatus() {
+        return simulationCheckStatus;
+    }
+
+    public void setSimulationCheckStatus(String simulationCheckStatus) {
+        this.simulationCheckStatus = simulationCheckStatus;
+    }
+
+    public Date getSimulationCheckDatetime() {
+        return simulationCheckDatetime;
+    }
+
+    public void setSimulationCheckDatetime(Date simulationCheckDatetime) {
+        this.simulationCheckDatetime = simulationCheckDatetime;
+    }
+
+    public String getMailSentFlg() {
+        return mailSentFlg;
+    }
+
+    public void setMailSentFlg(String mailSentFlg) {
+        this.mailSentFlg = mailSentFlg;
+    }
+
+    public Date getMailSentAt() {
+        return mailSentAt;
+    }
+
+    public void setMailSentAt(Date mailSentAt) {
+        this.mailSentAt = mailSentAt;
+    }
+
+    public String getSfUpsertFlg() {
+        return sfUpsertFlg;
+    }
+
+    public void setSfUpsertFlg(String sfUpsertFlg) {
+        this.sfUpsertFlg = sfUpsertFlg;
+    }
+
+    public Date getSfUpsertAt() {
+        return sfUpsertAt;
+    }
+
+    public void setSfUpsertAt(Date sfUpsertAt) {
+        this.sfUpsertAt = sfUpsertAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public void setModifiedAt(Date modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
+
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+
+    public String getWfStatus() {
+        return wfStatus;
+    }
+
+    public void setWfStatus(String wfStatus) {
+        this.wfStatus = wfStatus;
+    }
 
 
 }

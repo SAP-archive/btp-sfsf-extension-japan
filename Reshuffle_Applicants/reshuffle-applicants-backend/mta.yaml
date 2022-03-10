@@ -1,0 +1,51 @@
+## Generated mta.yaml based on template version 0.4.0
+## appName = backend
+## language=java; multitenant=false
+## approuter=
+_schema-version: "3.1"
+ID: backend
+version: 1.0.0-SNAPSHOT
+description: "backend application"
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install --production
+        - npx -p @sap/cds-dk cds build --production
+
+modules:
+  # --------------------- SERVER MODULE ------------------------
+  - name: backend-srv
+    # ------------------------------------------------------------
+    type: java
+    path: srv
+    parameters:
+      buildpack: java_buildpack
+    properties:
+      SPRING_PROFILES_ACTIVE: cloud
+    build-parameters:
+      builder: custom
+      commands: [mvn clean package]
+      build-result: "target/*-exec.[wj]ar"
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: destination_kyoneo
+      - name: hdi_db_kyoneo
+
+
+resources:
+  - name: hdi_db_kyoneo
+    properties:
+      hdi-container-name: ${service-name}
+    type: org.cloudfoundry.managed-service
+  - name: destination_kyoneo
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: lite
+      service: destination

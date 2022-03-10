@@ -67,12 +67,12 @@ public class PDFService {
 			"</page>";
 			pages.append(String.format(page,
 				previewDate,
-				c.getCurrentDivisionName(),
-				c.getCurrentDepartmentName(),
+				c.getCandidateDivisionName(),
+				c.getCandidateDepartmentName(),
 				c.getCandidateName(),
 				orderDate,
-				c.getNextDivisionName(),
-				c.getNextDepartmentName())
+				c.getDivisionName(),
+				c.getDepartmentName())
 			);
 		}
 		form = String.format(form, pages.toString());

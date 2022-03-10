@@ -1,18 +1,26 @@
 {
-        "welcomeFile": "/comsapsfsfapplicants/index.html",
-                "authenticationMethod": "route",
-                "routes": [
-                {
-                        "source": "/srv_api/(.*)$",
-                        "target": "$1",
-                        "authenticationType": "xsuaa",
-                        "destination": "srv_api",
-                        "csrfProtection": false
-                },{
-                        "source": "/config_api/(.*)$",
-                        "target": "$1",
-                        "authenticationType": "xsuaa",
-                        "destination": "config_api"
-                }
-                ]
+  "welcomeFile": "/comsapsfsfreshuffleapplicants/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "/odata/(.*)$",
+      "target": "/odata/$1",
+      "authenticationType": "xsuaa",
+      "destination": "srv_api",
+      "csrfProtection": false
+    },
+    {
+      "source": "/api/(.*)$",
+      "target": "/api/$1",
+      "authenticationType": "xsuaa",
+      "destination": "srv_api",
+      "csrfProtection": false
+    },
+    {
+      "source": "/reshuffle-configuration/(.*)$",
+      "target": "$1",
+      "authenticationType": "xsuaa",
+      "destination": "config_api"
+    }
+  ]
 }

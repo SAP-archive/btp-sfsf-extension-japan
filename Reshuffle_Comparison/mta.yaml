@@ -1,8 +1,7 @@
+_schema-version: "3.2"
 ID: Reshuffle_Comparison
-_schema-version: '2.1'
-parameters:
-  deploy_mode: html5-repo
 version: 0.0.1
+
 modules:
   - name: reshuffle-comparison-approuter
     type: approuter.nodejs
@@ -55,15 +54,19 @@ modules:
     path: Reshuffle_Comparison_Backend
     parameters:
       memory: 1024M
+    properties:
+      DEST_NAME: SFSF
+      ODATA_SERVICE_PATH: odata/v2
     provides:
       - name: Reshuffle_Comparison_Backend_api
         properties:
           url: '${default-url}'
     build-parameters:
       build-result: 'target/*.jar'
+      timeout: 30m
     requires:
       - name: hdi_db
-      - name: dest_Reshuffle_Comparison
+      - name: dest_Reshuffle
       - name: uaa_Reshuffle
 
 resources:
@@ -80,21 +83,12 @@ resources:
     type: org.cloudfoundry.managed-service
 
   - name: uaa_Reshuffle
-    # parameters:
-    #   path: ./xs-security.json
-    #   service-plan: application
-    #   service: xsuaa
     type: org.cloudfoundry.existing-service
 
-  - name: dest_Reshuffle_Comparison
-    parameters:
-      service-plan: lite
-      service: destination
-    type: org.cloudfoundry.managed-service
+  - name: dest_Reshuffle
+    type: org.cloudfoundry.existing-service
 
   - name: hdi_db
-    properties:
-      hdi-container-name: '${service-name}'
     type: org.cloudfoundry.existing-service
 
   - name: Reshuffle_Configuration_Backend

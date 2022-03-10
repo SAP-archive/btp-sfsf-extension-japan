@@ -1,0 +1,155 @@
+<core:FragmentDefinition
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<l:VerticalLayout id="NextPositionTableFilterVerticalLayout" width="100%">
+		<fb:FilterBar 
+			id="NextPositionTableFilterFilterBar" 
+			header="{i18n>nextPositionTableTitle}"
+			reset="onReset" search="onSearch" showRestoreButton="true" showClearButton="true">
+			<fb:filterGroupItems>
+				<fb:FilterGroupItem id="NextPositionTableFilterCompanyFilterGroupItem" 
+					groupName="NextPositionTableFilterGroup"
+					name="NextPositionTableFilterCompanyFilterName"
+					label="{i18n>nextPositionTableCompanyFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="false"
+					visibleInFilterBar="false">
+					<fb:control>
+						<m:Select 
+							id="NextPositionTableFilterCompanyFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true" 
+							name="CompanySelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/companies',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="NextPositionTableFilterCompanyFilterListItem" key="{id}" text="{name}" additionalText="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem id="NextPositionTableFilterBusinessUnitFilterGroupItem" 
+					groupName="NextPositionTableFilterGroup"
+					name="NextPositionTableFilterBusinessUnitFilterName"
+					label="{i18n>nextPositionTableBusinessUnitFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="false"
+					visibleInFilterBar="false">
+					<fb:control>
+						<m:Select 
+							id="NextPositionTableFilterBusinessUnitFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true" 
+							name="BusinessUnitSelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/businessunits',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="NextPositionTableFilterBusinessUnitFilterListItem" key="{id}" text="{name}" additionalText="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem id="NextPositionTableFilterDivisionFilterGroupItem" 
+					groupName="NextPositionTableFilterGroup"
+					name="NextPositionTableFilterDivisionFilterName"
+					label="{i18n>nextPositionTableDivisionFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="true"
+					visibleInFilterBar="true">
+					<fb:control>
+						<m:Select 
+							id="NextPositionTableFilterDivisionFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true" 
+							name="DivisionSelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/divisions',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="NextPositionTableFilterDivisionFilterListItem" key="{id}" text="{name}" additionalText="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem id="NextPositionTableFilterDepartmentFilterGroupItem" 
+					groupName="NextPositionTableFilterGroup"
+					name="NextPositionTableFilterDepartmentFilterName"
+					label="{i18n>nextPositionTableDepartmentFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="true"
+					visibleInFilterBar="true">
+					<fb:control>
+						<m:Select 
+							id="NextPositionTableFilterDepartmentFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true" 
+							name="DepartmentSelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/departments',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="NextPositionTableFilterDepartmentFilterListItem" key="{id}" text="{name}" additionalText="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem id="NextPositionTableFilterPositionFilterGroupItem" 
+					groupName="NextPositionTableFilterGroup"
+					name="NextPositionTableFilterPositionFilterName"
+					label="{i18n>nextPositionTablePositionFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="false"
+					visibleInFilterBar="true">
+					<fb:control>
+						<m:Select 
+							id="NextPositionTableFilterPositionFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true" 
+							name="PositionSelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/positions',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="NextPositionTableFilterPositionFilterListItem" key="{id}" text="{name}" additionalText="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem id="NextPositionTableFilterRetireFilterGroupItem" 
+					groupName="NextPositionTableFilterGroup"
+					name="NextPositionTableFilterRetireFilterName"
+					label="{i18n>nextPositionTableRetireFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="false"
+					visibleInFilterBar="true">
+					<fb:control>
+						<m:Select 
+							id="NextPositionTableFilterRetireFilterSelect"
+							forceSelection="true"
+							name="RetireSelector">
+							<core:Item id="NextPositionTableFilterRetireFilterALL" key="" text="ALL"/>
+							<core:Item id="NextPositionTableFilterRetireFilterYes" key="yes" text="yes"/>
+							<core:Item id="NextPositionTableFilterRetireFilterNo" key="no" text="no"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+			</fb:filterGroupItems>
+		</fb:FilterBar>
+	</l:VerticalLayout>
+</core:FragmentDefinition>

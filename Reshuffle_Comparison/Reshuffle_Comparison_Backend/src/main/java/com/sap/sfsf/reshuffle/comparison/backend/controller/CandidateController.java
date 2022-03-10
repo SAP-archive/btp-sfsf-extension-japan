@@ -5,12 +5,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sap.sfsf.reshuffle.comparison.backend.model.Candidate;
-import com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.CurrentDepartment;
-import com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.CurrentDivision;
-import com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.CurrentPosition;
-import com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.NextDepartment;
-import com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.NextDivision;
-import com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.NextPosition;
+import com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.*;
 import com.sap.sfsf.reshuffle.comparison.backend.service.CandidateService;
 
 import org.slf4j.Logger;
@@ -34,6 +29,7 @@ public class CandidateController {
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     String getCandidates() {
+        logger.info("/candidates is called.");
         List<Candidate> candidates = candidateService.findAll();
         Gson gson = new GsonBuilder().serializeNulls().create();
         
@@ -43,6 +39,7 @@ public class CandidateController {
     @GetMapping(value = "/{candidateid:.{1,1024}}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     String getCandidatesByCandidateId(@PathVariable String candidateid) {
+        logger.info("/{candidateId} is called.");
         List<Candidate> candidates = candidateService.findByCandidateid(candidateid);
         Gson gson = new GsonBuilder().serializeNulls().create();
 
@@ -52,63 +49,70 @@ public class CandidateController {
     @GetMapping(value = "/caseids", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     String getCandidateCaseids() {
+        logger.info("/caseids is called.");
         List<String> caseIds = candidateService.findDistinctCaseIds();
         Gson gson = new GsonBuilder().serializeNulls().create();
 
         return gson.toJson(caseIds);
     }
 
-    @GetMapping(value = "/currentdivisions", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/candidatedivisions", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    String getCandidateCurrentDivisions() {
-        List<CurrentDivision> currentDivisions = candidateService.findDistinctCurrentDivisions();
+    String getCandidateDivisions() {
+        logger.info("/candidatedivisions is called.");
+        List<CandidateDivision> candidateDivisions = candidateService.findDistinctCandidateDivisions();
         Gson gson = new GsonBuilder().serializeNulls().create();
 
-        return gson.toJson(currentDivisions);
+        return gson.toJson(candidateDivisions);
     }
 
-    @GetMapping(value = "/currentdepartments", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/candidatedepartments", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    String getCandidateCurrentDepartments() {
-        List<CurrentDepartment> currentDepartments = candidateService.findDistinctCurrentDepartments();
+    String getCandidateDepartments() {
+        logger.info("/candidatedepartments is called.");
+        List<CandidateDepartment> candidateDepartments = candidateService.findDistinctCandidateDepartments();
         Gson gson = new GsonBuilder().serializeNulls().create();
 
-        return gson.toJson(currentDepartments);
+        return gson.toJson(candidateDepartments);
     }
 
-    @GetMapping(value = "/currentpositions", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/candidatepositions", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    String getCandidateCurrentPositions() {
-        List<CurrentPosition> currentPositions = candidateService.findDistinctCurrentPositions();
+    String getCandidatePositions() {
+        logger.info("/candidatepositions is called.");
+        List<CandidatePosition> candidatePositions = candidateService.findDistinctCandidatePositions();
         Gson gson = new GsonBuilder().serializeNulls().create();
 
-        return gson.toJson(currentPositions);
+        return gson.toJson(candidatePositions);
     }
 
-    @GetMapping(value = "/nextdivisions", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/departments", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    String getCandidateNextDivisions() {
-        List<NextDivision> nextDivisions = candidateService.findDistinctNextDivisions();
+    String getDepartments() {
+        logger.info("/departments is called.");
+        List<Department> departments = candidateService.findDistinctDepartments();
         Gson gson = new GsonBuilder().serializeNulls().create();
 
-        return gson.toJson(nextDivisions);
+        return gson.toJson(departments);
     }
 
-    @GetMapping(value = "/nextdepartments", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/divisions", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    String getCandidateNextDepartments() {
-        List<NextDepartment> nextDepartments = candidateService.findDistinctNextDepartments();
+    String getDivisions() {
+        logger.info("/divisions is called.");
+        List<Division> divisions = candidateService.findDistinctDivisions();
         Gson gson = new GsonBuilder().serializeNulls().create();
 
-        return gson.toJson(nextDepartments);
+        return gson.toJson(divisions);
     }
 
-    @GetMapping(value = "/nextpositions", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/positions", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    String getCandidateNextPositions() {
-        List<NextPosition> nextPositions = candidateService.findDistinctNextPositions();
+    String getPositions() {
+        logger.info("/positions is called.");
+        List<Position> positions = candidateService.findDistinctPositions();
         Gson gson = new GsonBuilder().serializeNulls().create();
 
-        return gson.toJson(nextPositions);
+        return gson.toJson(positions);
     }
 }

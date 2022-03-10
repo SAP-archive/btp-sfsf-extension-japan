@@ -1,29 +1,12 @@
 package com.sap.sfsf.reshuffle.simulation.backend.services;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import com.sap.sfsf.reshuffle.simulation.backend.config.PlaceholderConfig;
+import com.sap.sfsf.reshuffle.simulation.backend.model.Candidate;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import org.springframework.web.client.RestTemplate;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataQuery;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
-import com.sap.sfsf.reshuffle.simulation.backend.model.Candidate;
-import com.sap.sfsf.reshuffle.simulation.backend.services.CandidateService;
-import com.sap.sfsf.reshuffle.simulation.backend.services.ConfigService;
-import com.sap.sfsf.reshuffle.simulation.backend.config.PlaceholderConfig;
 
 @Service
 public class MailBodyService {
@@ -72,14 +55,14 @@ public class MailBodyService {
 		String[] candidateParamValues = {
 				candidateFromDB.getCandidateID(),
 				candidateFromDB.getCandidateName(),
-				candidateFromDB.getCurrentDivision(),
-				candidateFromDB.getCurrentDepartmentName(),
-				candidateFromDB.getCurrentPositionName(),
-				candidateFromDB.getCurrentJobGradeName(),
-				candidateFromDB.getNextDivisionName(),
-				candidateFromDB.getNextDepartmentName(),
-				candidateFromDB.getNextPositionName(),
-				candidateFromDB.getNextJobGradeName()
+				candidateFromDB.getCandidateDivisionID(),
+				candidateFromDB.getCandidateDepartmentName(),
+				candidateFromDB.getCandidatePositionName(),
+				candidateFromDB.getCandidateJobGradeName(),
+				candidateFromDB.getDivisionName(),
+				candidateFromDB.getDepartmentName(),
+				candidateFromDB.getPositionName(),
+				candidateFromDB.getJobGradeName()
 		};
 	
 		return candidateParamValues;

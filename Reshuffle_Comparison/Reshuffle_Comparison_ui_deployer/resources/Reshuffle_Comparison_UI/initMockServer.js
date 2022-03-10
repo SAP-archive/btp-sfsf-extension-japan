@@ -1,0 +1,1 @@
+sap.ui.define(["com/sap/sfsf/comparison/Reshuffle_Comparison_UI/localService/mockserver"],function(e,i){"use strict";e.init();sap.ui.require(["sap/ui/core/ComponentSupport"])});

@@ -106,7 +106,7 @@ public class HelloController {
 			//@formatter:off
 			return "{" +
 			"\"status\":\""+ status + "\","+
-			"\"checkedDateTime\":\"" +  DateTimeUtil.formatDateTokyo(candidate.getCheckDateTime())+"\","+
+			"\"checkedDateTime\":\"" +  DateTimeUtil.formatDateTokyo(candidate.getSimulationCheckDatetime())+"\","+
 			"\"TOTAL\":\"" + list.size() + "\","+
 			"\"NG\":\"" + ngCnt + "\","+
 			"\"WARN\":\"" + warnCnt + "\","+

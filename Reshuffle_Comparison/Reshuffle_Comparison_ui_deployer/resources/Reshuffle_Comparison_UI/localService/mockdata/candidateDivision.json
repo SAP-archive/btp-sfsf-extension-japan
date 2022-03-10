@@ -1,0 +1,10 @@
+[{
+	"candidateDivision": "EXEC",
+	"candidateDivisionName": "社長室"
+}, {
+	"candidateDivision": "DIR_SALES",
+	"candidateDivisionName": "営業本部"
+}, {
+	"candidateDivision": "MANU",
+	"candidateDivisionName": "生産本部"
+}]

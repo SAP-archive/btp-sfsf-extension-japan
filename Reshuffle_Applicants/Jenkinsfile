@@ -1,0 +1,74 @@
+@Library('piper-lib-os') _
+
+def mtarFilePath = ''
+
+pipeline {
+    agent any
+    stages {
+        stage('init') {
+            steps {
+		deleteDir()
+                checkout scm
+                setupCommonPipelineEnvironment script: this
+            }
+        }
+        stage('build') {
+            steps {
+                pipelineStashFiles(script: this) {
+				    mtaBuild script: this
+                    script {
+                        mtarFilePath = commonPipelineEnvironment.getMtarFilePath()
+                        echo "mtarFilePath: ${mtarFilePath}"
+                    }
+                }
+            }
+        }
+        // stage('integration test') {
+        //     steps {
+        //         mavenExecuteIntegration script: this
+        //     }
+        // }
+        // stage('deploy') {
+        //     when {
+        //         branch 'develop'
+        //     }
+        //     steps {
+        //         cloudFoundryDeploy script: this
+        //     }
+        // }
+        stage('cofirm') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                input 'Shall we proceed to next?'
+            }
+        }
+        stage('transport') {
+            when {
+                 branch 'develop'
+            }
+            steps {
+                tmsUpload script: this,
+                    nodeName: 'dev',
+                    credentialsId: 'tms-sk-json',
+                    mtaPath: mtarFilePath,
+		    customDescription: "${env.JOB_NAME}-${env.BUILD_ID}",
+                    verbose: true
+            }
+        }
+    }
+
+    post {
+        success {
+            mail to: '<your-email>',
+                 subject: "Successful Pipeline: ${currentBuild.fullDisplayName}",
+                 body: "Succesfully executing: \n- build_id: ${env.BUILD_ID}\n- build_no: ${env.BUILD_NUMBER}\n- job_name: ${env.JOB_NAME}\n- url:\n${env.BUILD_URL}"
+        }
+        failure {
+            mail to: '<your-email>',
+                 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                 body: "Something is wrong with: \n- build_id: ${env.BUILD_ID}\n- build_no: ${env.BUILD_NUMBER}\n- job_name: ${env.JOB_NAME}\n- url:\n${env.BUILD_URL}"
+        }
+    }
+}

@@ -1,0 +1,14 @@
+---
+  applications:
+    - name: backend-service-kyoneo-mock
+      path: srv/target/backend-exec.jar
+      route: dbs-japan-shared-dev-demo-backend-service-kyoneo-mock.cfapps.jp10.hana.ondemand.com
+      buildpacks:
+        - sap_java_buildpack
+      env:
+        TARGET_RUNTIME: tomcat
+        SET_LOGGING_LEVEL: '{ROOT: DEBUG, com.sap.cloud.sdk: DEBUG}'
+        SPRING_PROFILES_ACTIVE: 'cloud'
+  services:
+    - destination_kyoneo
+    - hdi_db

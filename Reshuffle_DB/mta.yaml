@@ -1,5 +1,5 @@
 ID: Reshuffle_DB
-_schema-version: '2.1'
+_schema-version: "3.2" 
 version: 0.0.1
 
 modules:
@@ -11,6 +11,10 @@ modules:
 
 resources:
  - name: hdi_db
+   type: com.sap.xs.hdi-container
    properties:
      hdi-container-name: ${service-name}
-   type: com.sap.xs.hdi-container
+   parameters:
+     config:
+       database_id: 2c35fbb2-9aa5-4cbf-b696-94c343635a27
+

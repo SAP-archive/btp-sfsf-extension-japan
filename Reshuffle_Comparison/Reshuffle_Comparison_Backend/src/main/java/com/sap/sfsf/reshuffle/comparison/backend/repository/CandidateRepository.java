@@ -23,28 +23,28 @@ public interface CandidateRepository extends CrudRepository<Candidate, Candidate
 	List<String> findDistinctCaseIds();
 
     @Nullable
-    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.CurrentDivision(c.currentDivision, c.currentDivisionName) from Candidate c")
-    List<CurrentDivision> findDistinctCurrentDivisions();
+    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.CandidateDivision(c.candidateDivisionID, c.candidateDivisionName) from Candidate c")
+    List<CandidateDivision> findDistinctCandidateDivisions();
 
     @Nullable
-    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.CurrentDepartment(c.currentDepartment, c.currentDepartmentName) from Candidate c")
-    List<CurrentDepartment> findDistinctCurrentDepartments();
+    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.CandidateDepartment(c.candidateDepartmentID, c.candidateDepartmentName) from Candidate c")
+    List<CandidateDepartment> findDistinctCandidateDepartments();
 
     @Nullable
-    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.CurrentPosition(c.currentPosition, c.currentPositionName) from Candidate c")
-    List<CurrentPosition> findDistinctCurrentPositions();
+    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.CandidatePosition(c.candidatePositionID, c.candidatePositionName) from Candidate c")
+    List<CandidatePosition> findDistinctCandidatePositions();
 
     @Nullable
-    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.NextDivision(c.nextDivision, c.nextDivisionName) from Candidate c")
-    List<NextDivision> findDistinctNextDivisions();
+    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.Division(c.divisionID, c.divisionName) from Candidate c")
+    List<Division> findDistinctDivisions();
 
     @Nullable
-    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.NextDepartment(c.nextDepartment, c.nextDepartmentName) from Candidate c")
-    List<NextDepartment> findDistinctNextDepartments();
+    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.Department(c.departmentID, c.departmentName) from Candidate c")
+    List<Department> findDistinctDepartments();
 
     @Nullable
-    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.NextPosition(c.nextPosition, c.nextPositionName) from Candidate c")
-    List<NextPosition> findDistinctNextPositions();
+    @Query("select distinct new com.sap.sfsf.reshuffle.comparison.backend.model.candidateDto.Position(c.positionID, c.positionName) from Candidate c")
+    List<Position> findDistinctPositions();
 
     @Nullable
 	@Query("select c from Candidate c where c.caseID in :caseID")

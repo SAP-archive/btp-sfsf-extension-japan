@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<l:VerticalLayout id="EditCaseTableFilterVerticalLayout" width="100%">
+		<fb:FilterBar 
+			id="EditCaseTableFilterFilterBar" 
+			header="{i18n>EditCaseTableTitle}"
+			reset="onReset" search="onSearch" showRestoreButton="true" showClearButton="true">
+			<fb:filterGroupItems>
+				<fb:FilterGroupItem id="EditCaseTableFilterCaseIdFilterGroupItem" 
+					groupName="EditCaseTableFilterGroup"
+					name="EditCaseTableFilterCaseIdFilterName"
+					label="{i18n>EditCaseTableCaseIdFilterName}" 
+					partOfCurrentVariant="true" 
+					mandatory="false"
+					visibleInFilterBar="true">
+					<fb:control>
+						<m:Select 
+							id="EditCaseTableFilterCompanyFilterSelect"
+							showSecondaryValues="true"
+							forceSelection="true" 
+							name="CaseIdSelector"
+							change="onSelectFilterSelector"
+							items="{
+								path: '/filterData/caseids',
+								templateShareable: false
+							}">
+							<core:ListItem 
+								id="EditCaseTableFilterCompanyFilterListItem" key="{id}" text="{id}"/>
+						</m:Select>
+					</fb:control>
+				</fb:FilterGroupItem>
+			</fb:filterGroupItems>
+		</fb:FilterBar>
+	</l:VerticalLayout>
+</core:FragmentDefinition>

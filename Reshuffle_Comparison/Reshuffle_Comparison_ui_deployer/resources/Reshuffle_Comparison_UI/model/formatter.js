@@ -1,0 +1,1 @@
+sap.ui.define([],function(){"use strict";return{url:function(n){return"../../../../../../"+n}}});

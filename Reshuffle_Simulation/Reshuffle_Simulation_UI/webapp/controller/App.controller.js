@@ -33,13 +33,6 @@ sap.ui.define([
 		_onRouteMatched: function(oEvent) {
 			Log.info(this.getView().getControllerName(), "_onRouteMatched");
 			var oConfig = oEvent.getParameter("config");
-
-			// select the corresponding item in the left menu
-			this.setSelectedMenuItem(oConfig.name);
-		},
-
-		setSelectedMenuItem: function(sKey) {
-			// this.byId("OverflowToolbarLayoutData").setSelectedKey(sKey);
 		},
 
 		_onBypassed: function(oEvent) {
@@ -48,22 +41,6 @@ sap.ui.define([
 				this.getView().getControllerName(),
 				"_onBypassed Hash=" + sHash
 			);
-		// },
-
-		// onItemSelect: function(oEvent) {
-		// 	var sKey = oEvent.getParameter("item").getKey();
-		// 	Log.info(this.getView().getControllerName(), "onItemSelect Key=" + sKey);
-		// 	sKey = "simulationcheck";
-		// 	this.getOwnerComponent().getRouter().navTo("simulationcheck");
-		// },
-		
-		// onCollapseExpandPress: function () {
-		// 	var oToolPage = this.byId("toolPage");
-		// 	oToolPage.setSideExpanded(!oToolPage.getSideExpanded());
-		// }, 
-		
-		// onHomePress: function(){
-		// 	this.getOwnerComponent().getRouter().navTo("home");
 		}
 	});
 });

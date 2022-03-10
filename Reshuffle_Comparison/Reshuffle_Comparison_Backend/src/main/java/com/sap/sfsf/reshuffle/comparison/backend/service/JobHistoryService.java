@@ -5,7 +5,6 @@ import java.util.List;
 import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationAccessor;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpDestination;
 import com.sap.cloud.sdk.datamodel.odata.client.exception.ODataException;
-import com.sap.sfsf.reshuffle.comparison.backend.config.EnvConfig;
 import com.sap.sfsf.vdm.namespaces.ecemployeeprofile.Background_InsideWorkExperience;
 import com.sap.sfsf.vdm.services.DefaultECEmployeeProfileService;
 
@@ -18,15 +17,14 @@ import org.springframework.stereotype.Service;
 public class JobHistoryService  {
     Logger logger = LoggerFactory.getLogger(JobHistoryService.class);
 
-    @Autowired
-    private EnvConfig envConfig;
-
     public List<Background_InsideWorkExperience> getWorkHistoryByCandidateId(String candidateId) throws ODataException {
-        String destinationName = envConfig.getDestinationName();
+        String destinationName = System.getenv("DEST_NAME");
         final HttpDestination httpDestination =
             DestinationAccessor.getDestination(destinationName).asHttp();
     
-        String servicePath = envConfig.getServicePath();
+        String servicePath = System.getenv("ODATA_SERVICE_PATH");
+        System.out.println("=============================");
+        System.out.println("service path: " + servicePath);
     
         DefaultECEmployeeProfileService employeeService = new DefaultECEmployeeProfileService();
         List<Background_InsideWorkExperience> workHistoryList = employeeService

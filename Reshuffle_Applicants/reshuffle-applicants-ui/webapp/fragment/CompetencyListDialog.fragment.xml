@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:core="sap.ui.core">
+	<Dialog id="CompetencyListDialog">
+		<content>
+			<t:Table id="CompetencyListDialogTable" selectionMode="Single" selectionBehavior="Row" rowSelectionChange="onPressCompetencyListItem" noData="No competency found" rows="{path: '/competencyData/competencies'}" width="100%">
+				<t:columns>
+
+					<t:Column id="CompetencyListDialogTableEmpNameColumn" width="50%">
+						<Label id="CompetencyListDialogTableEmpNameLabel" text="{i18n>competencyListDialogTableColumnName_empName}" />
+						<t:template>
+							<Text id="CompetencyListDialogTableEmpNameTemplateText" text="{currentEmpName}" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+					<t:Column id="CompetencyListDialogTableCompetencyPercentageColumn" width="50%">
+						<Label id="CompetencyListDialogTableCompetencyPercentageLabel" text="{i18n>competencyListDialogTableColumnName_competencyPercentage}" />
+						<t:template>
+							<Text id="CompetencyListDialogTableCompetencyPercentageTemplateText" text="{competencyPercentage}%" wrapping="false" />
+						</t:template>
+					</t:Column>
+
+				</t:columns>
+			</t:Table>
+		</content>
+		<endButton>
+			<Button id="CompetencyListDialogTableCancelButton" text="Cancel" press="onPressCompetencyListCancelButton"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

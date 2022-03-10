@@ -1,0 +1,28 @@
+<mvc:View
+    controllerName="com.sap.sfsf.reshuffle.applicants.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    displayBlock="true"
+    xmlns="sap.m">
+    <App id="app">
+        <pages>
+            <Page id="page" title="{i18n>title} ({/startDateTime}{i18n>titleSuiffix})" titleAlignment="Center">
+                <content>
+                    <l:Splitter id="mainSplitter" >
+                        <VBox id="mainVboxLeft" justifyContent="Start" width="100%">
+                            <layoutData>
+                                <l:SplitterLayoutData id="mainSplitterLayoutDataLeft" size="100%" resizable="true"/>
+                            </layoutData>
+                            <mvc:XMLView id="mainCurrentPositionEmployeeView" viewName="com.sap.sfsf.reshuffle.applicants.view.CurrentPositionEmployeeTable"/>
+                        </VBox>
+                        <VBox id="mainVboxRigh" justifyContent="Start" width="100%">
+                            <layoutData>
+                                <l:SplitterLayoutData id="mainSplitterLayoutDataRight" size="0%" resizable="true"/>
+                            </layoutData>
+                        </VBox>
+                    </l:Splitter>
+                </content>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>

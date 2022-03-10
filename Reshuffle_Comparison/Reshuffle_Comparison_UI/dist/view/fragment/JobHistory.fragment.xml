@@ -1,0 +1,69 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<Popover
+		placement="Bottom">
+		<content>
+			<Table
+				id="jobHistory"
+				items="{
+					path : '/jobHistory',
+					sorter : {
+						path : 'Name',
+						descending : false
+					}
+				}">
+				<ColumnListItem>
+					<cells>
+						<ObjectIdentifier text="{bgOrderPos}" />
+						<Text text="{department}" />
+						<Text text="{title}" />
+						<Text text="{startDate}" />
+						<Text text="{endDate}" />
+						<Text text="{lastModifiedDate}" />
+						<Text text="{backgroundElementId}" />
+					</cells>
+				</ColumnListItem>
+				<columns>
+					<Column>
+						<header>
+							<Text text="{i18n>bgOrderPos}" />
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Text text="{i18n>department}" />
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Text text="{i18n>jobtitle}" />
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Text text="{i18n>startDate}" />
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Text text="{i18n>endDate}" />
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Text text="{i18n>lastModifiedDate}" />
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Text text="{i18n>backgroundElementId}" />
+						</header>
+					</Column>
+				</columns>
+			</Table>			
+		</content>
+	</Popover>
+</core:FragmentDefinition>

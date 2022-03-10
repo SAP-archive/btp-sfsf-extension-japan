@@ -12,22 +12,22 @@ sap.ui.define([
             return this.getView().getModel("i18n").getResourceBundle().getText(sKey);
         },
         
-        _divisionFilterItemChange: function (selectedDivision, key, defaultDepartment, defaultPosition) {
+        _divisionFilterItemChange: function (selectedDivision, field, defaultDepartment, defaultPosition, modelName) {
 			var oView = this.getView();
-			var oModel = oView.getModel();
+			var oModel = oView.getModel(modelName);
 			var modelData = oModel.getData();
 			var department = [];
 			var position = [];
 
-			if (selectedDivision !== "") {
+			if (selectedDivision) {
 				
-				department = this._getFilteredDepartment(selectedDivision);
+				department = this._getFilteredDepartment(selectedDivision, modelData.department);
 				department.unshift(defaultDepartment);
 
-				position = this._getFilteredPosition(selectedDivision, "");
+				position = this._getFilteredPosition(selectedDivision, "", modelData.position);
 				position.unshift(defaultPosition);
 				
-				if(key === "C"){
+				if(field === "C"){
 					modelData.currentDepartment = department;
 					modelData.currentPosition = position;
 					
@@ -37,47 +37,47 @@ sap.ui.define([
 				}
 				
 			} else {
-				if(key === "C"){
-					modelData.currentDepartment = this.department;
-					modelData.currentPosition = this.position;
+				if(field === "C"){
+					modelData.currentDepartment = modelData.department;
+					modelData.currentPosition = modelData.position;
 					
 				}else{
-					modelData.nextDepartment = this.department;
-					modelData.nextPosition = this.position;
+					modelData.nextDepartment = modelData.department;
+					modelData.nextPosition = modelData.position;
 				}
 			}
 			oModel.refresh(true);
-			this.getView().setModel(oModel);
+			this.getView().setModel(oModel, modelName);
 		},
 
-		_departmentFilterItemChange: function (selectedDivision, selectedDepartment, key, defaultPosition) {
+		_departmentFilterItemChange: function (selectedDivision, selectedDepartment, field, defaultPosition, modelName) {
 			var oView = this.getView();
-			var oModel = oView.getModel();
+			var oModel = oView.getModel(modelName);
 			var modelData = oModel.getData();
 			var position = [];
 
-			if (selectedDepartment !== "") {
-				position = this._getFilteredPosition(selectedDivision, selectedDepartment);
+			if (selectedDepartment) {
+				position = this._getFilteredPosition(selectedDivision, selectedDepartment, modelData.position);
 				position.unshift(defaultPosition);
-				if(key==="C"){
+				if(field==="C"){
 					modelData.currentPosition = position;
 				}else{
 					modelData.nextPosition = position;
 				}
 				oModel.refresh(true);
 			} else {
-				if(key==="C"){
+				if(field==="C"){
 					modelData.currentPosition = this.position;
 				}else{
 					modelData.nextPosition = this.position;
 				}
 			}
-			this.getView().setModel(oModel);
+			this.getView().setModel(oModel, modelName);
 		},
 
-		_getFilteredDepartment: function (selectedDivision) {
-			return this.department.filter(function (item, index) {
-				if (item.externalCode !== "") {
+		_getFilteredDepartment: function (selectedDivision, department) {
+			return department.filter(function (item, index) {
+				if (item.externalCode) {
 					for (var iDivisionList in item.division.divisionList) {
 						if (selectedDivision === item.division.divisionList[iDivisionList].externalCode) {
 							return true;
@@ -87,9 +87,9 @@ sap.ui.define([
 			});
 		},
 
-		_getFilteredPosition: function (selectedDivision, selectedDepartment) {
+		_getFilteredPosition: function (selectedDivision, selectedDepartment, position) {
 			if (!selectedDepartment) {
-				return this.position.filter(function (item, index) {
+				return position.filter(function (item, index) {
 					if (item.hasOwnProperty("division")) {
 						if (selectedDivision === item.division) {
 							return true;
@@ -97,7 +97,7 @@ sap.ui.define([
 					}
 				});
 			} else {
-				return this.position.filter(function (item, index) {
+				return position.filter(function (item, index) {
 					if (item.code !== "" && item.hasOwnProperty("department")) {
 						if (selectedDivision === item.division && selectedDepartment === item.department) {
 							return true;
@@ -107,7 +107,7 @@ sap.ui.define([
 			}
 		},
 		_searchCheckStatus: function (searchResult, key) {
-			if (key === "") {
+			if (!key) {
 				return searchResult;
 			} else if (key === "-") {
 				return searchResult.filter(function (item, index) {
@@ -136,77 +136,80 @@ sap.ui.define([
 			}
 		},
 		_searchDivision: function (searchResult, key, field) {
-			if (key === "") {
+			if (!key) {
 				return searchResult;
 			} else {
 				return searchResult.filter(function (item, index) {
-					if (field === "C") {
-						if (item.currentDivision === key) {
-							return true;
-						} else {
-							return false;
-						}
-					} else if (field === "N") {
-						if (item.nextDivision === key) {
-							return true;
-						} else {
-							return false;
-						}
-					} else {
-						return false;
-					}
+                    switch(field){
+                        case "C":
+                            if (item.candidateDivisionID === key) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        case "N":
+                            if (item.divisionID === key) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        default :
+                            return false;
+                    }
 				});
 			}
 		},
 		_searchDepartment: function (searchResult, key, field) {
-			if (key === "") {
+			if (!key) {
 				return searchResult;
 			} else {
 				return searchResult.filter(function (item, index) {
-					if (field === "C") {
-						if (item.currentDepartment === key) {
-							return true;
-						} else {
-							return false;
-						}
-					} else if (field === "N") {
-						if (item.nextDepartment === key) {
-							return true;
-						} else {
-							return false;
-						}
-					} else {
-						return false;
-					}
+                    switch(field){
+                        case "C":
+                            if (item.candidateDepartmentID === key) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        case "N":
+                            if (item.departmentID === key) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        default :
+                            return false;
+                    }
 				});
 			}
 		},
 		_searchPosition: function (searchResult, key, field) {
-			if (key === "") {
+			if (!key) {
 				return searchResult;
 			} else {
 				return searchResult.filter(function (item, index) {
-					if (field === "C") {
-						if (item.currentPosition === key) {
-							return true;
-						} else {
-							return false;
-						}
-					} else if (field === "N") {
-						if (item.nextPosition === key) {
-							return true;
-						} else {
-							return false;
-						}
-					} else {
-						return false;
-					}
+                    switch(field){
+                        case "C":
+                            if (item.candidatePositionID === key) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        case "N":
+                            if (item.positionID === key) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        default :
+                            return false;
+                    }
 				});
 			}
 		},
 		
 		_searchCandidateId: function (searchResult, key) {
-			if (key === "") {
+			if (!key) {
 				return searchResult;
 			} else {
 				return searchResult.filter(function (item, index) {
@@ -220,7 +223,7 @@ sap.ui.define([
 		},
 		
 		_searchCandidateName: function (searchResult, key) {
-			if (key === "") {
+			if (!key) {
 				return searchResult;
 			} else {
 				return searchResult.filter(function (item, index) {
@@ -242,18 +245,13 @@ sap.ui.define([
 		},
 
 		_searchCaseId: function (searchResult, key) {
-			if(key !== "-"){
-				return searchResult.filter(function (item, index) {
-					if (item.caseID === key) {
-						return true;
-					} else {
-						return false;
-					}
-				});
-			}else{
-				return searchResult;
-			}
+            return searchResult.filter(function (item, index) {
+                if (item.caseID === key) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
 		}
-
 	});
 });

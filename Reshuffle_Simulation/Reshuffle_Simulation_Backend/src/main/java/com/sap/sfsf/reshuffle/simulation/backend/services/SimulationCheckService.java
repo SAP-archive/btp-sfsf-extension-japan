@@ -36,6 +36,8 @@ public class SimulationCheckService {
 	private static final int transferYearLimit = 1;
 	private static final int tenureWarnLimit = 3;
 
+    private int candidateTransferTimes;
+
 	/**
 	 * 候補者の雇用情報をチェック
 	 * <li>異動回数</li>
@@ -52,8 +54,8 @@ public class SimulationCheckService {
 			String userID = candidate.getCandidateID();
 			LOG.debug("User ID:" + userID);
 
-			if (candidate.getCheckResult() == null) {
-				candidate.setCheckResult("");
+			if (candidate.getSimulationCheckResult() == null) {
+				candidate.setSimulationCheckResult("");
 			}
 			EmpJob currentJob = empJobMap.get(userID);
 			if (currentJob != null) {
@@ -112,10 +114,10 @@ public class SimulationCheckService {
 			String aggressorId = victimMap.get(candidateId).getUser();
 			if (candidateMap.containsKey(aggressorId)) {
 				Candidate aggressorCandidate = candidateMap.get(aggressorId);
-				if (aggressorCandidate.getNextDivision().equals(candidate.getNextDivision())
-						|| aggressorCandidate.getNextDepartment().equals(candidate.getNextDepartment())
-						|| aggressorCandidate.getNextPosition().equals(candidate.getNextPosition())) {
-					candidate.setCheckStatus("NG");
+				if (aggressorCandidate.getDivisionID().equals(candidate.getDivisionID())
+						|| aggressorCandidate.getDepartmentID().equals(candidate.getDepartmentID())
+						|| aggressorCandidate.getPositionID().equals(candidate.getPositionID())) {
+					candidate.setSimulationCheckStatus("NG");
 					appendCheckResult(candidate, "Employee " + candidate.getCandidateName() + " was harassed by "
 							+ aggressorCandidate.getCandidateName());
 				}
@@ -137,7 +139,7 @@ public class SimulationCheckService {
 		if (harassmentMap.containsKey(candidateId)) {
 			String reason = harassmentMap.get(candidateId).getReason();
 			appendCheckResult(candidate, "Employee was punished before for the reason:" + reason);
-			candidate.setCheckStatus("NG");
+			candidate.setSimulationCheckStatus("NG");
 		}
 	}
 
@@ -152,13 +154,13 @@ public class SimulationCheckService {
 			Map<String, MyEmpJob> empJobMap) {
 		LOG.debug("=== Relative check start ===");
 		String candidateId = candidate.getCandidateID();
-		String candidateDepartment = candidate.getNextDepartment();
+		String candidateDepartment = candidate.getDepartmentID();
 		if (spouseListMap.containsKey(candidateId)) {
 			String spouseId = spouseListMap.get(candidateId).getCustomString20();
 			if (spouseId != null) {
 				String spouseDepartment = empJobMap.get(spouseId).getDepartment();
 				if (spouseDepartment.equals(candidateDepartment)) {
-					candidate.setCheckStatus("NG");
+					candidate.setSimulationCheckStatus("NG");
 					appendCheckResult(candidate, "Employee and spouse cannot be in the same department!");
 				}
 			}
@@ -168,8 +170,8 @@ public class SimulationCheckService {
 
 	private void checkFamilyMemberNeedsCare(Candidate candidate, Map<String, MyPerGlobalInfoJPN> familyMemberListMap) {
 		if (familyMemberListMap.containsKey(candidate.getCandidateID())) {
-			if (candidate.getCheckStatus() == null) {
-				candidate.setCheckStatus("WARN");
+			if (candidate.getSimulationCheckStatus() == null) {
+				candidate.setSimulationCheckStatus("WARN");
 			}
 			appendCheckResult(candidate, "Employee has family member to take care of!");
 		}
@@ -177,8 +179,8 @@ public class SimulationCheckService {
 
 	public void preCheck(List<Candidate> list) {
 		for (Candidate candidate : list) {
-			candidate.setCheckStatus(null);
-			candidate.setCheckResult(null);
+			candidate.setSimulationCheckStatus(null);
+			candidate.setSimulationCheckResult(null);
 		}
 	}
 
@@ -188,10 +190,10 @@ public class SimulationCheckService {
 	public void finalCheck(List<Candidate> list) {
 		Date now = new Date();
 		for (Candidate candidate : list) {
-			if (candidate.getCheckResult().equals("")) {
-				candidate.setCheckStatus("OK");
+			if (candidate.getSimulationCheckResult().equals("")) {
+				candidate.setSimulationCheckStatus("OK");
 			}
-			candidate.setCheckDateTime(now);
+			candidate.setSimulationCheckDatetime(now);
 		}
 		// candidateService.deleteAll();
 		candidateService.saveAll(list);
@@ -206,11 +208,11 @@ public class SimulationCheckService {
 	private void checkRating(Candidate candidate) {
 		LOG.debug("=== Check Rating Start ===");
 		Integer r1, r2, r3;
-		r1 = candidate.getRating1() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getRating1());
-		r2 = candidate.getRating1() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getRating2());
-		r3 = candidate.getRating1() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getRating3());
+		r1 = candidate.getCandidateLastRating1() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getCandidateLastRating1());
+		r2 = candidate.getCandidateLastRating2() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getCandidateLastRating2());
+		r3 = candidate.getCandidateLastRating3() == null ? Integer.MAX_VALUE : Integer.parseInt(candidate.getCandidateLastRating3());
 		if (r1 < ratingLimit || r2 < ratingLimit || r3 < ratingLimit) {
-			candidate.setCheckStatus("NG");
+			candidate.setSimulationCheckStatus("NG");
 			appendCheckResult(candidate, "Employee's performance is not good enough!");
 		}
 		LOG.debug("=== Check Rating End ===");
@@ -224,8 +226,9 @@ public class SimulationCheckService {
 	 */
 	public void checkTransferTimes(Candidate candidate) {
 		LOG.debug("=== Check Transfer Times Start ===");
-		if (candidate.getTransferTimes() > transferTimesLimit) {
-			candidate.setCheckStatus("NG");
+        int candidateTransferTimes = (int) employeeService.getTransferTimesByID(candidate.getCandidateID());
+		if (candidateTransferTimes > transferTimesLimit) {
+			candidate.setSimulationCheckStatus("NG");
 			appendCheckResult(candidate,
 					"Employee has been transferred for more than " + transferTimesLimit + " times!");
 		}
@@ -243,7 +246,7 @@ public class SimulationCheckService {
 		if (currentJobJSON.has("event")) {
 			String event = currentJobJSON.get("event").getAsString();
 			if (event.equals("3671")) {
-				candidate.setCheckStatus("NG");
+				candidate.setSimulationCheckStatus("NG");
 				appendCheckResult(candidate, "Employee is on leave!");
 			}
 		}
@@ -257,9 +260,9 @@ public class SimulationCheckService {
 	 */
 	public void checkPeriodAfterLastTransfer(Candidate candidate) {
 		LOG.debug("=== Check Period After Last Transfer Start ===");
-		if (candidate.getJobTenure() < transferYearLimit) {
+		if (candidate.getCandidateJobTenure() < transferYearLimit) {
 			appendCheckResult(candidate, "Employee cannot be transfered within 1 year after last transfer!");
-			candidate.setCheckStatus("NG");
+			candidate.setSimulationCheckStatus("NG");
 		}
 		LOG.debug("=== Check Period After Last Transfer End ===");
 	}
@@ -271,9 +274,9 @@ public class SimulationCheckService {
 	 */
 	public void checkSamePositionPeriod(Candidate candidate) {
 		LOG.debug("=== Check Same Position Period Start ===");
-		if (candidate.getJobTenure() > tenureWarnLimit) {
-			if (candidate.getCheckStatus() == null) {
-				candidate.setCheckStatus("WARN");
+		if (candidate.getCandidateJobTenure() < tenureWarnLimit) {
+			if (candidate.getSimulationCheckStatus() == null) {
+				candidate.setSimulationCheckStatus("WARN");
 			}
 			appendCheckResult(candidate, "Employee stays at the same position for " + tenureWarnLimit + " years!");
 		}
@@ -282,10 +285,10 @@ public class SimulationCheckService {
 	}
 
 	private void appendCheckResult(Candidate candidate, String result) {
-		StringBuilder sb = new StringBuilder(candidate.getCheckResult());
+		StringBuilder sb = new StringBuilder(candidate.getSimulationCheckResult());
 		String content = String.format("<li>%s</li>", result);
 		sb.append(content);
-		candidate.setCheckResult(sb.toString());
+		candidate.setSimulationCheckResult(sb.toString());
 	}
 
 }

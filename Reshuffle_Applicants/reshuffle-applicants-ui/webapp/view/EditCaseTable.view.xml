@@ -1,0 +1,96 @@
+<mvc:View
+	xmlns="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:dnd="sap.ui.core.dnd"
+	xmlns:m="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:core="sap.ui.core"
+	controllerName="com.sap.sfsf.reshuffle.applicants.controller.EditCaseTable"
+	height="100%" width="100%">
+	<core:Fragment fragmentName="com.sap.sfsf.reshuffle.applicants.fragment.EditCaseTableFilter" type="XML" />
+	<t:Table id="EditCaseTable"  
+		selectionMode="MultiToggle" 
+		visibleRowCount="13" 
+		enableBusyIndicator="true"
+		rows="{path: '/tableData'}"
+		ariaLabelledBy="title">
+		<t:extension>
+			<m:OverflowToolbar id="EditCaseTableToolBar" style="Clear">
+				<!-- TODO: textを置き換え-->
+				<m:Label id="EditCaseTableOverflowToolBarLabel" text = "{i18n>EditCaseTableAssignedCountText} {/indicatorData/assignedCount} / {i18n>EditCastTablePositionCountText} {/indicatorData/positionCount}"/>
+				<m:ProgressIndicator id="EditCaseTableOverflowToolBarProgressIndicator" width="20%" displayValue="{/indicatorData/percentValue}%" percentValue="{/indicatorData/percentValue}" showValue="true" state="None"/>
+				<m:ToolbarSpacer id="EditCaseEmployeeTableToolbarSpacer"/>
+				<m:Button id="EditCaseTableToolBarCancelEditCaseButton" text="{i18n>EditCaseTableCancelEditCaseButton}" press="onPresssCancelEditCase"/>
+				<m:Button id="EditCaseTableToolBarDeleteCaseButton" text="{i18n>EditCaseTableDeleteCaseButton}" press="onPresssDelteCase"/>
+				<m:Button id="EditCaseTableToolBarExportButton" text="{i18n>EditCaseTableExportButton}" press="onPressExport"/>
+				<m:Button id="EditCaseTableToolBarSaveButton" text="{i18n>EditCaseTableSaveButton}" press="onPressSave"/>
+			</m:OverflowToolbar>
+		</t:extension>
+
+		<t:columns>
+			<t:Column id="EditCaseTableColumnCandidateNameColumn" width="11rem">
+				<m:Label id="EditCaseTableColumnCandidateNameLabel" text="{i18n>EditCaseTableColumnName_candidateName}" />
+				<t:template>
+					<m:Text id="EditCaseTableColumnCandidateNameTemplate" text="{candidateName}" wrapping="false" />
+				</t:template>
+			</t:Column>
+
+			<t:Column id="EditCaseTableColumnDivisionNameColumn" width="11rem">
+				<m:Label id="EditCaseTableColumnDivisionNameLabel" text="{i18n>EditCaseTableColumnName_divisionName}" />
+				<t:template>
+					<m:Text id="EditCaseTableColumnDivisionNameTemplate" text="{divisionName}" wrapping="false" />
+				</t:template>
+			</t:Column>
+
+			<t:Column id="EditCaseTableColumnDepartmentNameColumn" width="11rem">
+				<m:Label id="EditCaseTableColumnDepartmentNameLabel" text="{i18n>EditCaseTableColumnName_departmentName}" />
+				<t:template>
+					<m:Text id="EditCaseTableColumnDepartmentNameTemplate" text="{departmentName}" wrapping="false" />
+				</t:template>
+			</t:Column>
+
+			<t:Column id="EditCaseTableColumnPositionNameColumn" width="11rem">
+				<m:Label id="EditCaseTableColumnPositionNameLabel" text="{i18n>EditCaseTableColumnName_positionName}" />
+				<t:template>
+					<m:Link id="EditCaseTableColumnPositionNameTemplate" text="{positionName}" press="onPressPositionName" />
+				</t:template>
+			</t:Column>
+
+			<t:Column id="EditCaseTableColumnIncumbentEmpNameColumn" width="11rem">
+				<m:Label id="EditCaseTableColumnIncumbentEmpNameLabel" text="{i18n>EditCaseTableColumnName_incumbentEmpName}" />
+				<t:template>
+					<m:Text id="EditCaseTableColumnIncumbentEmpNameTemplate" text="{incumbentEmpName}" wrapping="false" />
+				</t:template>
+			</t:Column>
+
+			<t:Column id="EditCaseTableColumnJobGradeNameColumn" width="11rem">
+				<m:Label id="EditCaseTableColumnJobGradeNameLabel" text="{i18n>EditCaseTableColumnName_jobGradeName}" />
+				<t:template>
+					<m:Text id="EditCaseTableColumnJobGradeNameTemplate" text="{jobGradeName}" wrapping="false" />
+				</t:template>
+			</t:Column>
+
+			<t:Column id="EditCaseTableColumnIncumbentEmpRetirementIntentionColumn" width="11rem">
+				<m:Label id="EditCaseTableColumnIncumbentEmpRetirementIntentionLabel" text="{i18n>EditCaseTableColumnName_incumbentEmpRetirementIntention}" />
+				<t:template>
+					<m:Text id="EditCaseTableColumnIncumbentEmpRetirementIntentionTemplate" text="{incumbentEmpRetirementIntention}" wrapping="false" />
+				</t:template>
+			</t:Column>
+		</t:columns>
+		<t:dragDropConfig>
+			<dnd:DragInfo id="EditCaseTableDragInfo"
+							groupName="moveToLeftPanel"
+							sourceAggregation="rows"
+							dragStart="onDragStart" />
+			<dnd:DropInfo id="EditCaseTableDropInfo"
+							groupName="moveToRightPanel"
+							targetAggregation="rows"
+							dropPosition="On"
+							drop="onDropTable" />
+		</t:dragDropConfig>
+	</t:Table>
+		
+</mvc:View>

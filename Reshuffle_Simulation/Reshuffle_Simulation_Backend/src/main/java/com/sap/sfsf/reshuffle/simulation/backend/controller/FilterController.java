@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.sap.sfsf.reshuffle.simulation.backend.model.All;
-import com.sap.sfsf.reshuffle.simulation.backend.model.Candidate;
 import com.sap.sfsf.reshuffle.simulation.backend.model.MyBusinessUnit;
 import com.sap.sfsf.reshuffle.simulation.backend.model.MyCompany;
 import com.sap.sfsf.reshuffle.simulation.backend.model.MyDepartment;

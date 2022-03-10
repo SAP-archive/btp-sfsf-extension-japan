@@ -1,0 +1,101 @@
+{
+    "type": "object",
+    "properties": {
+        "value": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "empID",
+                    "empName",
+                    "empRetire",
+                    "departmentID",
+                    "divisionID",
+                    "empManagerID",
+                    "positionID",
+                    "jobGradeID",
+                    "departmentName",
+                    "divisionName",
+                    "positionName",
+                    "jobGradeName",
+                    "empJobTenure",
+                    "willingness",
+                    "lastRating1",
+                    "lastRating2",
+                    "lastRating3"
+                ],
+                "properties": {
+                    "empID": {
+                        "type": "string",
+                        "enum": [
+                            "akuwa"
+                        ]
+                    },
+                    "empName": {
+                        "type": "string"
+                    },
+                    "empRetire": {
+                        "type": "null"
+                    },
+                    "departmentID": {
+                        "type": "string",
+                        "enum": [
+                            "5000102"
+                        ]
+                    },
+                    "divisionID": {
+                        "type": "string",
+                        "enum": [
+                            "DIR_SALES"
+                        ]
+                    },
+                    "empManagerID": {
+                        "type": "string",
+                        "enum": [
+                            "mtana"
+                        ]
+                    },
+                    "positionID": {
+                        "type": "string",
+                        "enum": [
+                            "3000233"
+                        ]
+                    },
+                    "jobGradeID": {
+                        "type": "string",
+                        "enum": [
+                            "GR-12"
+                        ]
+                    },
+                    "jobGradeName": {
+                        "type": "string",
+                        "enum": [
+                            "Salary Grade 12"
+                        ]
+                    },
+                    "empJobTenure": {
+                        "type": "number",
+                        "minimum": 4,
+                        "maximum": 4
+                    },
+                    "willingness": {
+                        "type": "null"
+                    },
+                    "lastRating1": {
+                        "type": "string",
+                        "enum": [
+                            "4"
+                        ]
+                    },
+                    "lastRating2": {
+                        "type": "null"
+                    },
+                    "lastRating3": {
+                        "type": "null"
+                    }
+                }
+            }
+        }
+    }
+}

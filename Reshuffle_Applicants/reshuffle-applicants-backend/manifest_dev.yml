@@ -1,0 +1,10 @@
+---
+  applications:
+    - name: Reshuflle_Applicants_Backend
+      path: srv/target/backend-exec.jar
+      buildpacks:
+        - sap_java_buildpack
+      env:
+        TARGET_RUNTIME: tomcat
+        SET_LOGGING_LEVEL: '{ROOT: DEBUG, com.sap.cloud.sdk: DEBUG}'
+        SPRING_PROFILES_ACTIVE: 'cloud'

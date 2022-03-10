@@ -1,0 +1,177 @@
+{
+    "type": "object",
+    "properties": {
+        "value": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "caseID",
+                    "positionID",
+                    "positionName",
+                    "divisionID",
+                    "divisionName",
+                    "departmentID",
+                    "departmentName",
+                    "jobGradeID",
+                    "jobGradeName",
+                    "candidateID",
+                    "candidateName",
+                    "candidateDivisionID",
+                    "candidateDivisionName",
+                    "candidateDepartmentID",
+                    "candidateDepartmentName",
+                    "candidatePositionID",
+                    "candidatePositionName",
+                    "candidateJobGradeID",
+                    "candidateJobGradeName",
+                    "candidateJobTenure",
+                    "candidateLastRating1",
+                    "candidateLastRating2",
+                    "candidateLastRating3",
+                    "candidateManagerID",
+                    "incumbentEmpID",
+                    "incumbentEmpName",
+                    "incumbentEmpRetirementIntention",
+                    "incumbentEmpManagerID",
+                    "createdAt",
+                    "createdBy",
+                    "modifiedAt",
+                    "modifiedBy"
+                ],
+                "properties": {
+                    "caseID": {
+                        "type": "string",
+                        "enum": [
+                            "forBackendIntegrationTest"
+                        ]
+                    },
+                    "positionID": {
+                        "type": "string",
+                        "enum": [
+                            "50023041"
+                        ]
+                    },
+                    "positionName": {
+                        "type": "string"
+                    },
+                    "divisionID": {
+                        "type": "string",
+                        "enum": [
+                            "CORP_SVCS"
+                        ]
+                    },
+                    "divisionName": {
+                        "type": "string"
+                    },
+                    "departmentID": {
+                        "type": "string",
+                        "enum": [
+                            "50150001"
+                        ]
+                    },
+                    "departmentName": {
+                        "type": "string"
+                    },
+                    "jobGradeID": {
+                        "type": "string",
+                        "enum": [
+                            "GR-07"
+                        ]
+                    },
+                    "jobGradeName": {
+                        "type": "string"
+                    },
+                    "candidateID": {
+                        "type": "string",
+                        "enum": [
+                            "VictorK"
+                        ]
+                    },
+                    "candidateName": {
+                        "type": "string"
+                    },
+                    "candidateDivisionID": {
+                        "type": "string",
+                        "enum": [
+                            "MANU"
+                        ]
+                    },
+                    "candidateDivisionName": {
+                        "type": "string"
+                    },
+                    "candidateDepartmentID": {
+                        "type": "string",
+                        "enum": [
+                            "5000011"
+                        ]
+                    },
+                    "candidateDepartmentName": {
+                        "type": "string"
+                    },
+                    "candidatePositionID": {
+                        "type": "string",
+                        "enum": [
+                            "3000250"
+                        ]
+                    },
+                    "candidatePositionName": {
+                        "type": "string"
+                    },
+                    "candidateJobGradeID": {
+                        "type": "string",
+                        "enum": [
+                            "GR-18"
+                        ]
+                    },
+                    "candidateJobGradeName": {
+                        "type": "string"
+                    },
+                    "candidateJobTenure": {
+                        "type": "number"
+                    },
+                    "candidateLastRating1": {
+                        "type": "null"
+                    },
+                    "candidateLastRating2": {
+                        "type": "null"
+                    },
+                    "candidateLastRating3": {
+                        "type": "string",
+                        "enum": [
+                            "0"
+                        ]
+                    },
+                    "candidateManagerID": {
+                        "type": "string",
+                        "enum": [
+                            "ChenM"
+                        ]
+                    },
+                    "incumbentEmpID": {
+                        "type": "string",
+                        "enum": [
+                            "108737"
+                        ]
+                    },
+                    "incumbentEmpName": {
+                        "type": "string",
+                        "enum": [
+                            "Dixon Milo"
+                        ]
+                    },
+                    "incumbentEmpRetirementIntention": {
+                        "type": "null"
+                    },
+                    "incumbentEmpManagerID": {
+                        "type": "string",
+                        "enum": [
+                            "108736"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

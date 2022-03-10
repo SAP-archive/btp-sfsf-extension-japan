@@ -39,34 +39,34 @@ public class CandidateService {
         return optCaseIdList.orElse(null);
     }
 
-    public List<CurrentDivision> findDistinctCurrentDivisions() {
-        Optional<List<CurrentDivision>> optCurrentDivisionList = Optional.ofNullable(candidateRepository.findDistinctCurrentDivisions());
-        return optCurrentDivisionList.orElse(null);
+    public List<CandidateDivision> findDistinctCandidateDivisions() {
+        Optional<List<CandidateDivision>> optCandidateDivisionList = Optional.ofNullable(candidateRepository.findDistinctCandidateDivisions());
+        return optCandidateDivisionList.orElse(null);
     }
 
-    public List<CurrentDepartment> findDistinctCurrentDepartments() {
-        Optional<List<CurrentDepartment>> optCurrentDepartmentList = Optional.ofNullable(candidateRepository.findDistinctCurrentDepartments());
-        return optCurrentDepartmentList.orElse(null);
+    public List<CandidateDepartment> findDistinctCandidateDepartments() {
+        Optional<List<CandidateDepartment>> optCandidateDepartmentList = Optional.ofNullable(candidateRepository.findDistinctCandidateDepartments());
+        return optCandidateDepartmentList.orElse(null);
     }
 
-    public List<CurrentPosition> findDistinctCurrentPositions() {
-        Optional<List<CurrentPosition>> optCurrentPositionList = Optional.ofNullable(candidateRepository.findDistinctCurrentPositions());
-        return optCurrentPositionList.orElse(null);
+    public List<CandidatePosition> findDistinctCandidatePositions() {
+        Optional<List<CandidatePosition>> optCandidatePositionList = Optional.ofNullable(candidateRepository.findDistinctCandidatePositions());
+        return optCandidatePositionList.orElse(null);
     }
 
-    public List<NextDivision> findDistinctNextDivisions() {
-        Optional<List<NextDivision>> optNextDivisionList = Optional.ofNullable(candidateRepository.findDistinctNextDivisions());
-        return optNextDivisionList.orElse(null);
+    public List<Division> findDistinctDivisions() {
+        Optional<List<Division>> optDivisionList = Optional.ofNullable(candidateRepository.findDistinctDivisions());
+        return optDivisionList.orElse(null);
     }
 
-    public List<NextDepartment> findDistinctNextDepartments() {
-        Optional<List<NextDepartment>> optNextDepartmentList = Optional.ofNullable(candidateRepository.findDistinctNextDepartments());
-        return optNextDepartmentList.orElse(null);
+    public List<Department> findDistinctDepartments() {
+        Optional<List<Department>> optDepartmentList = Optional.ofNullable(candidateRepository.findDistinctDepartments());
+        return optDepartmentList.orElse(null);
     }
 
-    public List<NextPosition> findDistinctNextPositions() {
-        Optional<List<NextPosition>> optNextPositionList = Optional.ofNullable(candidateRepository.findDistinctNextPositions());
-        return optNextPositionList.orElse(null);
+    public List<Position> findDistinctPositions() {
+        Optional<List<Position>> optPositionList = Optional.ofNullable(candidateRepository.findDistinctPositions());
+        return optPositionList.orElse(null);
     }
 
     public List<Candidate> findByCaseid(String caseId) {
