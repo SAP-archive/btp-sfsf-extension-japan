@@ -1,5 +1,5 @@
 # SAP SuccessFactors Extension on BTP for Japan
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-sfsf-extentsion-japan)](https://api.reuse.software/info/github.com/SAP-samples/btp-sfsf-extentsion-japan)
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-sfsf-extension-japan)](https://api.reuse.software/info/github.com/SAP-samples/btp-sfsf-extension-japan)
 
 ## Description
 
